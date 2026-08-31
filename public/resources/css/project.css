@@ -1,0 +1,759 @@
+@charset "utf-8";
+
+/*
+  Project additions on top of the TemplateHouse sheets. Loaded last.
+  Everything here covers something the contest template has no block for:
+  the seat counter, the application form, and the lists that are longer than
+  the template's fixed three-card rows. Tokens and the 1rem = 10px scale come
+  from templatehouse.css.
+*/
+
+/* ---------- skip link ---------- */
+.skip-link {
+  position: absolute;
+  left: 1.6rem;
+  top: -6rem;
+  z-index: 100;
+  padding: 1rem 1.6rem;
+  border-radius: 0.4rem;
+  background: var(--secondary);
+  color: var(--white);
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 1.6rem; }
+
+/* ---------- contest-N3 hero ---------- */
+/* The rain canvas and the vignette over it are both z-index 1, so the copy
+   needs 2 to stay on top of both. */
+.contest-N3 .title-area { z-index: 2; }
+/* The hero lead is two paragraphs. The template zeroes p margins, so without
+   this they butt together and read as one wrapped block. */
+.contest-N3 .title-area p.p1 + p.p1 { margin-top: 1.2rem; }
+
+/* Both ported from the legacy static page. The rain runs at half strength,
+   and the two-part vignette darkens the middle so the copy has a ground and
+   pulls the bottom edge to #000 so the block dissolves into the marquee. */
+.contest-N3 .matrix-rain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Same z-index as the canvas, later in the tree, so it paints over it. */
+.contest-N3::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      120% 70% at 50% 40%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.55) 55%,
+      #000 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5),
+      transparent 30%,
+      transparent 60%,
+      #000 100%
+    );
+}
+
+/* ---------- anchor offsets ---------- */
+/* The header is fixed (86px desktop, 60px mobile), so a jump to #prize would
+   otherwise land with the heading behind it. */
+#prize,
+#arena,
+#who,
+#process,
+#faq,
+#apply { scroll-margin-top: 10rem; }
+
+@media (max-width: 992px) {
+  #prize,
+  #arena,
+  #who,
+  #process,
+  #faq,
+  #apply { scroll-margin-top: 7rem; }
+}
+
+/* ---------- header / footer wordmarks ---------- */
+.contest-N1 .header-title a { font-weight: var(--fw-bold); letter-spacing: -0.02em; }
+/* The template's footer uses a white logo image, so nothing set a colour here.
+   A text wordmark inherits --text-color1 and lands at 1.1:1 on the black bar. */
+.footer-logo { margin: 0; letter-spacing: -0.02em; color: var(--white); }
+
+/* The template zeroes the font in .header-right because it expects icon-only
+   buttons there. These two are text, so they get their size back. */
+@media (max-width: 992px) {
+  .contest-N1 .header-utils .btnset { font-size: var(--fs-p3); }
+  .contest-N1 .header-right button { width: 2.8rem; height: 2.8rem; }
+  /* The floating contest-N4 bar already carries Apply at this width. */
+  .contest-N1 .header-utils li.button { display: none; }
+}
+
+/* ---------- contest-N6 prize panels ---------- */
+/* .blue .thumb is absolutely positioned at right: 4rem with a 25.8rem basis,
+   so it takes no space and longer copy than the template's ran under it. */
+@media (min-width: 993px) {
+  .contest-N6 .blue .desc { padding-right: 29.8rem; }
+  /* The blob is align-self: center, which put its top edge level with the last
+     line of the note. Nudged down so the copy clears it. Under 993px the thumb
+     is in flow with its own margin, so the shift stops here. */
+  .contest-N6 .blue .thumb { transform: translateY(4rem); }
+}
+
+/* ---------- contest-N5 with more than three cards ---------- */
+/* The template pins N5 to three tilted cards. These lists are longer, so the
+   row wraps and the tilt drops to an angle that survives two rows. */
+.contest-N5 .list-area { flex-wrap: wrap; }
+.contest-N5 .list-label { margin: 0 0 2.4rem; }
+.contest-N5 .not-area { margin-top: 6.4rem; }
+.contest-N5 .not-area ul { margin: 0; padding: 0; list-style: none; }
+.contest-N5 .not-area li { position: relative; padding-left: 1.8rem; }
+.contest-N5 .not-area li + li { margin-top: 0.8rem; }
+.contest-N5 .not-area li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.1rem;
+  width: 0.6rem;
+  height: 0.1rem;
+  background: var(--text-color3);
+}
+
+/* The template tilts the first two cards, which works for its single row of
+   three. These lists wrap, and the rotated cards overlapped their neighbours.
+   The :nth-child selectors are repeated because the template's own rules carry
+   that specificity and a plain `li` selector loses to them. */
+@media (min-width: 993px) {
+  .contest-N5 .list-area li { flex: 0 1 calc(33.333% - 1.4rem); }
+}
+.contest-N5 .list-area li:nth-child(1),
+.contest-N5 .list-area li:nth-child(2) { transform: none; }
+
+/* Text-only variant: same card, no image slot. */
+.contest-N5.no-thumb .list-area li figure { text-align: left; }
+.contest-N5.no-thumb .list-area li figcaption { margin-top: 0; }
+.contest-N5.no-thumb .card-idx {
+  display: block;
+  margin-bottom: 1.2rem;
+  color: var(--text-color3);
+  font-size: var(--fs-p3);
+}
+.contest-N5.no-thumb .list-area li strong { display: block; }
+.contest-N5.no-thumb .list-area li p { margin: 1.2rem 0 0; color: var(--text-color2); }
+
+/* ---------- seat counter ---------- */
+.seat-block { padding: 8rem 0; }
+.seat-lead { display: block; margin-bottom: 3.2rem; }
+.seat-area {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.seat {
+  padding: 3.2rem 2.4rem;
+  border: 1px solid var(--secondary);
+  border-radius: 1.2rem;
+  background: var(--white);
+}
+.seat .no { display: block; font-size: var(--fs-h3); font-weight: var(--fw-bold); line-height: 1; }
+.seat .status {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  font-size: var(--fs-p3);
+}
+.seat .status i {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 1px solid var(--secondary);
+}
+.seat p { margin: 0.8rem 0 0; color: var(--text-color2); }
+/* Taken seats stay legible — they drop the accent, not the contrast. */
+.seat.taken { background: var(--bg-color); }
+.seat.taken .no { color: var(--text-color3); }
+.seat.taken .status i { background: var(--text-color4); }
+
+.count-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  flex-wrap: wrap;
+  margin-top: 4rem;
+  padding-top: 4rem;
+  border-top: 1px solid var(--line-color1);
+}
+/* No fill: the accent moved from the pill's ground to its ink, and the size
+   went 1.4rem -> 2rem so the label leads the block instead of tagging it. */
+.count-label {
+  font-size: var(--fs-h6);
+  color: var(--primary);
+}
+.clock { display: flex; align-items: flex-end; gap: 1.2rem; }
+.clock .unit { text-align: center; }
+.clock .unit b { display: block; font-size: var(--fs-h3); line-height: 1; font-variant-numeric: tabular-nums; }
+.clock .unit span { font-size: var(--fs-p3); color: var(--text-color3); }
+.clock .colon { font-size: var(--fs-h4); line-height: 1.2; color: var(--text-color3); }
+
+@media (max-width: 992px) {
+  .seat-area { grid-template-columns: repeat(2, 1fr); }
+  .count-band { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- application form ---------- */
+.apply-block { padding: 8rem 0; background: var(--bg-color); }
+.apply-shell { display: grid; grid-template-columns: 28rem 1fr; gap: 6rem; align-items: start; }
+.apply-kv { margin: 0; }
+.apply-kv dt { color: var(--text-color3); }
+.apply-kv dd { margin: 0.4rem 0 2.4rem; }
+
+.apply-form { display: grid; gap: 2.4rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.apply-form .inputset-label { display: block; margin-bottom: 0.8rem; }
+.apply-form .inputset-input { width: 100%; }
+.apply-form textarea.inputset-input { height: auto; min-height: 12rem; padding: 1.4rem 1.6rem; resize: vertical; }
+.req { color: var(--danger-ink, var(--danger)); }
+.inputset-langth { display: block; margin-top: 0.6rem; text-align: right; color: var(--text-color3); }
+
+.form-submit { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
+
+/* Empty until a submit says something, so it never leaves a blank gap. */
+.form-status:empty { display: none; }
+.form-status { padding: 1.2rem 1.6rem; border-radius: 0.4rem; background: var(--bg-color); }
+.form-status.err { background: rgba(var(--danger-rgb), 0.1); color: var(--danger-ink, var(--danger)); }
+
+@media (max-width: 992px) {
+  .apply-shell { grid-template-columns: 1fr; gap: 4rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* ---------- motion ---------- */
+/* The template animates with GSAP and AOS, neither of which checks this. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- dark theme ---------- */
+/*
+  The template ships one light palette. This overrides the neutral tokens and
+  the surfaces that hard-code #fff / #f5f5f5. --white itself stays white:
+  56 rules in templatehouse.css use it as label text on a coloured button,
+  where it still has to read as white.
+*/
+:root {
+  --body-bg: #000000;
+  --bg-color: #0d0d0d;
+  --surface: #151515;
+  --surface-2: #1e1e1e;
+  --text-color1: #f2f2f2;
+  --text-color2: #a6a6a6;
+  --text-color3: #8a8a8a;
+  --text-color4: #6e6e6e;
+  --line-color1: #2a2a2a;
+  --line-color2: #333333;
+  --line-color3: #f2f2f2;
+  --custom-color-1: #1e1e1e;
+  --body-color: var(--text-color1);
+  --border-color: var(--line-color1);
+  --link-color: var(--text-color1);
+  --link-hover-color: var(--text-color1);
+  /* Ink for the blocks that keep a bright background (primary, prize panels). */
+  --on-bright: #0a0a0a;
+  /* --danger reads at 4.29:1 on the dark ground, just under AA. */
+  --danger-ink: #ff6b76;
+}
+
+/* Section grounds. Six blocks hard-code #f5f5f5. */
+.contest-N3,
+.contest-N5,
+.contest-N6,
+.contest-N7,
+.contest-N8,
+.contest-N9 { background: var(--body-bg); }
+
+/* Raised surfaces that hard-code #fff. */
+.contest-N4 .contents-inner,
+.contest-N5 .list-area li,
+.contest-N8 .alert-area,
+.contest-N8 .accordset.accent-header .accordset-item.active .accordset-button,
+.contest-N2 .modal-area,
+.seat { background: var(--surface); }
+.contest-N2 .info-desc { background-color: var(--surface-2); }
+.contest-N1 .user-menu li:not(:first-child)::before { background: var(--line-color1); }
+
+/* Form controls. Only the fill changes — the text already follows --body-color. */
+.inputset .inputset-input,
+.inputset .inputset-input:focus,
+.inputset .inputset-textarea,
+.inputset .inputset-textarea:focus,
+.selectset .selectset-select,
+.selectset .selectset-select:focus,
+.selectset .selectset-toggle,
+.radioset .radioset-label::before,
+.checkset .checkset-label::before { background-color: var(--surface); }
+
+/* Bright blocks keep dark ink so the copy stays readable on them.
+   Their headings and terms set their own colour, so they are pulled back to the
+   panel's — which is exactly what they inherited in the light palette. */
+.contest-N10 .loop-area,
+.contest-N8 .accordset .accordset-content,
+.contest-N6 .green,
+.contest-N6 .blue { color: var(--on-bright); }
+.contest-N10 .loop-area *,
+.contest-N8 .accordset .accordset-content *,
+.contest-N6 .green *,
+.contest-N6 .blue * { color: inherit; }
+
+/* The language switch draws its label and its border in --black. */
+.btnset-line-dark { color: var(--text-color1); border-color: var(--text-color1); }
+.btnset-line-dark:hover {
+  color: var(--body-bg);
+  background-color: var(--text-color1);
+  border-color: var(--text-color1);
+}
+
+/* The accordion header hard-codes #fff, and N8 draws its dividers in --black. */
+.accordset .accordset-header { background-color: var(--surface); }
+.contest-N8 .accordset.accordset-round,
+.contest-N8 .accordset .accordset-item + .accordset-item { border-color: var(--line-color1); }
+
+/* The scroll-jack list inverts on black: the inactive #bdbdbd came out brighter
+   than the active --text-color2, so both ends are restated. */
+.contest-N7 .list li h3,
+.contest-N7 .list li span,
+.contest-N7 .list li p { color: var(--text-color3); }
+.contest-N7 .list li.active span,
+.contest-N7 .list li.active p { color: var(--text-color1); }
+
+
+@media (max-width: 992px) {
+  .contest-N1.block-active,
+  .contest-N1 .header-gnb { background-color: var(--surface); }
+}
+
+/* ---------- N9 code rain ---------- */
+/*
+  .title-area is absolutely positioned, so the drifting thumbnail strip was the
+  block's only in-flow child and the section collapsed to nothing once it went.
+  76rem is the height that strip used to give it.
+*/
+.contest-N9 .contents-inner { min-height: 76rem; }
+
+@media (max-width: 992px) {
+  .contest-N9 .contents-inner { min-height: 52rem; }
+}
+
+/*
+  The ASCII layer sits between the drifting strip and the copy. It takes the
+  same z-index as .dim but comes later in the DOM, so it wins the tie;
+  .title-area is z-index 2 and stays on top. Motion is handled in the
+  component — it draws a single static frame under prefers-reduced-motion.
+*/
+.contest-N9 .code-rain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/*
+  Bloom clips the brightest glyphs to near-white, and the closing copy is
+  near-white too, so the title block carries its own scrim — the same job .dim
+  does for the strip underneath. z-index -1 keeps it inside .title-area's
+  stacking context, painting under the copy and over the canvas.
+*/
+.contest-N9 .title-area::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -8rem 0;
+  background: radial-gradient(
+    ellipse 72% 60% at 50% 50%,
+    rgba(0, 0, 0, 0.92),
+    rgba(0, 0, 0, 0.88) 40%,
+    rgba(0, 0, 0, 0.55) 68%,
+    rgba(0, 0, 0, 0) 88%
+  );
+}
+
+
+/* The block is barely taller than its copy here, so the scrim needs the room. */
+@media (max-width: 992px) {
+  .contest-N9 .title-area::before { inset: -5rem -15%; }
+}
+
+/* ---------- contest-N10 marquee ---------- */
+/* The span carries .h4 from the template. 3rem filled the 7rem band edge to
+   edge; h6 leaves the band reading as a rule rather than a headline. */
+.contest-N10 .text-wrap span { font-size: var(--fs-h6); padding-right: 0; }
+
+/* The template hung the whole gap off the span, which spaced the clones but
+   not the items inside one. The trailing * carries it instead, so every gap
+   is the same 4.8rem: 2rem, the ~0.8rem glyph, 2rem. */
+.contest-N10 .text-wrap i {
+  margin: 0 2rem;
+  font-style: normal;
+}
+
+@media (max-width: 992px) {
+  .contest-N10 .text-wrap i { margin: 0 1.2rem; }
+}
+
+/* ---------- section heading gap ---------- */
+/*
+  The template gives each block a different gap under its heading: 19.3rem on
+  N5 (#arena, #who) and 8rem on N6, N7 and N8. On this page the sections read
+  as one sequence, so the gap is one number. 6.4rem, which is where #arena was
+  set first. These match the template's own specificity and project.css is the
+  last sheet, so they win without !important; the mobile block below has to be
+  repeated for the same reason, otherwise this rule would also beat the
+  template's 4rem at 992px.
+*/
+.contest-N5 .title-area,
+.contest-N6 .title-area,
+.contest-N7 .title-area,
+.contest-N8 .title-area {
+  margin-bottom: 6.4rem;
+}
+
+@media (max-width: 992px) {
+  .contest-N5 .title-area,
+  .contest-N6 .title-area,
+  .contest-N7 .title-area,
+  .contest-N8 .title-area {
+    margin-bottom: 4rem;
+  }
+}
+
+/* ---------- contest-N5 #arena: card carousel ---------- */
+/*
+  Reference is a shadcn/embla carousel: tall rounded cards, one per view on
+  mobile and three on desktop, with a round arrow control. Rebuilt on native
+  scroll-snap because embla is not installed. Every size below is the
+  reference number converted to this project's 10px root: p-8 -> 3.2rem,
+  rounded-3xl -> 2.4rem. The reference h-[450px] is dropped: it sized a card
+    holding a 4.8rem icon, and with the icon gone the top half was empty.
+*/
+
+
+/* The track is focusable, so it can also be scrolled from the keyboard. */
+.arena-row {
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0 0 1.6rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  list-style: none;
+  scrollbar-width: none;
+}
+
+.arena-row::-webkit-scrollbar { display: none; }
+
+.arena-row { cursor: grab; }
+.arena-row.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.arena-row:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+/*
+  The reference cards carry a bright per-service gradient. This page is flat
+  black, so a saturated card would read as a different site. The gradient stays
+  but is pulled down to the surface colour with one lift of the acid green.
+*/
+.arena-card {
+  display: flex;
+  /*
+    Not a third of the track. Three cards that fit the container exactly read
+    as a static grid, because nothing tells the eye there is more to the right.
+    30% leaves the fourth card cut by the container edge, which is the only
+    reliable affordance a carousel has before you touch it.
+  */
+  flex: 0 0 30%;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 32rem;
+  padding: 3.2rem;
+  border: 1px solid var(--line-color2);
+  border-radius: 2.4rem;
+  background: linear-gradient(150deg, var(--bg-color) 35%, #151d10 125%);
+  color: var(--text-color1);
+  scroll-snap-align: start;
+}
+
+/* ( 01 ), monospaced and quiet, the way the reference marks its cards. */
+.arena-num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1.3rem;
+  color: var(--text-color2);
+}
+
+.arena-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* The half of the card index after the slash: 방식, 자금, 순위. */
+.arena-tag {
+  font-size: 1.2rem;
+  letter-spacing: 0.16em;
+  color: var(--primary);
+}
+
+.arena-card .p1 {
+  margin: 0;
+  color: var(--text-color2);
+}
+
+.arena-nav {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: flex-end;
+  margin-top: 2.4rem;
+}
+
+.arena-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  border: 1px solid var(--line-color2);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-color1);
+  transition: .3s;
+  cursor: pointer;
+}
+
+.arena-arrow svg {
+  width: 2rem;
+  height: 2rem;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.arena-arrow:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--on-bright);
+}
+
+.arena-arrow:disabled {
+  opacity: .35;
+  cursor: default;
+}
+
+@media (max-width: 1200px) {
+  .arena-card { flex-basis: 44%; }
+}
+
+@media (max-width: 992px) {
+  .arena-card {
+    flex-basis: 82%;
+    height: 30rem;
+    padding: 2.8rem;
+  }
+}
+
+/* ---------- primary CTA ---------- */
+/*
+  Supplied as a styled-jsx component wrapping its own <button>. Neither part
+  fits: the stylesheets load as plain files in a fixed cascade, and four of the
+  five CTAs are <a href="#apply"> links that have to stay links. So the design
+  lands as a skin on .btnset-primary and the markup only gains the <span> the
+  shimmer needs.
+
+  Four forced changes, all noted where they apply:
+  - The dot field rides on span::after, not ::before. The sticky bar's CTA is
+    .ff-ico.ti-code and its ::before is the icon glyph.
+  - No Inter. Every CTA label is Korean and Inter ships no Hangul, so the
+    request would buy a fallback.
+  - Height and padding stay the template's --ht-sm/md/lg. The supplied
+    1.25rem/2.5rem read as 20px/40px at a 16px root; this document sets
+    62.5%, where the same numbers come out half size.
+  - The highlight is --primary. The supplied `blue` is a second accent that
+    appears nowhere else on the page.
+*/
+@property --gradient-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+@property --gradient-angle-offset { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+@property --gradient-percent { syntax: "<percentage>"; initial-value: 5%; inherits: false; }
+@property --gradient-shine { syntax: "<color>"; initial-value: #ffffff; inherits: false; }
+
+/*
+  :hover is in the selector because templatehouse.css restates background-color
+  and border-width there, at the same specificity this block would otherwise
+  concede on that one state.
+*/
+.btnset-primary,
+.btnset-primary:hover {
+  --shiny-bg: #000000;
+  --shiny-bg-subtle: #1a1818;
+  --shiny-highlight: var(--primary);
+  --shiny-highlight-subtle: #d3fdaa;
+  --shiny-duration: 3s;
+  --shiny-dot: 2px;
+  --shiny-anim: gradient-angle linear infinite;
+
+  isolation: isolate;
+  position: relative;
+  overflow: hidden;
+  outline-offset: 4px;
+  border: 1px solid transparent;
+  border-radius: 360px;
+  color: var(--text-color1);
+  background:
+    linear-gradient(var(--shiny-bg), var(--shiny-bg)) padding-box,
+    conic-gradient(
+      from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
+      transparent,
+      var(--shiny-highlight) var(--gradient-percent),
+      var(--gradient-shine) calc(var(--gradient-percent) * 2),
+      var(--shiny-highlight) calc(var(--gradient-percent) * 3),
+      transparent calc(var(--gradient-percent) * 4)
+    ) border-box;
+  box-shadow: inset 0 0 0 1px var(--shiny-bg-subtle);
+  transition: 800ms cubic-bezier(0.25, 1, 0.5, 1);
+  transition-property: --gradient-angle-offset, --gradient-percent, --gradient-shine;
+}
+
+/*
+  The span stays unpositioned on purpose: its two pseudo-elements size and place
+  themselves against the button, which is the nearest positioned ancestor.
+*/
+.btnset-primary::after,
+.btnset-primary span::before,
+.btnset-primary span::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+}
+
+.btnset-primary:active { translate: 0 1px; }
+
+/* Dot field, masked to a rotating arc. */
+.btnset-primary span::after {
+  --size: calc(100% - var(--shiny-dot) * 6);
+  --space: calc(var(--shiny-dot) * 2);
+  width: var(--size);
+  height: var(--size);
+  background: radial-gradient(
+    circle at var(--shiny-dot) var(--shiny-dot),
+    #fff calc(var(--shiny-dot) / 4),
+    transparent 0
+  ) padding-box;
+  background-size: var(--space) var(--space);
+  background-repeat: space;
+  mask-image: conic-gradient(
+    from calc(var(--gradient-angle) + 45deg),
+    #000,
+    transparent 10% 90%,
+    #000
+  );
+  border-radius: inherit;
+  opacity: 0.4;
+}
+
+/* Inner shimmer, a bar sweeping the lower half. */
+.btnset-primary::after {
+  --shiny-anim: shimmer linear infinite;
+  width: 100%;
+  aspect-ratio: 1;
+  background: linear-gradient(-50deg, transparent, var(--shiny-highlight), transparent);
+  mask-image: radial-gradient(circle at bottom, transparent 40%, #000);
+  opacity: 0.6;
+}
+
+/* Glow that breathes up from the bottom edge, only while hovered or focused. */
+.btnset-primary span::before {
+  --size: calc(100% + 1rem);
+  width: var(--size);
+  height: var(--size);
+  box-shadow: inset 0 -1ex 2rem 4px var(--shiny-highlight);
+  opacity: 0;
+  transition: opacity 800ms cubic-bezier(0.25, 1, 0.5, 1);
+  animation: calc(var(--shiny-duration) * 1.5) breathe linear infinite;
+}
+
+/*
+  Two passes of the same keyframe composited together. The second is paused
+  until the pointer arrives, so hover speeds the sweep up rather than restarting it.
+*/
+.btnset-primary,
+.btnset-primary::after,
+.btnset-primary span::after {
+  animation:
+    var(--shiny-anim) var(--shiny-duration),
+    var(--shiny-anim) calc(var(--shiny-duration) / 0.4) reverse paused;
+  animation-composition: add;
+}
+
+.btnset-primary:is(:hover, :focus-visible) {
+  --gradient-percent: 20%;
+  --gradient-angle-offset: 95deg;
+  --gradient-shine: var(--shiny-highlight-subtle);
+}
+
+.btnset-primary:is(:hover, :focus-visible),
+.btnset-primary:is(:hover, :focus-visible)::after,
+.btnset-primary:is(:hover, :focus-visible) span::after { animation-play-state: running; }
+
+.btnset-primary:is(:hover, :focus-visible) span::before { opacity: 1; }
+
+/* The submit button disables itself while sending; a live shine would deny it. */
+.btnset-primary:disabled { opacity: 0.55; }
+.btnset-primary:disabled,
+.btnset-primary:disabled::after,
+.btnset-primary:disabled span::after,
+.btnset-primary:disabled span::before { animation-play-state: paused; }
+
+@keyframes gradient-angle { to { --gradient-angle: 360deg; } }
+@keyframes shimmer { to { rotate: 360deg; } }
+@keyframes breathe { from, to { scale: 1; } 50% { scale: 1.2; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .btnset-primary,
+  .btnset-primary::after,
+  .btnset-primary span::after,
+  .btnset-primary span::before { animation: none; }
+}
