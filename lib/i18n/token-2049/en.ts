@@ -1,7 +1,15 @@
-import type { Dictionary } from "./index";
+/*
+ * TODO — this file is a verbatim copy of perp-dex-day/, made so the TOKEN 2049
+ * tab renders instead of 404ing. Every fact in it still describes the Seoul
+ * event: the date, the venue, the seat count, the prize, the form questions
+ * and the FAQ. Nothing below has been checked against TOKEN 2049 Singapore.
+ *
+ * Do not ship this tab to applicants until the copy is replaced.
+ */
+import type { Dictionary } from "../index";
 
 export const en: Dictionary = {
-  a11y: { skip: "Skip to content", menu: "Menu" },
+  a11y: { skip: "Skip to content", menu: "Menu", events: "Events" },
   meta: {
     title: "PERP-DEX DAY / Traders Wanted",
     description:

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import type { Dictionary, Locale } from "@/lib/i18n";
-import { otherLocale } from "@/lib/i18n";
+import type { Dictionary, EventSlug, Locale } from "@/lib/i18n";
+import { EVENT_LABELS, EVENTS, otherLocale } from "@/lib/i18n";
 
 /**
  * TemplateHouse block contest-N1. The class names and the id are the contract
@@ -9,10 +9,12 @@ import { otherLocale } from "@/lib/i18n";
  */
 export function Header({
   lang,
+  event,
   nav,
   a11y,
 }: {
   lang: Locale;
+  event: EventSlug;
   nav: Dictionary["nav"];
   a11y: Dictionary["a11y"];
 }) {
@@ -46,15 +48,27 @@ export function Header({
             </div>
           </div>
           <div className="header-center">
-            <h1 className="header-title h5">
-              <Link href={`/${lang}`}>PERP DEX DAY</Link>
-            </h1>
+            {/* The tabs replaced the wordmark, so the page heading is carried
+                separately. .blind is templatehouse's visually-hidden class. */}
+            <h1 className="blind">{EVENT_LABELS[event]}</h1>
+            <nav className="header-title h5 event-tabs" aria-label={a11y.events}>
+              {EVENTS.map((slug) => (
+                <Link
+                  className={slug === event ? "event-tab is-active" : "event-tab"}
+                  key={slug}
+                  href={`/${lang}/${slug}`}
+                  aria-current={slug === event ? "page" : undefined}
+                >
+                  {EVENT_LABELS[slug]}
+                </Link>
+              ))}
+            </nav>
           </div>
           <div className="header-right">
             <div className="header-utils">
               <ul>
                 <li>
-                  <Link className="btnset btnset-sm btnset-line-dark" href={`/${other}`}>
+                  <Link className="btnset btnset-sm btnset-line-dark" href={`/${other}/${event}`}>
                     {other.toUpperCase()}
                   </Link>
                 </li>

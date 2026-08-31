@@ -1,7 +1,7 @@
 /**
- * One shape, two languages. en.ts and ko.ts both satisfy `Dictionary`,
- * so a string that exists in one locale and not the other fails typecheck
- * instead of silently rendering as English on the Korean page.
+ * One shape, two languages, two events. All four dictionaries satisfy
+ * `Dictionary`, so a string that exists in one and not another fails
+ * typecheck instead of silently rendering the wrong event's copy.
  */
 
 export const LOCALES = ["en", "ko"] as const;
@@ -9,6 +9,19 @@ export type Locale = (typeof LOCALES)[number];
 
 export const isLocale = (value: string): value is Locale =>
   (LOCALES as readonly string[]).includes(value);
+
+/** Route slugs. The first one is what a bare /en or /ko redirects to. */
+export const EVENTS = ["perp-dex-day", "token-2049"] as const;
+export type EventSlug = (typeof EVENTS)[number];
+
+export const isEvent = (value: string): value is EventSlug =>
+  (EVENTS as readonly string[]).includes(value);
+
+/** Wordmarks, not copy — they read the same in both locales. */
+export const EVENT_LABELS: Record<EventSlug, string> = {
+  "perp-dex-day": "PERP DEX DAY",
+  "token-2049": "TOKEN 2049",
+};
 
 /** A run of copy where `mark` marks the words the design lifts out of the sentence. */
 export type Segment = { t: string; mark?: boolean };
@@ -18,7 +31,7 @@ type Choice = { label: string; options: string[] };
 
 export type Dictionary = {
   /** Text that only assistive tech reads. */
-  a11y: { skip: string; menu: string };
+  a11y: { skip: string; menu: string; events: string };
   meta: {
     title: string;
     description: string;
@@ -126,12 +139,18 @@ export type Dictionary = {
   footer: { backToTop: string };
 };
 
-import { en } from "./en";
-import { ko } from "./ko";
+import { en as perpDexDayEn } from "./perp-dex-day/en";
+import { ko as perpDexDayKo } from "./perp-dex-day/ko";
+import { en as token2049En } from "./token-2049/en";
+import { ko as token2049Ko } from "./token-2049/ko";
 
-const dictionaries: Record<Locale, Dictionary> = { en, ko };
+const dictionaries: Record<EventSlug, Record<Locale, Dictionary>> = {
+  "perp-dex-day": { en: perpDexDayEn, ko: perpDexDayKo },
+  "token-2049": { en: token2049En, ko: token2049Ko },
+};
 
-export const getDictionary = (locale: Locale): Dictionary => dictionaries[locale];
+export const getDictionary = (event: EventSlug, locale: Locale): Dictionary =>
+  dictionaries[event][locale];
 
 /** The locale the language switch in the header points at. */
 export const otherLocale = (locale: Locale): Locale => (locale === "en" ? "ko" : "en");

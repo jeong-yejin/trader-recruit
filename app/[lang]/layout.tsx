@@ -1,16 +1,18 @@
-import type { Metadata, Viewport } from "next";
+import type { Viewport } from "next";
 import { notFound } from "next/navigation";
 import Script from "next/script";
-import { getDictionary, isLocale, LOCALES } from "@/lib/i18n";
+import { isLocale, LOCALES } from "@/lib/i18n";
 
 type Params = { params: Promise<{ lang: string }> };
 
-/** Only /en and /ko exist — anything else 404s instead of rendering an empty page. */
+/** Only en and ko exist — anything else 404s instead of rendering an empty page. */
 export const dynamicParams = false;
 
 export const generateStaticParams = () => LOCALES.map((lang) => ({ lang }));
 
 export const viewport: Viewport = { themeColor: "#000000" };
+
+/* generateMetadata lives in [event]/page.tsx: every field of it is per-event. */
 
 /**
  * The TemplateHouse stylesheets, in the order index.html loads them.
@@ -38,27 +40,6 @@ const SCRIPTS = [
   "/resources/js/templatehouse.js",
   "/resources/js/style.js",
 ];
-
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { lang } = await params;
-  if (!isLocale(lang)) return {};
-  const { meta } = getDictionary(lang);
-
-  return {
-    title: meta.title,
-    description: meta.description,
-    openGraph: {
-      title: meta.ogTitle,
-      description: meta.ogDescription,
-      type: "website",
-      locale: lang === "ko" ? "ko_KR" : "en_US",
-    },
-    alternates: {
-      canonical: `/${lang}`,
-      languages: { en: "/en", ko: "/ko" },
-    },
-  };
-}
 
 export default async function LangLayout({
   children,

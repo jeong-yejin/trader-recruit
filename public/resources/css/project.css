@@ -87,6 +87,37 @@
 
 /* ---------- header / footer wordmarks ---------- */
 .contest-N1 .header-title a { font-weight: var(--fw-bold); letter-spacing: -0.02em; }
+
+/*
+  The two events share one header, and .header-title is where the single
+  wordmark used to sit — it is already a flex row, so the tabs reuse it. The
+  template sized its <a> for a logo image, which is what width and height are
+  undoing below; that sizing lives in a media query, but specificity beats a
+  media query, so one rule covers both widths.
+*/
+.event-tabs { gap: 2.4rem; }
+
+.contest-N1 .header-title .event-tab {
+  width: auto;
+  height: auto;
+  color: var(--text-color3);
+  border-bottom: 0.2rem solid transparent;
+  transition: color 0.2s;
+}
+
+.contest-N1 .header-title .event-tab:hover,
+.contest-N1 .header-title .event-tab:focus-visible { color: var(--text-color1); }
+
+/* aria-current carries the state for screen readers. This is its visible half:
+   the rule is transparent on the other tab, so neither one changes height. */
+.contest-N1 .header-title .event-tab.is-active {
+  color: var(--text-color1);
+  border-bottom-color: var(--primary);
+}
+
+@media (max-width: 992px) {
+  .event-tabs { gap: 1.6rem; }
+}
 /* The template's footer uses a white logo image, so nothing set a colour here.
    A text wordmark inherits --text-color1 and lands at 1.1:1 on the black bar. */
 .footer-logo { margin: 0; letter-spacing: -0.02em; color: var(--white); }
