@@ -6,6 +6,9 @@ import type { Dictionary } from "@/lib/i18n";
 
 type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
+/** Either one satisfies the requirement. Order decides which gets focus. */
+const SOCIAL = ["telegram", "x"];
+
 /** The dictionary crosses the server/client boundary, so it holds templates, not functions. */
 const fill = (template: string, vars: Record<string, string>) =>
   template.replace(/\{(\w+)\}/g, (_, key: string) => vars[key] ?? "");
@@ -97,22 +100,37 @@ export function ApplyForm({ t }: { t: Dictionary["apply"] }) {
     const form = event.currentTarget;
     setStatus({ text: "", error: false });
 
-    const invalid = Array.from(form.elements)
-      .filter(isControl)
-      .filter((el) => el.required && !el.checkValidity());
+    const controls = Array.from(form.elements).filter(isControl);
+    const invalid = controls.filter((el) => el.required && !el.checkValidity());
+
+    // Telegram and X are one requirement between them. `required` can only say
+    // "this one", so neither input carries it and the pair is checked here.
+    const entries = new FormData(form);
+    const hasSocial = SOCIAL.some((n) => String(entries.get(n) ?? "").trim());
 
     // Flag every empty field, not just the first — one generic message left the
     // applicant hunting through the form for whatever was wrong.
-    setMissing(Object.fromEntries(invalid.map((el) => [el.name, true as const])));
+    setMissing({
+      ...Object.fromEntries(invalid.map((el) => [el.name, true as const])),
+      ...(hasSocial ? {} : { telegram: true as const, x: true as const }),
+    });
 
-    if (invalid.length > 0) {
-      setStatus({ text: t.status.missing, error: true });
-      invalid[0].focus();
-      invalid[0].scrollIntoView({ behavior: "smooth", block: "center" });
+    const firstBad =
+      invalid[0] ?? (hasSocial ? undefined : controls.find((el) => el.name === SOCIAL[0]));
+
+    if (firstBad) {
+      // The generic message covers a mixed failure; the pair only gets its own
+      // wording when it is the single thing standing in the way.
+      setStatus({
+        text: invalid.length > 0 ? t.status.missing : t.status.eitherSocial,
+        error: true,
+      });
+      firstBad.focus();
+      firstBad.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
 
-    const data = Object.fromEntries(new FormData(form).entries());
+    const data = Object.fromEntries(entries.entries());
     setBusy(true);
 
     if (!CONFIG.formEndpoint) {
@@ -153,7 +171,12 @@ export function ApplyForm({ t }: { t: Dictionary["apply"] }) {
 
   const { fields } = t;
 
-  const err = (name: string) => (missing[name] ? t.status.required : undefined);
+  const err = (name: string) =>
+    missing[name]
+      ? SOCIAL.includes(name)
+        ? t.status.eitherSocial
+        : t.status.required
+      : undefined;
   const flagged = (name: string) =>
     missing[name]
       ? ({ "aria-invalid": true, "aria-describedby": `${name}-err` } as const)
@@ -186,7 +209,7 @@ export function ApplyForm({ t }: { t: Dictionary["apply"] }) {
         </Field>
       </div>
 
-      <div className="form-row">
+      <div className="form-row form-row-3">
         <Field name="email" label={fields.email.label} required error={err("email")}>
           <input
             id="email"
@@ -199,15 +222,26 @@ export function ApplyForm({ t }: { t: Dictionary["apply"] }) {
             {...flagged("email")}
           />
         </Field>
-        <Field name="social" label={fields.social.label} required error={err("social")}>
+        {/* Starred like the rest: an applicant who fills both is never worse
+            off, and one who has only X still submits. */}
+        <Field name="telegram" label={fields.telegram.label} required error={err("telegram")}>
           <input
-            id="social"
-            name="social"
+            id="telegram"
+            name="telegram"
             type="text"
             className="inputset-input"
-            placeholder={fields.social.placeholder}
-            required
-            {...flagged("social")}
+            placeholder={fields.telegram.placeholder}
+            {...flagged("telegram")}
+          />
+        </Field>
+        <Field name="x" label={fields.x.label} required error={err("x")}>
+          <input
+            id="x"
+            name="x"
+            type="text"
+            className="inputset-input"
+            placeholder={fields.x.placeholder}
+            {...flagged("x")}
           />
         </Field>
       </div>

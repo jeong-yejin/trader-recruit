@@ -105,7 +105,8 @@ export type Dictionary = {
       name: Field;
       handle: Field;
       email: Field;
-      social: Field;
+      telegram: Field;
+      x: Field;
       city: Field;
       years: Choice;
       venue: Choice;
@@ -121,6 +122,8 @@ export type Dictionary = {
       missing: string;
       /** Shown under each field the applicant left empty. */
       required: string;
+      /** Telegram and X satisfy one requirement between them. */
+      eitherSocial: string;
       mailto: string;
       sending: string;
       ok: string;

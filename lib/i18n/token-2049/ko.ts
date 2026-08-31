@@ -209,7 +209,8 @@ export const ko: Dictionary = {
       name: { label: "이름", placeholder: "실명" },
       handle: { label: "닉네임", placeholder: "순위표에 올라갈 이름" },
       email: { label: "이메일", placeholder: "you@domain.com" },
-      social: { label: "Telegram 또는 X", placeholder: "@아이디" },
+      telegram: { label: "Telegram", placeholder: "@아이디" },
+      x: { label: "X", placeholder: "@아이디" },
       city: { label: "사는 곳", placeholder: "도시, 국가" },
       years: {
         label: "무기한 선물 거래 경력",
@@ -264,6 +265,7 @@ export const ko: Dictionary = {
     status: {
       missing: "별표(*) 표시된 칸을 채워 주세요",
       required: "꼭 입력해 주세요",
+      eitherSocial: "Telegram과 X 중 하나는 입력해 주세요",
       mailto: "메일 앱에서 보내기를 누르면 지원서가 접수돼요",
       sending: "보내는 중이에요…",
       ok: "지원서가 접수됐고 모든 분께 답장드릴게요",

@@ -223,7 +223,8 @@ export const en: Dictionary = {
         placeholder: "The name on the leaderboard",
       },
       email: { label: "Email", placeholder: "you@domain.com" },
-      social: { label: "Telegram or X", placeholder: "@handle" },
+      telegram: { label: "Telegram", placeholder: "@handle" },
+      x: { label: "X", placeholder: "@handle" },
       city: { label: "Based in", placeholder: "City, country" },
       years: {
         label: "Years trading perps",
@@ -274,6 +275,7 @@ export const en: Dictionary = {
     status: {
       missing: "Fill in the required fields marked with *",
       required: "Required",
+      eitherSocial: "Enter at least one of Telegram or X",
       mailto: "Opening your mail app to send the application…",
       sending: "Sending…",
       ok: "Application received. We reply to every applicant.",

@@ -257,6 +257,10 @@
 
 .apply-form { display: grid; gap: 2.4rem; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+/* Email plus the Telegram/X pair. Declared before the 992px block on purpose:
+   .form-row collapses both to one column there, and equal specificity means
+   the later rule is the one that wins. */
+.form-row-3 { grid-template-columns: 1fr 1fr 1fr; }
 .apply-form .inputset-label { display: block; margin-bottom: 0.8rem; }
 .apply-form .inputset-input { width: 100%; }
 .apply-form textarea.inputset-input { height: auto; min-height: 12rem; padding: 1.4rem 1.6rem; resize: vertical; }
