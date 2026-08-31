@@ -196,3 +196,4 @@ mailSubject: "[PERP-DEX DAY] Trader application — {name}",
 - [ ] 기존 PERP-DEX DAY 사이트에 라우트로 편입 (`/traders` 등) + 헤더 내비 연결
 - [ ] 좌석 마감 시 좌석 그리드 상태 변경 방식 결정 (수동 편집 / API 연동)
 - [ ] 루트의 `index.html` / `index.ko.html` 정리 — `legacy/`에 사본이 있어 지워도 됩니다
+# trader-recruit
