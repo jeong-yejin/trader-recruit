@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { MARQUEE_LOGOS } from "@/lib/events/assets";
 
 /**
  * The dictionaries write the partner lines as "with <name>", so the name is
@@ -10,14 +11,6 @@ import { Fragment } from "react";
  * decide how many copies to clone, and without the attributes the marks would
  * be 0x0 at that moment and the loop would come out the wrong length.
  */
-const LOGOS = new Map([
-  ["variational", { file: "variational.svg", w: 1284, h: 171 }],
-  ["lighter", { file: "lighter.svg", w: 93, h: 30 }],
-  ["extended", { file: "extended.svg", w: 136, h: 24 }],
-  ["aster", { file: "aster.svg", w: 91, h: 24 }],
-  ["metamask", { file: "MetaMask-logo-white.svg", w: 127, h: 63 }],
-]);
-
 const partnerOf = (item: string) => item.replace(/^with\s+/i, "").toLowerCase();
 
 /**
@@ -38,7 +31,7 @@ export function Marquee({ items }: { items: string[] }) {
             <span className="h4">
               {items.map((item) => {
                 const key = partnerOf(item);
-                const logo = LOGOS.get(key);
+                const logo = MARQUEE_LOGOS.get(key);
                 return (
                   <Fragment key={item}>
                     {logo ? (

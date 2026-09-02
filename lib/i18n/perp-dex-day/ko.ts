@@ -1,4 +1,4 @@
-import type { Dictionary } from "../index";
+import type { Dictionary } from "../types.ts";
 
 export const ko: Dictionary = {
   a11y: {

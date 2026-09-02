@@ -1,4 +1,5 @@
 import type { Dictionary, EventSlug } from "@/lib/i18n";
+import { PROCESS_ART } from "@/lib/events/assets";
 
 /**
  * Three floating objects, sized by the CSS heights rather than their own
@@ -9,19 +10,6 @@ import type { Dictionary, EventSlug } from "@/lib/i18n";
  * The rabbit sits in slot 2 and the blue pill in slot 3, so project.css trades
  * those two heights back to keep each one its own size.
  */
-const ART: Record<EventSlug, [string, string, string]> = {
-  "perp-dex-day": [
-    "/resources/images/process-red-pill.png",
-    "/resources/images/process-rabbit.png",
-    "/resources/images/process-blue-pill.png",
-  ],
-  "token-2049": [
-    "/resources/images/contest_N7_01.png",
-    "/resources/images/contest_N7_02.png",
-    "/resources/images/contest_N7_03.png",
-  ],
-};
-
 /**
  * TemplateHouse block contest-N7. style.js looks it up as
  * `.contest-N7[id='fPMtE69e1t']` and gives each `.list li` a ScrollTrigger
@@ -35,7 +23,7 @@ export function Process({
   process: Dictionary["process"];
   event: EventSlug;
 }) {
-  const art = ART[event];
+  const art = PROCESS_ART[event];
 
   return (
     <div id="process">

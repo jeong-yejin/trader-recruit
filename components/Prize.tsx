@@ -1,4 +1,5 @@
 import type { Dictionary, EventSlug } from "@/lib/i18n";
+import { PRIZE_ART, type EventArt } from "@/lib/events/assets";
 
 /**
  * The template ships one blob per panel, tinted to the panel it sits on.
@@ -8,27 +9,8 @@ import type { Dictionary, EventSlug } from "@/lib/i18n";
  *
  * `mobile` only exists where the template ships a second crop for it.
  */
-type Art = { src: string; mobile?: string };
-
-const ART: Record<EventSlug, { green: Art; blue: Art }> = {
-  "perp-dex-day": {
-    green: { src: "/resources/images/prize-hand.png" },
-    blue: { src: "/resources/images/prize-pose.png" },
-  },
-  "token-2049": {
-    green: {
-      src: "/resources/images/contest_N6_01.png",
-      mobile: "/resources/images/contest_N6_04.png",
-    },
-    blue: {
-      src: "/resources/images/contest_N6_03.png",
-      mobile: "/resources/images/contest_N6_06.png",
-    },
-  },
-};
-
 /** Decorative, so the alt stays empty and the copy beside it carries the meaning. */
-function Thumb({ art }: { art: Art }) {
+function Thumb({ art }: { art: EventArt }) {
   return (
     <div className="thumb">
       <picture>
@@ -51,7 +33,7 @@ export function Prize({
   prize: Dictionary["prize"];
   event: EventSlug;
 }) {
-  const art = ART[event];
+  const art = PRIZE_ART[event];
 
   return (
     <section className="contest-N6" id="prize">

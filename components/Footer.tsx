@@ -1,16 +1,9 @@
 import { CONFIG } from "@/lib/config";
+import { FOOTER_LOGOS } from "@/lib/events/assets";
 import { EVENT_LABELS } from "@/lib/i18n";
 import type { Dictionary, EventSlug } from "@/lib/i18n";
 
 /** Keyed by event: an event with no entry here falls back to its text label. */
-const LOGOS = {
-  "perp-dex-day": {
-    src: "/resources/logo/perpdexday-white.svg",
-    w: 269,
-    h: 53,
-  },
-} as const;
-
 /**
  * TemplateHouse block contest-N2. style.js measures `.th-layout-footer` and
  * `.footer-container` to decide where the floating N4 bar stops, so both
@@ -26,7 +19,7 @@ export function Footer({
   const year = new Date(CONFIG.eventDate[event]).getFullYear();
   const label = EVENT_LABELS[event];
   // Only perp-dex-day has a drawn wordmark; token-2049 sets its label as text.
-  const logo = event === "perp-dex-day" ? LOGOS[event] : null;
+  const logo = event === "perp-dex-day" ? FOOTER_LOGOS[event] : null;
 
   return (
     <footer className="th-layout-footer">

@@ -1,4 +1,5 @@
 import type { Dictionary } from "@/lib/i18n";
+import { PARTNER_LOGOS } from "@/lib/events/assets";
 
 /**
  * Not a TemplateHouse block. It borrows the container and title-area classes so
@@ -9,14 +10,6 @@ import type { Dictionary } from "@/lib/i18n";
  * name into its file and its intrinsic size. A name with no entry here drops
  * out of the strip rather than rendering a broken image.
  */
-const LOGOS = new Map([
-  ["Variational", { file: "variational.svg", w: 1284, h: 171 }],
-  ["Lighter", { file: "lighter.svg", w: 93, h: 30 }],
-  ["Extended", { file: "extended.svg", w: 136, h: 24 }],
-  ["Aster", { file: "aster.svg", w: 91, h: 24 }],
-  ["MetaMask", { file: "MetaMask-logo-white.svg", w: 127, h: 63 }],
-]);
-
 export function Partners({ partners }: { partners: Dictionary["partners"] }) {
   if (!partners) return null;
 
@@ -38,7 +31,7 @@ export function Partners({ partners }: { partners: Dictionary["partners"] }) {
           </div>
           <ul className="partners-row">
             {partners.items.map((name) => {
-              const logo = LOGOS.get(name);
+              const logo = PARTNER_LOGOS.get(name);
               if (!logo) return null;
               return (
                 <li key={name}>
