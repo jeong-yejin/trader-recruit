@@ -1,6 +1,6 @@
 import type { Viewport } from "next";
 import { notFound } from "next/navigation";
-import Script from "next/script";
+import { TemplateScripts } from "@/components/TemplateScripts";
 import { isLocale, LOCALES } from "@/lib/i18n";
 
 type Params = { params: Promise<{ lang: string }> };
@@ -31,8 +31,10 @@ const STYLESHEETS = [
 
 /**
  * The same four scripts index.html ends with, in the same order.
- * afterInteractive runs them once hydration is done — none of them wait for
- * DOMContentLoaded, they read the DOM the moment they execute.
+ * TemplateScripts runs them in sequence, so only the first tag is on the
+ * server-rendered page; the preloads below start the other three downloading
+ * anyway. Next preloads the first one itself, and a repeated preload of one URL
+ * costs a tag, not a request.
  */
 const SCRIPTS = [
   "/resources/js/setting.js",
@@ -54,12 +56,13 @@ export default async function LangLayout({
         {STYLESHEETS.map((href) => (
           <link key={href} rel="stylesheet" href={href} />
         ))}
+        {SCRIPTS.map((src) => (
+          <link key={src} rel="preload" as="script" href={src} />
+        ))}
       </head>
       <body>
         {children}
-        {SCRIPTS.map((src) => (
-          <Script key={src} src={src} strategy="afterInteractive" />
-        ))}
+        <TemplateScripts srcs={SCRIPTS} />
       </body>
     </html>
   );
