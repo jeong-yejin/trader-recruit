@@ -23,7 +23,6 @@
 - Create: `features/application/form-contract.ts`
 - Create: `features/application/form-submit.ts`
 - Create: `features/application/form-submit.test.ts`
-- Create: `lib/i18n/routes.test.ts`
 - Modify: `package.json`
 
 **Interfaces:**
@@ -57,6 +56,7 @@
 - Create: `lib/i18n/types.ts`
 - Create: `lib/i18n/routes.ts`
 - Create: `lib/i18n/dictionaries.ts`
+- Create: `lib/i18n/routes.test.ts`
 - Create: `lib/events/assets.ts`
 - Modify: `lib/i18n/index.ts`
 - Modify: `lib/i18n/perp-dex-day/en.ts`
