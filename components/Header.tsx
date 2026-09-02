@@ -19,9 +19,12 @@ export function Header({
   a11y: Dictionary["a11y"];
 }) {
   const other = otherLocale(lang);
+  // The partner strip only exists on the event whose dictionary names it, so
+  // the label is what decides whether the link is there. Same order as the page.
   const links = [
     { href: "#prize", label: nav.prize },
     { href: "#arena", label: nav.arena },
+    ...(nav.partners ? [{ href: "#partners", label: nav.partners }] : []),
     { href: "#who", label: nav.who },
     { href: "#process", label: nav.process },
     { href: "#faq", label: nav.faq },

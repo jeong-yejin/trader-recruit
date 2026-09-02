@@ -5,15 +5,16 @@ export const en: Dictionary = {
   meta: {
     title: "PERP-DEX DAY / Traders Wanted",
     description:
-      "PERP-DEX DAY is recruiting 4 traders for a live, on-stage perpetuals trading competition during Korea Blockchain Week 2026. The winner flies to Singapore — flight and hotel covered.",
+      "With Variational, Lighter, Extended, Aster and MetaMask, we're looking for 4 traders to compete in a live perpetuals trading competition in Seoul on September 28, 2026. First place goes on to the Asia Trading Championship with Kalshi.",
     ogTitle: "PERP-DEX DAY / Traders Wanted",
     ogDescription:
-      "4 seats. One arena. The winner trades live in Singapore — flight and hotel on us.",
+      "Four seats, one ticket to Singapore. First place takes the flight and hotel and goes on to the Asia Trading Championship.",
   },
 
   nav: {
     prize: "Prize",
-    arena: "The Arena",
+    arena: "Format",
+    partners: "Partners",
     who: "Who",
     process: "Process",
     faq: "FAQ",
@@ -22,196 +23,197 @@ export const en: Dictionary = {
 
   hero: {
     titleTop: "Four seats.",
-    titleLit: "One arena.",
+    titleLit: "One ticket.",
     sub: [
       [
-        { t: "PERP-DEX DAY puts " },
-        { t: "four traders on one stage", mark: true },
         {
-          t: ", live in front of a room — real perps, real size, one leaderboard on the big screen.",
+          t: "Four traders compete on real accounts with real capital.",
+          mark: true,
         },
       ],
       [
-        { t: "Win it — only the winner — and you fly to " },
-        { t: "Singapore", mark: true },
-        { t: " for the live trading competition. " },
-        { t: "Flight and hotel covered.", mark: true },
+        {
+          t: "First place goes on to the Asia Trading Championship in Singapore, with Kalshi.",
+        },
       ],
     ],
-    ctaPrimary: "Take the seat ↗",
+    ctaPrimary: "Apply for a seat ↗",
   },
 
   marquee: [
-    "live on stage",
-    "capital provided",
-    "winner takes all",
-    "1st place flies to singapore",
-    "flight + hotel covered",
-    "real perps · real size",
+    "live trading on stage",
+    "real accounts · real capital",
+    "trading capital fully covered",
+    "first place flies to singapore",
+    "flight and hotel covered",
+    "with variational",
+    "with lighter",
+    "with extended",
+    "with aster",
+    "with metamask",
   ],
 
   seat: {
     status: "Open",
-    note: "Unclaimed seat on the arena floor.",
+    note: "Open for applications.",
     takenStatus: "Taken",
-    takenNote: "Locked in. This seat is off the board.",
+    takenNote: "This seat is confirmed.",
     remaining: "{n} of 4 seats still open",
   },
 
   countdown: {
-    label: "The arena opens in",
+    label: "The competition starts in",
     units: { d: "Days", h: "Hours", m: "Minutes", s: "Seconds" },
   },
 
   prize: {
-    title: ["Win the arena,", "fly to Singapore."],
-    intro: "There is no second place here.",
-    kicker: "Champion package",
+    title: ["Only first place", "flies to Singapore."],
+    intro: "Prove it in Seoul, then go for the Asia title.",
+    kicker: "What first place gets",
     heading: [
-      { t: "A seat in the " },
-      { t: "Singapore live trading competition", mark: true },
-      { t: " — travel on us." },
+      { t: "A seat in the Asia Trading Championship", mark: true },
+      { t: ", with the flight and hotel covered." },
     ],
     items: [
       {
         k: "01",
-        lead: "Qualification.",
-        body: "Guaranteed entry to the Singapore live trading competition.",
+        lead: "Championship entry",
+        body: "You go on to the Asia Trading Championship in Singapore, with Kalshi.",
       },
       {
         k: "02",
-        lead: "Flight.",
-        body: "Round-trip airfare, Seoul ⇄ Singapore, booked and paid by us.",
+        lead: "Round-trip flight",
+        body: "We book the round-trip flight between Seoul and Singapore.",
       },
       {
         k: "03",
-        lead: "Hotel.",
-        body: "Accommodation for the competition dates, covered.",
+        lead: "Hotel for the competition",
+        body: "We book the accommodation you need for the Singapore final.",
       },
     ],
     sideNote:
-      "Only first place takes a prize. All four trade on our capital, so nobody covers their own losses.",
+      "The prize goes to first place only. We cover every trading loss all four make during the competition.",
   },
 
   arena: {
     prev: "Previous card",
     next: "Next card",
-    title: ["How the arena works."],
+    title: ["The whole trading session", "is the match."],
     intro:
-      "E-sports format, perps engine. Four traders, one clock, one screen — and a room full of people watching every fill.",
+      "An e-sports style trading competition. The room watches the trading screens and the leaderboard move in real time.",
     cards: [
       {
         idx: "01 / Format",
-        title: "Four traders, one clock",
-        body:
-          "All four trade the same session, same window, same venue-approved pairs. Everyone starts flat.",
+        title: "Four traders start at once",
+        body: "Everyone starts flat, on the same pairs, in the same window.",
       },
       {
         idx: "02 / Capital",
-        title: "Capital is provided",
-        body:
-          "You don't bring your own bankroll. Each seat is funded with an identical starting balance for the session.",
+        title: "We provide the trading capital",
+        body: "All four start with the same balance, and we cover any loss made during the competition.",
       },
       {
         idx: "03 / Scoring",
-        title: "Live PnL leaderboard",
-        body:
-          "Ranking is by session PnL, projected live on the main screen.",
+        title: "The PnL ranking is live",
+        body: "Ranking is by trading PnL, and every move shows on the main screen as it happens.",
       },
       {
         idx: "04 / Broadcast",
-        title: "Your screen is the show",
-        body:
-          "Positions, entries and liquidation levels are on the big display. Commentary runs over the top, e-sports style.",
+        title: "Your screen is the broadcast",
+        body: "Positions, entries and exits go up on the big display, with live commentary over the top.",
       },
       {
         idx: "05 / The crowd",
-        title: "The room has a vote",
-        body:
-          "Attendees vote on who owns the arena before the bell. The crowd doesn't move your PnL — but it moves the room.",
+        title: "The crowd predicts the winner",
+        body: "Before the start, the audience votes for the trader they think takes it.",
       },
       {
-        idx: "06 / The venue",
-        title: "Korea Blockchain Week",
-        body:
-          "September 28, 2026 in Seoul, on the KBW 2026 week calendar, alongside the PERP-DEX DAY main stage and partner sessions.",
+        idx: "06 / Venue",
+        title: "KBW 2026, Seoul",
+        body: "September 28, 2026 at SJ KUNSTHALLE, during Korea Blockchain Week.",
       },
     ],
   },
 
-  who: {
-    title: ["Who we're", "looking for."],
+  partners: {
+    kicker: "PARTICIPATING PARTNERS",
+    title: ["The partners standing", "behind PERP-DEX DAY."],
     intro:
-      "Not the biggest account — the trader who can hold their process together with a room watching and a clock running.",
-    haveLabel: "You should have",
+      "Variational, Lighter, Extended, Aster and MetaMask are on this stage with you, so your trading and your name reach the industry.",
+    items: ["Variational", "Lighter", "Extended", "Aster", "MetaMask"],
+  },
+
+  who: {
+    title: ["We're looking for traders", "who can prove it on stage."],
+    intro:
+      "Account size carries less weight than your actual trading record, your risk process, and whether you can hold your strategy together in front of an audience.",
+    haveLabel: "You're a good fit if",
     have: [
-      "Live perpetuals experience — you trade perps now, not “used to”.",
-      "A verifiable track record: exchange PnL page, read-only API, or a public profile we can check.",
-      "A defined risk process you can explain in one paragraph.",
-      "Comfort being on camera and on a live leaderboard.",
-      "Full availability on event day in Seoul, plus a short briefing the day before.",
-      "A valid passport, if you're the one who ends up on the Singapore flight.",
+      "You currently trade perpetuals.",
+      "You can show your track record: an exchange PnL page, a read-only API, or a public profile.",
+      "You can explain your own trading rules and risk process.",
+      "You can trade as usual with cameras and a live leaderboard on you.",
+      "You can be at the Seoul venue all day on September 28, 2026.",
+      "You hold a valid passport for travel to Singapore.",
     ],
     not: [
-      "A large following. We're picking traders, not accounts.",
-      "Your own capital — the session bankroll is provided.",
-      "A specific DEX. Bring whatever you actually trade on.",
-      "Institutional background. Independent traders are welcome and expected.",
+      "Follower count and name recognition alone won't get you selected.",
+      "We provide the competition capital, so you don't need your own.",
+      "Independent traders with no institutional background can apply.",
+      "We never accept withdrawal-enabled API keys or seed phrases.",
     ],
   },
 
   process: {
-    title: ["Selection process."],
-    intro: "Five rounds, fast.",
+    title: ["How we select traders."],
+    intro:
+      "We interview in the order applications arrive and close once the four seats are filled.",
     steps: [
       {
         n: "01",
         title: "Apply",
-        body:
-          "Five minutes. Contact, venue you trade, and a link that proves the track record.",
-        when: "Now — rolling",
+        body: "Your contact details, the venue you mainly trade, and a link to your track record.",
+        when: "Rolling",
       },
       {
         n: "02",
         title: "Track record review",
-        body: "We verify PnL and risk behaviour from what you submit.",
+        body: "We check your trading PnL and your risk process from what you send.",
         when: "Within 5 days",
       },
       {
         n: "03",
-        title: "30-minute call",
-        body:
-          "Video call in Korean or English. Your process, your worst drawdown, and how you'd handle a live audience.",
-        when: "By invitation",
+        title: "30-minute video call",
+        body: "Your trading rules, how you manage losses, and the strategy you'd run on a live stage.",
+        when: "Notified individually",
       },
       {
         n: "04",
-        title: "Seat confirmed",
-        body:
-          "Contract, briefing pack, rules and risk limits. Your name goes on the arena card and the vote page.",
-        when: "Before event week",
+        title: "Entry confirmed",
+        body: "We send the contract and the participation pack, and your name goes up on the event page.",
+        when: "Notified individually",
       },
       {
         n: "05",
-        title: "Arena day",
-        body: "Briefing, sound check, then the bell.",
+        title: "Competition day",
+        body: "Check-in and an equipment check, then live trading starts.",
         when: "Sep 28 · Seoul",
       },
     ],
   },
 
   apply: {
-    kicker: "Application",
-    title: ["Claim", "a seat."],
+    kicker: "Trader application",
+    title: ["Take your shot at", "one of the four seats."],
     kv: [
       { k: "Time to complete", v: "About 5 minutes." },
       {
         k: "What we check",
-        v: "Your track record link and your risk process. Nothing else carries weight.",
+        v: "Your trading record, your risk process, and how you'd hold up on a live stage.",
       },
       {
         k: "Security",
-        v: "Never send a withdrawal-enabled API key, a seed phrase, or a password. Read-only keys or a screenshot page are enough.",
+        v: "We never accept withdrawal-enabled keys, seed phrases or passwords. Send a read-only API or a screenshot.",
       },
     ],
     contactLabel: "Questions",
@@ -219,7 +221,7 @@ export const en: Dictionary = {
     fields: {
       name: { label: "Name", placeholder: "Legal name" },
       handle: {
-        label: "Trading handle",
+        label: "Handle",
         placeholder: "The name on the leaderboard",
       },
       email: { label: "Email", placeholder: "you@domain.com" },
@@ -231,7 +233,7 @@ export const en: Dictionary = {
         options: ["Under 1 year", "1–2 years", "3–5 years", "5 years or more"],
       },
       venue: {
-        label: "Main venue",
+        label: "Main venue or protocol",
         options: [
           "Variational",
           "Lighter",
@@ -249,74 +251,88 @@ export const en: Dictionary = {
       proof: {
         label: "Track record link",
         placeholder:
-          "Exchange PnL page, leaderboard profile, or a public thread",
+          "A PnL page, public profile, leaderboard — anything we can check",
       },
       risk: {
-        label: "Your risk process, in one paragraph",
+        label: "Your risk process",
         placeholder:
-          "Position sizing, max leverage, how you cut a loser, what makes you sit out a session.",
+          "Position sizing, max leverage, where you cut a loser, and the rules you hold to",
       },
       why: {
-        label: "Why you should own the arena",
-        placeholder: "Optional. Short is fine.",
+        label: "Why you're applying",
+        placeholder:
+          "In a few lines, why you want to be on the PERP-DEX DAY stage",
       },
       available: {
-        label: "Available Sep 28 in Seoul",
+        label: "Can you be in Seoul on September 28?",
         options: [
-          "Yes — Sep 28 full day, plus the briefing",
-          "Yes, with a scheduling constraint",
-          "Not sure yet",
+          "Yes, all day.",
+          "Yes, with a scheduling constraint.",
+          "Not sure yet.",
         ],
       },
     },
     agree:
-      "I confirm the track record I submitted is my own, I can attend in person in Seoul, and I agree to the event terms and privacy policy. I understand trading involves risk of loss.",
-    submit: "Submit application ↗",
+      "The track record I submitted is my own. I can attend in person in Seoul, and I agree to the event terms, the privacy policy, and the risk of trading losses.",
+    submit: "Send application ↗",
     status: {
-      missing: "Fill in the required fields marked with *",
+      missing: "Fill in the fields marked with *",
       required: "Required",
       eitherSocial: "Enter at least one of Telegram or X",
-      mailto: "Opening your mail app to send the application…",
+      mailto: "Hit send in your mail app and the application reaches us",
       sending: "Sending…",
-      ok: "Application received. We reply to every applicant.",
-      error: "Something broke on send. Mail us at {email}",
+      ok: "Application received. We'll review it and reply individually",
+      error: "The mail didn't send. Write to {email} directly",
     },
-    mailSubject: "PERP-DEX DAY — trader application: {name}",
+    mailSubject: "PERP-DEX DAY trader application: {name}",
   },
 
   faq: {
     title: ["Questions."],
-    intro: "Anything not covered here — mail us and we'll answer directly.",
+    intro:
+      "Anything not covered here — message us on Telegram at @reboundx_cs.",
     items: [
       {
-        q: "Is this open to traders outside Korea?",
-        a: "Yes — but the arena is offline in Seoul on September 28, 2026, and you need to be in the room. Tell us where you're based in the form and we'll talk about travel.",
+        q: "Which partners are in on the competition?",
+        a: "Variational, Lighter, Extended, Aster and MetaMask are all in on PERP-DEX DAY.",
       },
       {
-        q: "What do I send as proof of track record?",
-        a: "A shareable exchange PnL page, a public leaderboard profile, or a read-only API key. Never send a withdrawal-enabled key, a seed phrase, or a password — we will never ask for one, and any message that does is not from us.",
+        q: "Can I apply if I don't live in Korea?",
+        a: "Yes. But you have to be at the Seoul venue in person on September 28, 2026.",
       },
       {
-        q: "Which pairs and what leverage?",
-        a: "The approved pair list, maximum leverage and risk limits are fixed at the briefing the day before and are identical for all four seats. Breaching a limit is disqualifying.",
+        q: "How do I submit my track record?",
+        a: "Send anything that verifies your own trading: an exchange PnL page, a public profile, a leaderboard, or a read-only API key. We never accept withdrawal-enabled API keys, seed phrases or passwords.",
+      },
+      {
+        q: "How are the pairs and leverage decided?",
+        a: "The pairs, the maximum leverage and the risk limits are the same for every participant. We share the detailed rules once your entry is confirmed.",
+      },
+      {
+        q: "Who covers losses during the competition?",
+        a: "We provide the competition capital, and we cover every trading loss the four participants make during the competition.",
+      },
+      {
+        q: "What does first place go on to?",
+        a: "The Asia Trading Championship with Kalshi. It runs during TOKEN2049 Singapore week, and we cover the round-trip flight and the hotel for the competition dates.",
       },
       {
         q: "Do I need to speak English?",
-        a: "No. The interview and the event run in Korean or English, whichever you prefer. Interpretation is available on stage.",
+        a: "No. You can do the interview and the Seoul competition in whichever language you're comfortable with.",
       },
       {
-        q: "Can I bring my own setup?",
-        a: "Your own keyboard and mouse, yes. Machines and screens are provided and identical, and the session runs on the venue network.",
+        q: "Can I bring my own equipment?",
+        a: "PCs and monitors are identical for every participant. We share the rules on keyboards and mice once your entry is confirmed.",
       },
     ],
   },
 
   final: {
-    kicker: "The arena is filling",
-    title: ["Four seats.", "One flight to Singapore."],
+    kicker: "We close when the four seats are filled.",
+    title: ["Four seats,", "one ticket to Singapore."],
     body:
-      "Applications are reviewed as they arrive and the call closes the moment the last seat is claimed.",
-    cta: "Take the seat ↗",
+      "Applications are reviewed in the order they arrive. We close the moment the last seat is confirmed.",
+    cta: "Apply for a seat ↗",
   },
 
   footer: { backToTop: "Back to top ↑" },

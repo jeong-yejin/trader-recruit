@@ -34,7 +34,15 @@ export function Apply({ apply }: { apply: Dictionary["apply"] }) {
               ))}
               <dt className="p3">{apply.contactLabel}</dt>
               <dd className="p2">
-                <a href={`mailto:${CONFIG.fallbackEmail}`}>{CONFIG.fallbackEmail}</a>
+                {/* A new tab, not this one: the applicant is mid-form and a
+                    same-tab jump loses everything they have typed. */}
+                <a
+                  href={`https://t.me/${CONFIG.contactTelegram}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  TG @{CONFIG.contactTelegram}
+                </a>
               </dd>
             </dl>
 

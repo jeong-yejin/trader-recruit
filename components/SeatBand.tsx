@@ -1,6 +1,6 @@
 import { Countdown } from "./Countdown";
 import { CONFIG } from "@/lib/config";
-import type { Dictionary } from "@/lib/i18n";
+import type { Dictionary, EventSlug } from "@/lib/i18n";
 
 const SEAT_NUMBERS = ["01", "02", "03", "04"];
 
@@ -12,9 +12,11 @@ const SEAT_NUMBERS = ["01", "02", "03", "04"];
 export function SeatBand({
   seat,
   countdown,
+  event,
 }: {
   seat: Dictionary["seat"];
   countdown: Dictionary["countdown"];
+  event: EventSlug;
 }) {
   /** Seats fill from the front, so seat 01 is the first one to go. */
   const takenCount = SEAT_NUMBERS.length - CONFIG.seatsOpen;
@@ -45,7 +47,7 @@ export function SeatBand({
 
           <div className="count-band">
             <span className="count-label">{countdown.label}</span>
-            <Countdown units={countdown.units} />
+            <Countdown units={countdown.units} event={event} />
           </div>
         </div>
       </div>

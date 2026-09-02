@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { CONFIG } from "@/lib/config";
-import type { Dictionary } from "@/lib/i18n";
+import type { Dictionary, EventSlug } from "@/lib/i18n";
 
 type Clock = { d: string; h: string; m: string; s: string };
 
@@ -25,18 +25,20 @@ const remaining = (end: number): Clock => {
 
 export function Countdown({
   units,
+  event,
 }: {
   units: Dictionary["countdown"]["units"];
+  event: EventSlug;
 }) {
   const [clock, setClock] = useState<Clock>(IDLE);
 
   useEffect(() => {
-    const end = new Date(CONFIG.eventDate).getTime();
+    const end = new Date(CONFIG.eventDate[event]).getTime();
     const tick = () => setClock(remaining(end));
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [event]);
 
   // No aria-live: this ticks every second and would be read aloud each time.
   return (

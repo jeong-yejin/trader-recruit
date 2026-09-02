@@ -1,27 +1,19 @@
-/*
- * TODO — this file is a verbatim copy of perp-dex-day/, made so the TOKEN 2049
- * tab renders instead of 404ing. Every fact in it still describes the Seoul
- * event: the date, the venue, the seat count, the prize, the form questions
- * and the FAQ. Nothing below has been checked against TOKEN 2049 Singapore.
- *
- * Do not ship this tab to applicants until the copy is replaced.
- */
 import type { Dictionary } from "../index";
 
 export const en: Dictionary = {
   a11y: { skip: "Skip to content", menu: "Menu", events: "Events" },
   meta: {
-    title: "PERP-DEX DAY / Traders Wanted",
+    title: "ASIA TRADING CHAMPIONSHIP with Kalshi / Traders Wanted",
     description:
-      "PERP-DEX DAY is recruiting 4 traders for a live, on-stage perpetuals trading competition during Korea Blockchain Week 2026. The winner flies to Singapore — flight and hotel covered.",
-    ogTitle: "PERP-DEX DAY / Traders Wanted",
+      "We're looking for traders to compete in the Asia live on-chain trading championship, held with Kalshi at Zouk Singapore during TOKEN2049 Singapore week.",
+    ogTitle: "ASIA TRADING CHAMPIONSHIP with Kalshi",
     ogDescription:
-      "4 seats. One arena. The winner trades live in Singapore — flight and hotel on us.",
+      "A live on-chain match to decide Asia's best trader. Take the stage at the TOKEN2049 Singapore Side Event.",
   },
 
   nav: {
-    prize: "Prize",
-    arena: "The Arena",
+    prize: "Championship",
+    arena: "Format",
     who: "Who",
     process: "Process",
     faq: "FAQ",
@@ -29,197 +21,187 @@ export const en: Dictionary = {
   },
 
   hero: {
-    titleTop: "Four seats.",
+    titleTop: "Asia’s traders.",
     titleLit: "One arena.",
     sub: [
       [
-        { t: "PERP-DEX DAY puts " },
-        { t: "four traders on one stage", mark: true },
         {
-          t: ", live in front of a room — real perps, real size, one leaderboard on the big screen.",
+          t: "With Kalshi, we're deciding Asia's best on-chain trader.",
+          mark: true,
         },
       ],
       [
-        { t: "Win it — only the winner — and you fly to " },
-        { t: "Singapore", mark: true },
-        { t: " for the live trading competition. " },
-        { t: "Flight and hotel covered.", mark: true },
+        {
+          t: "TOKEN2049 Singapore Side Event · October 5, 2026 · Zouk Singapore",
+        },
       ],
     ],
-    ctaPrimary: "Take the seat ↗",
+    ctaPrimary: "Apply to the championship ↗",
   },
 
   marquee: [
-    "live on stage",
-    "capital provided",
-    "winner takes all",
-    "1st place flies to singapore",
-    "flight + hotel covered",
-    "real perps · real size",
+    "asia trading championship",
+    "with kalshi",
+    "recruiting asia's traders",
+    "live on-chain trading",
+    "a match in front of a crowd",
+    "token2049 singapore side event",
+    "perpdex day singapore",
+    "zouk singapore",
   ],
 
   seat: {
     status: "Open",
-    note: "Unclaimed seat on the arena floor.",
-    takenStatus: "Taken",
-    takenNote: "Locked in. This seat is off the board.",
-    remaining: "{n} of 4 seats still open",
+    note: "Open for applications.",
+    takenStatus: "Closed",
+    takenNote: "Applications are closed.",
+    remaining: "{n} seats still open",
   },
 
   countdown: {
-    label: "The arena opens in",
+    label: "The championship starts in",
     units: { d: "Days", h: "Hours", m: "Minutes", s: "Seconds" },
   },
 
   prize: {
-    title: ["Win the arena,", "fly to Singapore."],
-    intro: "There is no second place here.",
-    kicker: "Champion package",
+    title: ["Take the Singapore stage", "that decides Asia's best trader."],
+    intro:
+      "The Asia Trading Championship, with Kalshi, runs at Zouk Singapore during TOKEN2049 Singapore week.",
+    kicker: "ASIA TRADING CHAMPIONSHIP · WITH KALSHI",
     heading: [
-      { t: "A seat in the " },
-      { t: "Singapore live trading competition", mark: true },
-      { t: " — travel on us." },
+      { t: "Any trader who proves it with real trades", mark: true },
+      { t: " can apply to the championship." },
     ],
     items: [
       {
         k: "01",
-        lead: "Qualification.",
-        body: "Guaranteed entry to the Singapore live trading competition.",
+        lead: "Asia championship",
+        body: "Traders from across Asia compete on one stage for the champion's seat.",
       },
       {
         k: "02",
-        lead: "Flight.",
-        body: "Round-trip airfare, Seoul ⇄ Singapore, booked and paid by us.",
+        lead: "Live on-chain match",
+        body: "You go up against the field on real on-chain results and performance.",
       },
       {
         k: "03",
-        lead: "Hotel.",
-        body: "Accommodation for the competition dates, covered.",
+        lead: "Crowd predictions with Kalshi",
+        body: "Over 1,000 people in the room follow every trade and predict the winner.",
       },
     ],
     sideNote:
-      "Only first place takes a prize. All four trade on our capital, so nobody covers their own losses.",
+      "Prize money, travel support and other conditions go to the traders who make the final selection.",
   },
 
   arena: {
     prev: "Previous card",
     next: "Next card",
-    title: ["How the arena works."],
+    title: ["Every trade you make", "is part of deciding Asia's champion."],
     intro:
-      "E-sports format, perps engine. Four traders, one clock, one screen — and a room full of people watching every fill.",
+      "An e-sports style live trading championship with Kalshi. Real trading performance decides it, not presentations.",
     cards: [
       {
         idx: "01 / Format",
-        title: "Four traders, one clock",
-        body:
-          "All four trade the same session, same window, same venue-approved pairs. Everyone starts flat.",
+        title: "You start trading at the same time",
+        body: "Selected Asian traders compete in one arena with live on-chain trades.",
       },
       {
-        idx: "02 / Capital",
-        title: "Capital is provided",
-        body:
-          "You don't bring your own bankroll. Each seat is funded with an identical starting balance for the session.",
+        idx: "02 / Performance",
+        title: "Your results show live",
+        body: "The crowd follows each trader's performance and every move on the leaderboard.",
       },
       {
-        idx: "03 / Scoring",
-        title: "Live PnL leaderboard",
-        body:
-          "Ranking is by session PnL, projected live on the main screen.",
+        idx: "03 / The crowd",
+        title: "The crowd predicts the champion",
+        body: "Before the start, the audience picks the trader they think takes the title, with Kalshi.",
       },
       {
-        idx: "04 / Broadcast",
-        title: "Your screen is the show",
-        body:
-          "Positions, entries and liquidation levels are on the big display. Commentary runs over the top, e-sports style.",
+        idx: "04 / Stage",
+        title: "An arena-grade LED stage",
+        body: "Lighting, cameras, sound and a large LED wall. It runs as a live show.",
       },
       {
-        idx: "05 / The crowd",
-        title: "The room has a vote",
-        body:
-          "Attendees vote on who owns the arena before the bell. The crowd doesn't move your PnL — but it moves the room.",
+        idx: "05 / The room",
+        title: "Global crypto attendees fill the room",
+        body: "Traders, institutions, KOLs and media gathered for TOKEN2049 week watch the match in one space.",
       },
       {
-        idx: "06 / The venue",
-        title: "Korea Blockchain Week",
-        body:
-          "September 28, 2026 in Seoul, on the KBW 2026 week calendar, alongside the PERP-DEX DAY main stage and partner sessions.",
+        idx: "06 / Venue",
+        title: "Zouk Singapore",
+        body: "October 5, 2026, as a TOKEN2049 Singapore Side Event.",
       },
     ],
   },
 
   who: {
-    title: ["Who we're", "looking for."],
+    title: ["We're looking for traders", "who'll compete for Asia's title."],
     intro:
-      "Not the biggest account — the trader who can hold their process together with a room watching and a clock running.",
-    haveLabel: "You should have",
+      "Follower count carries no weight. We look at your trading record, your risk process, and how you perform on a live stage.",
+    haveLabel: "You're a good fit if",
     have: [
-      "Live perpetuals experience — you trade perps now, not “used to”.",
-      "A verifiable track record: exchange PnL page, read-only API, or a public profile we can check.",
-      "A defined risk process you can explain in one paragraph.",
-      "Comfort being on camera and on a live leaderboard.",
-      "Full availability on event day in Seoul, plus a short briefing the day before.",
-      "A valid passport, if you're the one who ends up on the Singapore flight.",
+      "You currently trade perpetuals or on-chain derivatives.",
+      "You can show your track record: an exchange PnL page, a read-only API, or a public profile.",
+      "You can explain your own trading rules and risk process.",
+      "You can trade as usual with an audience and cameras on you.",
+      "You can be at the venue in Singapore on October 5, 2026.",
+      "You can do the interview in English or another supported language.",
     ],
     not: [
-      "A large following. We're picking traders, not accounts.",
-      "Your own capital — the session bankroll is provided.",
-      "A specific DEX. Bring whatever you actually trade on.",
-      "Institutional background. Independent traders are welcome and expected.",
+      "Follower count and name recognition alone won't get you selected.",
+      "Independent traders with no institutional background can apply.",
+      "Nationality and country of residence don't limit your application.",
+      "We never accept withdrawal-enabled API keys or seed phrases.",
     ],
   },
 
   process: {
-    title: ["Selection process."],
-    intro: "Five rounds, fast.",
+    title: ["How you get to the Singapore stage."],
+    intro:
+      "Applications and interviews decide who competes in the Asia Trading Championship.",
     steps: [
       {
         n: "01",
         title: "Apply",
-        body:
-          "Five minutes. Contact, venue you trade, and a link that proves the track record.",
+        body: "Five minutes. Contact, the venue you trade, and a link that proves the track record.",
         when: "Now — rolling",
       },
       {
         n: "02",
         title: "Track record review",
-        body: "We verify PnL and risk behaviour from what you submit.",
+        body: "We check your trading performance and your risk process from what you send.",
         when: "Within 5 days",
       },
       {
         n: "03",
         title: "30-minute call",
-        body:
-          "Video call in Korean or English. Your process, your worst drawdown, and how you'd handle a live audience.",
+        body: "Your trading rules, your risk process, and the strategy you'd run on a live stage, in whichever language you're comfortable with.",
         when: "By invitation",
       },
       {
         n: "04",
-        title: "Seat confirmed",
-        body:
-          "Contract, briefing pack, rules and risk limits. Your name goes on the arena card and the vote page.",
+        title: "Entry confirmed",
+        body: "We send the contract and the participation pack, and your name goes up on the championship page.",
         when: "Before event week",
       },
       {
         n: "05",
-        title: "Arena day",
-        body: "Briefing, sound check, then the bell.",
-        when: "Sep 28 · Seoul",
+        title: "Championship day",
+        body: "Check-in and an equipment check, then live trading starts.",
+        when: "Oct 5 · Singapore",
       },
     ],
   },
 
   apply: {
-    kicker: "Application",
-    title: ["Claim", "a seat."],
+    kicker: "ASIA TRADING CHAMPIONSHIP",
+    title: ["Take your shot at", "Asia's championship stage."],
     kv: [
-      { k: "Time to complete", v: "About 5 minutes." },
+      { k: "Date", v: "October 5, 2026" },
+      { k: "Venue", v: "Zouk Singapore" },
+      { k: "Partner", v: "Kalshi" },
       {
         k: "What we check",
-        v: "Your track record link and your risk process. Nothing else carries weight.",
-      },
-      {
-        k: "Security",
-        v: "Never send a withdrawal-enabled API key, a seed phrase, or a password. Read-only keys or a screenshot page are enough.",
+        v: "Your trading record, your risk process, and how you'd hold up on a live stage.",
       },
     ],
     contactLabel: "Questions",
@@ -227,8 +209,8 @@ export const en: Dictionary = {
     fields: {
       name: { label: "Name", placeholder: "Legal name" },
       handle: {
-        label: "Trading handle",
-        placeholder: "The name on the leaderboard",
+        label: "Handle",
+        placeholder: "The name you'll use in the championship",
       },
       email: { label: "Email", placeholder: "you@domain.com" },
       telegram: { label: "Telegram", placeholder: "@handle" },
@@ -239,14 +221,14 @@ export const en: Dictionary = {
         options: ["Under 1 year", "1–2 years", "3–5 years", "5 years or more"],
       },
       venue: {
-        label: "Main venue",
+        label: "Main venue or protocol",
         options: [
-          "Variational",
+          "Hyperliquid",
           "Lighter",
           "Aster",
-          "Extended",
-          "Hyperliquid",
-          "Backpack",
+          "Variational",
+          "edgeX",
+          "GRVT",
           "Other",
         ],
       },
@@ -257,74 +239,76 @@ export const en: Dictionary = {
       proof: {
         label: "Track record link",
         placeholder:
-          "Exchange PnL page, leaderboard profile, or a public thread",
+          "A PnL page, public profile, leaderboard — anything we can check",
       },
       risk: {
-        label: "Your risk process, in one paragraph",
+        label: "Your risk process",
         placeholder:
-          "Position sizing, max leverage, how you cut a loser, what makes you sit out a session.",
+          "Position sizing, max leverage, where you cut a loser, and the rules you hold to",
       },
       why: {
-        label: "Why you should own the arena",
-        placeholder: "Optional. Short is fine.",
+        label: "Why you're applying",
+        placeholder:
+          "In a few lines, why you want to compete in the Asia Trading Championship",
       },
       available: {
-        label: "Available Sep 28 in Seoul",
+        label: "Can you be in Singapore on October 5?",
         options: [
-          "Yes — Sep 28 full day, plus the briefing",
-          "Yes, with a scheduling constraint",
-          "Not sure yet",
+          "Yes, all day.",
+          "Yes, with a scheduling constraint.",
+          "Not sure yet.",
         ],
       },
     },
     agree:
-      "I confirm the track record I submitted is my own, I can attend in person in Seoul, and I agree to the event terms and privacy policy. I understand trading involves risk of loss.",
-    submit: "Submit application ↗",
+      "The track record I submitted is my own. I can attend in person in Singapore, and I agree to the championship terms, the privacy policy, and the risk of trading losses.",
+    submit: "Apply to the championship ↗",
     status: {
-      missing: "Fill in the required fields marked with *",
+      missing: "Fill in the fields marked with *",
       required: "Required",
       eitherSocial: "Enter at least one of Telegram or X",
-      mailto: "Opening your mail app to send the application…",
+      mailto: "Hit send in your mail app and the application reaches us",
       sending: "Sending…",
-      ok: "Application received. We reply to every applicant.",
-      error: "Something broke on send. Mail us at {email}",
+      ok: "Application received. We'll review it and reply individually",
+      error: "The mail didn't send. Write to {email} directly",
     },
-    mailSubject: "PERP-DEX DAY — trader application: {name}",
+    mailSubject: "ASIA TRADING CHAMPIONSHIP trader application: {name}",
   },
 
   faq: {
     title: ["Questions."],
-    intro: "Anything not covered here — mail us and we'll answer directly.",
+    intro:
+      "Anything not covered here — message us on Telegram at @reboundx_cs.",
     items: [
       {
-        q: "Is this open to traders outside Korea?",
-        a: "Yes — but the arena is offline in Seoul on September 28, 2026, and you need to be in the room. Tell us where you're based in the form and we'll talk about travel.",
+        q: "Can I apply if I don't live in Singapore?",
+        a: "Yes. Nationality and country of residence aren't restricted, but you have to be at Zouk Singapore in person on October 5, 2026.",
       },
       {
-        q: "What do I send as proof of track record?",
-        a: "A shareable exchange PnL page, a public leaderboard profile, or a read-only API key. Never send a withdrawal-enabled key, a seed phrase, or a password — we will never ask for one, and any message that does is not from us.",
+        q: "How do I submit my track record?",
+        a: "Send anything that verifies your own trading: an exchange PnL page, a public profile, a leaderboard, or a read-only API key. We never accept withdrawal-enabled API keys, seed phrases or passwords.",
       },
       {
-        q: "Which pairs and what leverage?",
-        a: "The approved pair list, maximum leverage and risk limits are fixed at the briefing the day before and are identical for all four seats. Breaching a limit is disqualifying.",
+        q: "How are traders selected?",
+        a: "Size alone doesn't decide it. We look at the track record, the risk process, and whether you can hold your strategy together on a live stage.",
       },
       {
-        q: "Do I need to speak English?",
-        a: "No. The interview and the event run in Korean or English, whichever you prefer. Interpretation is available on stage.",
+        q: "What about prize money and travel support?",
+        a: "Prize money, travel support and the championship rules are shared individually during final selection.",
       },
       {
-        q: "Can I bring my own setup?",
-        a: "Your own keyboard and mouse, yes. Machines and screens are provided and identical, and the session runs on the venue network.",
+        q: "What is the Asia Trading Championship?",
+        a: "A live on-chain trading competition run with Kalshi during TOKEN2049 Singapore week. Each trader's performance is shown live in the room, and the crowd predicts which trader takes the title.",
       },
     ],
   },
 
   final: {
-    kicker: "The arena is filling",
-    title: ["Four seats.", "One flight to Singapore."],
+    kicker: "ASIA TRADING CHAMPIONSHIP · WITH KALSHI",
+    title: ["The first stage on the way", "to Asia's title."],
     body:
-      "Applications are reviewed as they arrive and the call closes the moment the last seat is claimed.",
-    cta: "Take the seat ↗",
+      "Show us your record and your risk process. Applications are reviewed in the order they arrive.",
+    cta: "Apply to the championship ↗",
   },
 
   footer: { backToTop: "Back to top ↑" },

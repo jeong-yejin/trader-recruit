@@ -97,6 +97,18 @@
 */
 .event-tabs { gap: 2.4rem; }
 
+/*
+  space-between hands the leftovers to the tabs, so the nav's own padding is
+  what decides whether the two wordmarks fit on one line. The template's 3rem
+  a side left 207px for them in Korean and the pair broke over three lines;
+  2rem leaves the 326px they need at 1440. The mobile menu sets its own
+  `padding: 1.8rem 0`, hence the min-width — project.css is the last sheet and
+  would otherwise put 2rem back on either side of every item in the drawer.
+*/
+@media (min-width: 993px) {
+  .contest-N1 .header-gnblink { padding-inline: 2rem; }
+}
+
 .contest-N1 .header-title .event-tab {
   width: auto;
   height: auto;
@@ -122,6 +134,17 @@
    A text wordmark inherits --text-color1 and lands at 1.1:1 on the black bar. */
 .footer-logo { margin: 0; letter-spacing: -0.02em; color: var(--white); }
 
+/*
+  perp-dex-day swaps the text for a drawn wordmark. The template sizes footer
+  logos at 2.2rem, which on a 269x53 mark lands 50px short of the width the
+  text held; 3.2rem puts it back. token-2049 has no image here and is unaffected.
+
+  width:auto matters. The template sets a height and object-fit: contain but no
+  width, so the box took the 269 off the width attribute and letterboxed the
+  mark inside it — drawn at the right size, floating 78px from the gutter.
+*/
+.contest-N2 .footer-logo img { width: auto; height: 3.2rem; }
+
 /* The template zeroes the font in .header-right because it expects icon-only
    buttons there. These two are text, so they get their size back. */
 @media (max-width: 992px) {
@@ -141,6 +164,11 @@
      is in flow with its own margin, so the shift stops here. */
   .contest-N6 .blue .thumb { transform: translateY(4rem); }
 }
+
+/* Each prize item is a dt/dd pair inside its own div, so the template's
+   `dd + dt` never matches and the items ran together on their line-height
+   alone. The wrapper is what the gap has to hang off. */
+.contest-N6 .desc dl > div + div { margin-top: 1.2rem; }
 
 /* ---------- contest-N5 with more than three cards ---------- */
 /* The template pins N5 to three tilted cards. These lists are longer, so the
@@ -181,7 +209,6 @@
   font-size: var(--fs-p3);
 }
 .contest-N5.no-thumb .list-area li strong { display: block; }
-.contest-N5.no-thumb .list-area li p { margin: 1.2rem 0 0; color: var(--text-color2); }
 
 /* ---------- seat counter ---------- */
 .seat-block { padding: 8rem 0; }
@@ -195,10 +222,37 @@
   list-style: none;
 }
 .seat {
+  position: relative;
+  overflow: hidden;
   padding: 3.2rem 2.4rem;
   border: 1px solid var(--secondary);
   border-radius: 1.2rem;
   background: var(--white);
+}
+/*
+  One figure per card, hard right and hanging off the bottom edge, so the card
+  reads as a place a person takes rather than a numbered box. The card clips
+  it rather than growing to fit, which is what `overflow` above is for.
+
+  A masked pseudo-element, not the file as a background layer: the SVG ships a
+  black fill and both grounds are near-black (#0d0d0d here, #000 on
+  token-2049), so the drawn colour has to come from CSS. The mask carries the
+  shape and the box carries the colour, which is also what lets a taken seat
+  swap black for white without a second file.
+*/
+.seat::after {
+  content: "";
+  position: absolute;
+  right: 1.2rem;
+  bottom: -1.2rem;
+  /* Sized off the card's width, not its height: the cards keep their height
+     when the grid drops to two columns but lose a third of their width, and a
+     height-driven figure filled that narrower card end to end. */
+  width: 34%;
+  aspect-ratio: 1180 / 1732;
+  background: var(--black);
+  mask: url("../images/Silhouette.svg") no-repeat bottom / contain;
+  pointer-events: none;
 }
 .seat .no { display: block; font-size: var(--fs-h3); font-weight: var(--fw-bold); line-height: 1; }
 .seat .status {
@@ -220,6 +274,10 @@
 .seat.taken { background: var(--bg-color); }
 .seat.taken .no { color: var(--text-color3); }
 .seat.taken .status i { background: var(--text-color4); }
+/* The seat is filled, so the figure in it comes forward instead of sitting a
+   shade under the ground. It is the only thing on a taken card that gains
+   weight — the number and the dot both step back. */
+.seat.taken::after { background: var(--white); }
 
 .count-band {
   display: flex;
@@ -243,9 +301,35 @@
 .clock .unit span { font-size: var(--fs-p3); color: var(--text-color3); }
 .clock .colon { font-size: var(--fs-h4); line-height: 1.2; color: var(--text-color3); }
 
+/* The band centres as a whole at this width: the lead, all three lines inside
+   every card, the figure under them, and the countdown under its label.
+
+   Centring the copy is what forces the figure out of its corner. Left where it
+   was, the last line ran under it, and on a taken card the figure is white and
+   would take the line with it. So the figure centres too and the card pads out
+   the bottom to give it a lane of its own.
+
+   The figure is driven by height here, not by the 34% of card width it uses
+   above 993px: two cards across 992px are 480px wide, and 34% of that is a
+   figure taller than the card it sits in. One number sizes the figure and the
+   lane both — the lane is the figure less the 1.2rem it hangs off the bottom
+   edge, plus 1.6rem so the last line is not sitting on its head. */
 @media (max-width: 992px) {
   .seat-area { grid-template-columns: repeat(2, 1fr); }
-  .count-band { flex-direction: column; align-items: flex-start; }
+  .seat-block .contents-inner { text-align: center; }
+  .seat {
+    --seat-figure: clamp(8rem, 24vw, 13rem);
+    padding-bottom: calc(var(--seat-figure) + 0.4rem);
+  }
+  .seat::after {
+    right: auto;
+    left: 50%;
+    width: auto;
+    height: var(--seat-figure);
+    transform: translateX(-50%);
+  }
+  .seat .status { justify-content: center; }
+  .count-band { flex-direction: column; align-items: center; }
 }
 
 /* ---------- application form ---------- */
@@ -257,10 +341,6 @@
 
 .apply-form { display: grid; gap: 2.4rem; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-/* Email plus the Telegram/X pair. Declared before the 992px block on purpose:
-   .form-row collapses both to one column there, and equal specificity means
-   the later rule is the one that wins. */
-.form-row-3 { grid-template-columns: 1fr 1fr 1fr; }
 .apply-form .inputset-label { display: block; margin-bottom: 0.8rem; }
 .apply-form .inputset-input { width: 100%; }
 .apply-form textarea.inputset-input { height: auto; min-height: 12rem; padding: 1.4rem 1.6rem; resize: vertical; }
@@ -273,6 +353,58 @@
 .form-status:empty { display: none; }
 .form-status { padding: 1.2rem 1.6rem; border-radius: 0.4rem; background: var(--bg-color); }
 .form-status.err { background: rgba(var(--danger-rgb), 0.1); color: var(--danger-ink, var(--danger)); }
+
+/* ---------- select menu ---------- */
+/*
+  A native select hands its option list to the OS, which draws it white and
+  system-cornered on both events no matter what the page is wearing. The
+  control still is a native select — it holds the value and it is what
+  checkValidity() flags — but it is out of the layout and the button and list
+  below are what the applicant sees. See ApplyForm.tsx.
+
+  The button reuses .selectset-select, so the template's own box, height and
+  arrow carry over and only the list is new.
+*/
+.selectset-native { display: none; }
+
+/* The template paints the control in placeholder grey. Once a row is picked it
+   is a value, not a prompt, so it goes to the body ink. */
+.selectset .selectset-select[data-filled] { color: var(--body-color); }
+
+.selectset-arrow::after { transition: transform 0.2s; }
+.selectset-select[aria-expanded="true"] ~ .selectset-arrow::after { transform: rotate(180deg); }
+
+.selectset-menu {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.4rem);
+  max-height: 24rem;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0.4rem;
+  list-style: none;
+  border: 1px solid var(--line-color2);
+  border-radius: 0.4rem;
+  background: var(--surface);
+}
+
+.selectset-option {
+  padding: 1rem 1.2rem;
+  border-radius: 0.2rem;
+  color: var(--text-color2);
+  cursor: pointer;
+}
+
+/* One highlight for both inputs: the row under the pointer and the row the
+   arrow keys are on are the same state, so they are the same class. */
+.selectset-option.is-active {
+  background: rgba(var(--primary-rgb), 0.12);
+  color: var(--text-color1);
+}
+
+.selectset-option[aria-selected="true"] { color: var(--primary); }
 
 @media (max-width: 992px) {
   .apply-shell { grid-template-columns: 1fr; gap: 4rem; }
@@ -303,7 +435,6 @@
   --body-bg: #000000;
   --bg-color: #0d0d0d;
   --surface: #151515;
-  --surface-2: #1e1e1e;
   --text-color1: #f2f2f2;
   --text-color2: #a6a6a6;
   --text-color3: #8a8a8a;
@@ -311,12 +442,11 @@
   --line-color1: #2a2a2a;
   --line-color2: #333333;
   --line-color3: #f2f2f2;
-  --custom-color-1: #1e1e1e;
   --body-color: var(--text-color1);
   --border-color: var(--line-color1);
   --link-color: var(--text-color1);
   --link-hover-color: var(--text-color1);
-  /* Ink for the blocks that keep a bright background (primary, prize panels). */
+  /* Ink for the blocks that keep a bright background (primary buttons). */
   --on-bright: #0a0a0a;
   /* --danger reads at 4.29:1 on the dark ground, just under AA. */
   --danger-ink: #ff6b76;
@@ -333,12 +463,7 @@
 /* Raised surfaces that hard-code #fff. */
 .contest-N4 .contents-inner,
 .contest-N5 .list-area li,
-.contest-N8 .alert-area,
-.contest-N8 .accordset.accent-header .accordset-item.active .accordset-button,
-.contest-N2 .modal-area,
 .seat { background: var(--surface); }
-.contest-N2 .info-desc { background-color: var(--surface-2); }
-.contest-N1 .user-menu li:not(:first-child)::before { background: var(--line-color1); }
 
 /* Form controls. Only the fill changes — the text already follows --body-color. */
 .inputset .inputset-input,
@@ -347,19 +472,15 @@
 .inputset .inputset-textarea:focus,
 .selectset .selectset-select,
 .selectset .selectset-select:focus,
-.selectset .selectset-toggle,
-.radioset .radioset-label::before,
 .checkset .checkset-label::before { background-color: var(--surface); }
 
 /* Bright blocks keep dark ink so the copy stays readable on them.
    Their headings and terms set their own colour, so they are pulled back to the
    panel's — which is exactly what they inherited in the light palette. */
 .contest-N10 .loop-area,
-.contest-N8 .accordset .accordset-content,
 .contest-N6 .green,
 .contest-N6 .blue { color: var(--on-bright); }
 .contest-N10 .loop-area *,
-.contest-N8 .accordset .accordset-content *,
 .contest-N6 .green *,
 .contest-N6 .blue * { color: inherit; }
 
@@ -371,10 +492,37 @@
   border-color: var(--text-color1);
 }
 
-/* The accordion header hard-codes #fff, and N8 draws its dividers in --black. */
-.accordset .accordset-header { background-color: var(--surface); }
-.contest-N8 .accordset.accordset-round,
+/* N8 draws its dividers in --black. */
 .contest-N8 .accordset .accordset-item + .accordset-item { border-color: var(--line-color1); }
+
+/* ---------- contest-N8 accordion ---------- */
+/*
+  The template panels the accordion: a white header, a --primary answer body,
+  and a rounded box around the lot. Both events run it as plain rows on the
+  section ground instead, divided by the 1px rules .accordset already draws
+  top, bottom and between items. The box and the accent fill come off in the
+  markup; these three fills have no modifier class to drop, so they come off
+  here.
+
+  With the box gone the rows line up with the rest of the section, so the side
+  padding goes too and the chevron moves out to the edge. The rule between a
+  question and its own answer goes as well: it read as another item divider
+  once nothing was filled behind it.
+*/
+.accordset .accordset-header,
+.contest-N8 .accordset .accordset-content { background: none; }
+
+.contest-N8 .accordset .accordset-button,
+.contest-N8 .accordset .accordset-content { padding: 2.4rem 4rem 2.4rem 0; }
+
+.contest-N8 .accordset .accordset-header::after { right: 0; }
+
+.contest-N8 .accordset .accordset-body,
+.contest-N8 .accordset .accordset-content { border-top: 0; }
+
+/* The answer keeps the dimmer voice it had on the coloured panel. */
+.contest-N8 .accordset .accordset-content,
+.contest-N8 .accordset .accordset-content * { color: var(--text-color2); }
 
 /* The scroll-jack list inverts on black: the inactive #bdbdbd came out brighter
    than the active --text-color2, so both ends are restated. */
@@ -384,10 +532,63 @@
 .contest-N7 .list li.active span,
 .contest-N7 .list li.active p { color: var(--text-color1); }
 
+/* Below 993px the focus script does not run, so no step ever carries .active
+   and every heading would sit at the dim end with nothing to read against.
+   style.css keeps the headings at full strength there for that reason. */
+@media (max-width: 992px) {
+  .contest-N7 .list li h3 { color: var(--text-color1); }
+}
+
 
 @media (max-width: 992px) {
   .contest-N1.block-active,
   .contest-N1 .header-gnb { background-color: var(--surface); }
+}
+
+/* ---------- contest-N7 sticky art ---------- */
+/*
+  The art column is meant to hold still while the five steps scroll past it.
+  A sticky box can only travel (container height - its own height), and the
+  template's art stacks to 746px inside a 1150px .thumb, so at 1400x900 it
+  pinned for 338px of an 1166px list and then scrolled off while steps 03-05
+  were still being read. It read as no pin at all.
+
+  Two thirds of the height takes the stack to 480px and the pin to 604px, which
+  carries the art through step 04. These are close to the sizes the block
+  already uses below 993px, so the art is not being pushed out of its own range.
+  The mobile block re-declares all three heights, hence the query: project.css
+  loads last and an unguarded rule would win there too.
+*/
+@media (min-width: 993px) {
+  .contest-N7 .thumb .img-1 { height: 21rem; }
+  .contest-N7 .thumb .img-2 { height: 7.8rem; }
+  .contest-N7 .thumb .img-3 { height: 19.2rem; }
+}
+
+/*
+  perp-dex-day puts the rabbit in slot 2, so slot 2 takes the rabbit's height.
+  The two pills are one object drawn twice and carry the same height as each
+  other: img-1's 21rem above 993px, the template's 19.8rem below it.
+
+  That costs pin travel. The stack goes from 48.78rem to 61.2rem against the
+  48rem the pin above was tuned for, so the art now scrolls off around step 03
+  instead of step 04.
+
+  The pills lean opposite ways. `rotate` is its own property, applied on top of
+  the `transform` the float keyframes animate, so the lean survives the float
+  without either one having to be rewritten as the other.
+*/
+.ev-perp-dex-day .contest-N7 .thumb .img-1 { rotate: -12deg; }
+.ev-perp-dex-day .contest-N7 .thumb .img-3 { rotate: 14deg; }
+
+@media (min-width: 993px) {
+  .ev-perp-dex-day .contest-N7 .thumb .img-2 { height: 19.2rem; }
+  .ev-perp-dex-day .contest-N7 .thumb .img-3 { height: 21rem; }
+}
+
+@media (max-width: 992px) {
+  .ev-perp-dex-day .contest-N7 .thumb .img-2 { height: 18.2rem; }
+  .ev-perp-dex-day .contest-N7 .thumb .img-3 { height: 19.8rem; }
 }
 
 /* ---------- N9 code rain ---------- */
@@ -408,7 +609,8 @@
   .title-area is z-index 2 and stays on top. Motion is handled in the
   component — it draws a single static frame under prefers-reduced-motion.
 */
-.contest-N9 .code-rain {
+.contest-N9 .code-rain,
+.contest-N9 .retro-grid {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -460,12 +662,33 @@
   .contest-N10 .text-wrap i { margin: 0 1.2rem; }
 }
 
+/* The partner lines run as marks instead of words. Heights are in `em` so they
+   track the band's own font-size and the 1.8rem mobile step needs no second set
+   of numbers; the five files are drawn at ratios from 2:1 to 7.5:1, so each one
+   is measured against the text rather than shared.
+
+   The files ship in their own brand colours. brightness(0) crushes each to
+   the same black as the words beside them, so no logo carries its own accent
+   through the band. */
+.contest-N10 .text-wrap img {
+  width: auto;
+  height: 1.1em;
+  vertical-align: middle;
+  filter: brightness(0);
+}
+
+.contest-N10 .text-wrap img[data-logo="variational"] { height: 0.85em; }
+.contest-N10 .text-wrap img[data-logo="lighter"],
+.contest-N10 .text-wrap img[data-logo="metamask"] { height: 1.5em; }
+
 /* ---------- section heading gap ---------- */
 /*
   The template gives each block a different gap under its heading: 19.3rem on
   N5 (#arena, #who) and 8rem on N6, N7 and N8. On this page the sections read
   as one sequence, so the gap is one number. 6.4rem, which is where #arena was
-  set first. These match the template's own specificity and project.css is the
+  set first. #apply is not a template block and had no gap at all, so its
+  heading sat right on top of the form; it joins the group here.
+  These match the template's own specificity and project.css is the
   last sheet, so they win without !important; the mobile block below has to be
   repeated for the same reason, otherwise this rule would also beat the
   template's 4rem at 992px.
@@ -473,7 +696,9 @@
 .contest-N5 .title-area,
 .contest-N6 .title-area,
 .contest-N7 .title-area,
-.contest-N8 .title-area {
+.contest-N8 .title-area,
+.apply-block .title-area,
+.partners .title-area {
   margin-bottom: 6.4rem;
 }
 
@@ -481,10 +706,74 @@
   .contest-N5 .title-area,
   .contest-N6 .title-area,
   .contest-N7 .title-area,
-  .contest-N8 .title-area {
+  .contest-N8 .title-area,
+  .apply-block .title-area,
+  .partners .title-area {
     margin-bottom: 4rem;
   }
 }
+
+/*
+  Those same blocks centre the heading and set the body flush left. On a desktop
+  column that reads as a heading over a text column; at 430px the column is the
+  screen, so the two alignments sit a few pixels apart with nothing between them
+  to explain the step, and the heading looks misplaced rather than centred.
+
+  The body joins the heading instead. perp-dex-day only: token-2049 already runs
+  several of its headings flush left, so the pair agrees there. The seat band is
+  centred by the query above and #apply is flush left on both sides, so neither
+  is here.
+*/
+@media (max-width: 992px) {
+  .ev-perp-dex-day .contest-N5 .contents-inner,
+  .ev-perp-dex-day .contest-N6 .contents-inner,
+  .ev-perp-dex-day .contest-N7 .contents-inner,
+  .ev-perp-dex-day .contest-N8 .contents-inner {
+    text-align: center;
+  }
+
+  /* The no-thumb card sets its own `left`, which outranks the inherited centre. */
+  .ev-perp-dex-day .contest-N5.no-thumb .list-area li figure {
+    text-align: center;
+  }
+
+  /* The dash on a not-item is absolute at the row's left edge, so centring the
+     text alone left it stranded out at the margin. Shrinking the row to its own
+     text carries the dash in with it. */
+  .ev-perp-dex-day .contest-N5 .not-area li {
+    width: fit-content;
+    margin-inline: auto;
+  }
+
+  /* Both accordion halves are flex rows, so text-align has nothing to act on.
+     The button also pads 5.6rem on the right to clear the chevron; the left
+     side matches it, or the row centres 2rem off. */
+  .ev-perp-dex-day .contest-N8 .accordset-button,
+  .ev-perp-dex-day .contest-N8 .accordset-content {
+    justify-content: center;
+  }
+
+  .ev-perp-dex-day .contest-N8 .accordset-button { padding-left: 5.6rem; }
+
+  /* The carousel arrows sit under a track that now centres, so flush right
+     leaves them the one thing still hanging off the edge. */
+  .ev-perp-dex-day .arena-nav { justify-content: center; }
+}
+
+/*
+  Inside the heading the reset leaves h2 and its intro line flush, so the pair
+  reads as one block. 1.2rem in every section, the hero and #wWMTE69EdP too.
+*/
+.title-area h2 + p { margin-top: 1.2rem; }
+
+/*
+  N9 spaces the pair with the heading instead — 4rem here and 2rem at 992px —
+  which would sit on top of the rule above. Zeroing it hands the gap to that
+  one rule; the button underneath took its distance from the same margin, so
+  it carries the 4rem now.
+*/
+.contest-N9 .title-area h2 { margin-bottom: 0; }
+.contest-N9 .title-area .link-wrap { margin-top: 4rem; }
 
 /* ---------- contest-N5 #arena: card carousel ---------- */
 /*
@@ -792,3 +1081,687 @@
   .btnset-primary span::after,
   .btnset-primary span::before { animation: none; }
 }
+
+/* ==========================================================================
+   token-2049 — stage skin
+   --------------------------------------------------------------------------
+   project.css is one file behind both events, so every rule here hangs off the
+   .ev-token-2049 wrapper that app/[lang]/[event]/page.tsx puts around the page.
+   perp-dex-day keeps the template's own look untouched.
+
+   The markup is the template's. TemplateHouse class names are the contract
+   style.js binds to (carousel, mobile menu, accordion, sticky bar), so the tone
+   lands as CSS only and every string in the sections stays where it was.
+
+   Two fonts, no Hangul in either. Space Grotesk and JetBrains Mono ship Latin
+   only, so the stacks fall through to the template's own face and the /ko route
+   renders in Creato Display exactly as before. That is the intent: the mono
+   detailing reads on the English copy and does not mangle Korean.
+   ========================================================================== */
+
+/* ---------- tokens ---------- */
+/*
+  --primary carries the whole accent: templatehouse.css spends it on 40-odd
+  rules and every one of them wants the stage pink instead of the lime.
+  The CTA ink is --on-bright, not white: white on #ff25bc measures 3.36:1 and
+  on the #ff4dc8 hover 2.94:1, both under AA. #0a0a0a reads 5.89:1 / 6.74:1.
+*/
+.ev-token-2049 {
+  --primary: #ff25bc;
+  --primary-rgb: 255, 37, 188;
+  --body-bg: #000000;
+  --bg-color: #000000;
+  --surface: #0a0a0a;
+  --text-color1: #ffffff;
+  --text-color2: #e6e6e6;
+  --text-color3: #949494;
+  --text-color4: #6e6e6e;
+  --line-color1: #242424;
+  --line-color2: #2e2e2e;
+  /*
+    Both point at the template face. The stage used to import Space Grotesk and
+    JetBrains Mono; it now runs the same type as perp-dex-day. The two tokens
+    stay because 20-odd rules reference them and the display/label split is
+    still the thing they describe.
+  */
+  --stage-display: var(--ff-ko1);
+  --stage-mono: var(--ff-ko1);
+  background: #000;
+}
+
+/* ---------- edges ---------- */
+/* Nothing on the stage is rounded. One reset beats chasing five radii. */
+.ev-token-2049 .btnset,
+.ev-token-2049 .seat,
+.ev-token-2049 .form-status,
+.ev-token-2049 .skip-link,
+.ev-token-2049 .inputset-input,
+.ev-token-2049 .selectset-select,
+.ev-token-2049 .selectset-menu,
+.ev-token-2049 .selectset-option,
+.ev-token-2049 .contest-N5 .list-area li,
+.ev-token-2049 .contest-N6 .green,
+.ev-token-2049 .contest-N6 .blue,
+.ev-token-2049 .contest-N7 .img-wrap,
+.ev-token-2049 .arena-card,
+.ev-token-2049 .apply-shell { border-radius: 0; }
+
+.ev-token-2049 .arena-arrow { border-radius: 0; }
+
+/* ---------- type ---------- */
+/*
+  Mono is the stage's labelling voice: anything that names or numbers a thing
+  rather than saying it. Indices, terms, field labels, meta.
+*/
+.ev-token-2049 .contest-N5 .card-idx,
+.ev-token-2049 .contest-N5 .list-label,
+.ev-token-2049 .contest-N6 .desc dt,
+.ev-token-2049 .contest-N7 .list li span,
+.ev-token-2049 .apply-block .title-area p,
+.ev-token-2049 .apply-kv dt,
+.ev-token-2049 .inputset-label,
+.ev-token-2049 .checkset-label,
+.ev-token-2049 .seat .no,
+.ev-token-2049 .seat .status,
+.ev-token-2049 .count-label,
+.ev-token-2049 .contest-N10 .text-wrap .h4 {
+  font-family: var(--stage-mono);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- primary CTA ---------- */
+/*
+  The shiny pill above is the perp-dex-day skin. Here the button is a flat pink
+  rectangle, so the conic border, the dot field and both shimmer layers come
+  off. :hover is in the selector for the same reason it is up there —
+  templatehouse.css restates background-color on that state.
+*/
+.ev-token-2049 .btnset-primary,
+.ev-token-2049 .btnset-primary:hover {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: var(--primary);
+  color: var(--on-bright);
+  box-shadow: none;
+  font-family: var(--stage-display);
+  font-weight: 700;
+  letter-spacing: 0;
+  transition: background-color .2s;
+}
+
+.ev-token-2049 .btnset-primary:hover { background: #ff4dc8; }
+
+.ev-token-2049 .btnset-primary::after,
+.ev-token-2049 .btnset-primary::before,
+.ev-token-2049 .btnset-primary span::after,
+.ev-token-2049 .btnset-primary span::before { content: none; }
+
+/* The sticky bar's CTA keeps its glyph: .ff-ico writes it into ::before. */
+.ev-token-2049 .btnset-primary.ff-ico::before { content: ""; }
+
+.ev-token-2049 .btnset:not(.btnset-primary) {
+  border: 1px solid var(--line-color2);
+  background: transparent;
+  color: var(--text-color1);
+}
+
+/* ---------- hero stage ---------- */
+/*
+  StageBackdrop paints the clip twice. The lower plate is graded through
+  #stage-grade and covers the frame; the upper one runs #stage-grade-2 through
+  plus-lighter, which is what puts the pink bloom in the highlights. Both are
+  masked away from the left so the headline sits on black, not on footage.
+*/
+.ev-token-2049 .contest-N3 {
+  background: #000;
+  border-bottom: 1px solid var(--line-color1);
+}
+
+/*
+  The headline sits on the same left edge as every section below it. Rather
+  than a padding of its own, the title-area takes container-md's column —
+  1280px centred inside the 4rem gutter — so the two line up at any width.
+*/
+.ev-token-2049 .contest-N3 .title-area {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.ev-token-2049 .contest-N3 .title-area p { max-width: 66rem; }
+
+/* Face comes from the template (style.css sets the hero to Creato Display for
+   both events). Only the scale is the stage's own: the Singapore headline is
+   two full sentences where perp-dex-day's is four words, so it cannot run at
+   the template's 24rem. */
+.ev-token-2049 .contest-N3 .title-area h2 {
+  font-size: clamp(4rem, 7.4vw, 11rem);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+}
+
+.ev-token-2049 .contest-N3 .title-area p {
+  font-family: var(--stage-mono);
+  font-size: clamp(1.3rem, 1.2vw, 1.6rem);
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: var(--text-color2);
+}
+
+.ev-token-2049 .contest-N3 .title-area p strong {
+  font-weight: 500;
+  color: #fff;
+}
+
+.stage-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* The filters have to be in the document to be referenced, and nothing else. */
+.stage-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.stage-plate {
+  position: absolute;
+  inset: 0;
+  /*
+    The LUT lifts R over G and B, so it grades to red. Rotating 42 degrees off
+    it lands the plate on the stage pink without touching 390 table values in
+    StageBackdrop, and the near-neutral highlights stay where they are.
+  */
+  filter: url(#stage-grade) hue-rotate(-42deg);
+  -webkit-mask-image: linear-gradient(90deg, transparent 26%, #000 62%);
+  mask-image: linear-gradient(90deg, transparent 26%, #000 62%);
+}
+
+.stage-plate-lift {
+  filter: url(#stage-grade-2) hue-rotate(-42deg);
+  mix-blend-mode: plus-lighter;
+  opacity: .55;
+}
+
+.stage-plate video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 50%;
+}
+
+/* Holds the black under the headline no matter how bright the frame goes. */
+.stage-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #000 8%, rgba(0, 0, 0, .82) 34%, transparent 68%),
+    linear-gradient(0deg, rgba(0, 0, 0, .6), transparent 34%);
+}
+
+@media (max-width: 992px) {
+  .stage-plate,
+  .stage-plate-lift {
+    -webkit-mask-image: linear-gradient(180deg, #000 34%, transparent 88%);
+    mask-image: linear-gradient(180deg, #000 34%, transparent 88%);
+  }
+
+  .stage-scrim {
+    background: linear-gradient(0deg, #000 26%, rgba(0, 0, 0, .55) 62%, rgba(0, 0, 0, .3));
+  }
+
+  .ev-token-2049 .contest-N3 .contents-container.fullscreen { align-items: flex-end; }
+  .ev-token-2049 .contest-N3 .title-area { padding-bottom: 8rem; }
+}
+
+/* ---------- header ---------- */
+.ev-token-2049 .contest-N1 {
+  background: rgba(0, 0, 0, .72);
+  border-bottom: 1px solid var(--line-color1);
+  backdrop-filter: blur(12px);
+}
+
+/* ---------- marquee ---------- */
+/* The band inherits --primary, so the ink has to come back to white with it. */
+.ev-token-2049 .contest-N10 .loop-area,
+.ev-token-2049 .contest-N10 .loop-area * { color: #fff; }
+
+.ev-token-2049 .contest-N10 .text-wrap .h4 {
+  font-size: 1.4rem;
+}
+
+/* ---------- surfaces ---------- */
+/*
+  Six blocks in the template are raised panels on a lighter fill. The stage has
+  no cards: the same blocks become black with a hairline, and the 1px line does
+  the separating that the fill used to.
+*/
+.ev-token-2049 .contest-N4 .contents-inner,
+.ev-token-2049 .contest-N5 .list-area li,
+.ev-token-2049 .contest-N6 .green,
+.ev-token-2049 .contest-N6 .blue,
+.ev-token-2049 .arena-card,
+.ev-token-2049 .seat {
+  border: 1px solid var(--line-color1);
+  background: #000;
+  box-shadow: none;
+}
+
+.ev-token-2049 .contest-N6 .green,
+.ev-token-2049 .contest-N6 .blue,
+.ev-token-2049 .contest-N6 .green *,
+.ev-token-2049 .contest-N6 .blue * { color: var(--text-color1); }
+
+.ev-token-2049 .contest-N6 .desc dt {
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+.ev-token-2049 .contest-N5 .card-idx {
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+.ev-token-2049 .contest-N5 .list-label { font-size: 1.3rem; }
+
+/* The step label is the brightest thing in the row, so leaving it pink in both
+   states made the focus change read as nothing happening: the eye stayed on the
+   label while only the heading and body moved. It now dims with the rest of the
+   row and comes back to pink on the step being read. */
+.ev-token-2049 .contest-N7 .list li span {
+  font-size: 1.2rem;
+  color: var(--text-color4);
+}
+
+.ev-token-2049 .contest-N7 .list li.active span { color: var(--primary); }
+
+/* ---------- seat band ---------- */
+.ev-token-2049 .seat .no { color: var(--text-color3); }
+.ev-token-2049 .seat.taken .status { color: var(--text-color4); }
+
+/* The figure is black on a #0d0d0d card, which reads on perp-dex-day only
+   because it cuts a hole in the graph paper. The stage has no paper and a
+   #0a0a0a card, so black there is nothing at all and the space it holds sits
+   empty. It gets a faint white instead. A taken seat still goes to full
+   white — :not() is what keeps this rule out of that one's way. */
+.ev-token-2049 .seat:not(.taken)::after { background: rgba(255, 255, 255, 0.07); }
+
+/* ---------- accordion ---------- */
+.ev-token-2049 .contest-N8 .accordset .accordset-item { border-color: var(--line-color1); }
+
+/* The fill is gone, so the open question carries the stage pink on its own. */
+.ev-token-2049 .contest-N8 .accordset .accordset-item.active .accordset-button {
+  color: var(--primary);
+}
+
+/* ---------- form ---------- */
+.ev-token-2049 .inputset .inputset-input,
+.ev-token-2049 .inputset .inputset-textarea,
+.ev-token-2049 .selectset .selectset-select {
+  border: 1px solid var(--line-color2);
+  background-color: #000;
+}
+
+.ev-token-2049 .inputset .inputset-input:focus,
+.ev-token-2049 .inputset .inputset-textarea:focus,
+.ev-token-2049 .selectset .selectset-select:focus {
+  border-color: var(--primary);
+  background-color: #000;
+}
+
+/* --surface is #0a0a0a on the stage, a shade the fields never use. The list
+   sits on the same black as the control it drops out of. */
+.ev-token-2049 .selectset-menu { background: #000; }
+
+.ev-token-2049 .inputset-label,
+.ev-token-2049 .checkset-label { font-size: 1.2rem; }
+
+.ev-token-2049 .apply-kv dt {
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+/* ---------- motion ---------- */
+/*
+  AOS holds every data-aos element at opacity 0 until it fires a reveal on
+  scroll. With motion turned down the reveal is the thing being suppressed, so
+  without this the page stays blank. !important is the only lever: AOS writes
+  its opacity to the inline style attribute.
+*/
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+
+/* ---------- alignment ---------- */
+/*
+  The hero is locked to the left edge. Centred section headings under it read as
+  two different pages, so the whole column follows the hero. Text alignment
+  only: the template's grid is untouched.
+*/
+.ev-token-2049 .contest-N5 .title-area,
+.ev-token-2049 .contest-N6 .title-area,
+.ev-token-2049 .contest-N7 .title-area,
+.ev-token-2049 .contest-N8 .title-area { text-align: left; }
+
+/* The closer is the exception: it is the last thing on the page and carries a
+   single button, so it keeps the template's centred stack rather than the
+   left column the sections above it share. */
+
+/* ---------- template art ---------- */
+/*
+  Five PNGs are drawn in the template's lime. Nothing about them is text, so a
+  hue rotation brings them onto the stage pink without swapping assets.
+*/
+.ev-token-2049 .contest-N6 .thumb img,
+.ev-token-2049 .contest-N7 .thumb img {
+  filter: hue-rotate(-132deg) saturate(1.5);
+}
+
+/* ---------- corrections ---------- */
+.ev-token-2049 .btnset-line-dark { border-width: 1px; }
+
+/* The consent sentence is two lines of prose. Mono caps make it unreadable, so
+   it stays in the body face while the field labels above it do not. */
+.ev-token-2049 .checkset-label {
+  font-family: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 1.4rem;
+}
+
+/* The closer's title-area is absolute, so container-md's gutter does not reach
+   it and its left edge lands 4rem short of every other section. */
+.ev-token-2049 .contest-N9 .title-area { padding-inline: 4rem; }
+
+
+/* Hangul falls back to the body face, where the mono block's 0.08em tracking
+   reads as broken spacing between syllables. Latin keeps it. */
+.ev-token-2049:lang(ko) :is(
+  .card-idx,
+  .list-label,
+  .desc dt,
+  .list li span,
+  .apply-block .title-area p,
+  .apply-kv dt,
+  .inputset-label,
+  .seat .no,
+  .seat .status,
+  .count-label,
+  .text-wrap .h4
+) { letter-spacing: 0; }
+
+.ev-token-2049:lang(ko) .contest-N3 .title-area p { letter-spacing: 0; }
+
+/* ==========================================================================
+   perp-dex-day — terminal boxes
+   --------------------------------------------------------------------------
+   The card family was a fill and nothing else: --surface (#151515) sitting in
+   a --secondary border that resolves to the same #151515, so the edge never
+   drew. These square the corner, put graph paper under the copy, and give the
+   edge back as a plain hairline.
+
+   Scoped to .ev-perp-dex-day. project.css is one file behind both events, and
+   token-2049's stage skin does the same three things in its own palette.
+   ========================================================================== */
+
+.ev-perp-dex-day {
+  --grid-cell: 2.4rem;
+  --grid-x: repeating-linear-gradient(
+    90deg,
+    rgba(var(--primary-rgb), 0.055) 0 1px,
+    transparent 1px var(--grid-cell)
+  );
+  --grid-y: repeating-linear-gradient(
+    0deg,
+    rgba(var(--primary-rgb), 0.055) 0 1px,
+    transparent 1px var(--grid-cell)
+  );
+}
+
+.ev-perp-dex-day .seat,
+.ev-perp-dex-day .arena-card {
+  /* A rounded corner is the one thing a CRT terminal never had. */
+  border-radius: 0;
+}
+
+/* The six who cards are the exception: square corners on six flat boxes read
+   as one table, and 8px is enough to tell them apart without softening them. */
+.ev-perp-dex-day .contest-N5 .list-area li { border-radius: 0.8rem; }
+
+/*
+  Both of these sit on --bg-color inside a --secondary border that resolves to
+  #151515, so with no fill of their own they would have no edge at all. The
+  neutral hairline is the whole border now. arena-card already carries
+  --line-color2 and is left alone.
+*/
+.ev-perp-dex-day .contest-N5 .list-area li,
+.ev-perp-dex-day .seat { border-color: var(--line-color1); }
+
+/*
+  Graph paper. Two 1px rules repeating on a 2.4rem pitch, at an alpha low
+  enough that it reads as texture at arm's length and never as lines behind a
+  sentence.
+
+  background-image, not the shorthand: arena-card already owns a gradient in
+  its base rule and the shorthand would drop it.
+*/
+.ev-perp-dex-day .seat {
+  background-image:
+    var(--grid-x),
+    var(--grid-y),
+    radial-gradient(
+      130% 100% at 0% 0%,
+      rgba(var(--primary-rgb), 0.08),
+      transparent 58%
+    );
+  background-color: var(--bg-color);
+}
+
+/*
+  #who runs the paper behind the whole section instead of inside each of the
+  six boxes, so the pitch is continuous across the gutters rather than
+  restarting at every card. The boxes go flat on --bg-color, which is what
+  cuts them out of the sheet.
+
+  The id, not .contest-N5: #arena is the same block class and keeps a flat
+  ground. .contest-N5 above sets the colour with the shorthand, so only the
+  image layer is set here.
+*/
+.ev-perp-dex-day #who { background-image: var(--grid-x), var(--grid-y); }
+
+.ev-perp-dex-day .contest-N5 .list-area li { background: var(--bg-color); }
+
+.ev-perp-dex-day .arena-card {
+  background-image:
+    var(--grid-x),
+    var(--grid-y),
+    linear-gradient(150deg, var(--bg-color) 35%, #151d10 125%);
+}
+
+/* A taken seat is closed. It keeps the shape and loses the graph paper. */
+.ev-perp-dex-day .seat.taken { background: var(--bg-color); }
+
+/* ---------- contest-N6 prize panels ---------- */
+/*
+  The template fills these two with #0dd39b and #89b1ff. Dropping the fill also
+  drops the reason the copy was set in --on-bright (#0a0a0a), so it goes back to
+  the page's own ink and the hairline is what makes the panel read as a panel.
+*/
+.ev-perp-dex-day .contest-N6 .green,
+.ev-perp-dex-day .contest-N6 .blue {
+  border-color: var(--line-color1);
+  background: none;
+  color: var(--text-color1);
+}
+
+/*
+  The hand runs at 64% and the figure at 114%.
+
+  Above 993px the green thumb is width-driven with no height of its own, so the
+  width is the whole control and the panel height follows it. It is a column
+  flex item with a definite width, which parks it against the panel's left
+  edge; the margin is what walks it back toward the middle. The blue thumb is
+  absolutely positioned, which takes it out of the flex flow and leaves it
+  shrink-to-fit at the file's own 291px, so it needs a number rather than a
+  percentage: 291 x 1.14. The template centres it in the panel, and the figure
+  is drawn standing, so it goes to the floor instead.
+
+  Below 993px the template sizes them from its own two values instead — 18rem of
+  height on the green one, 16.8rem of width on the blue — so the same two ratios
+  are applied to those. The shift is desktop-only: the template already pins the
+  hand to `right bottom` there and the figure is back in flow at the column's
+  end.
+*/
+@media (min-width: 993px) {
+  .ev-perp-dex-day .contest-N6 .green .thumb {
+    width: 64%;
+    margin-left: 10%;
+  }
+
+  .ev-perp-dex-day .contest-N6 .blue .thumb {
+    width: 33.2rem;
+    align-self: flex-end;
+    /* flex-end stops at the padding box, and the panel pads 4rem. Restated
+       here rather than borrowed from the shared translateY above, whose job is
+       clearing the copy and could go away without this noticing. */
+    transform: translateY(4rem);
+  }
+}
+
+/* The template pins the hand to the bottom right of its box and hangs the
+   figure off the panel's right edge. Both come back to the middle with the copy
+   that the mobile centring query moved. */
+@media (max-width: 992px) {
+  .ev-perp-dex-day .contest-N6 .green .thumb { height: 11.5rem; }
+  .ev-perp-dex-day .contest-N6 .green .thumb img { object-position: bottom; }
+  .ev-perp-dex-day .contest-N6 .blue .thumb {
+    width: 19.2rem;
+    align-self: center;
+    /* The desktop rule offsets the figure 4rem from the panel's right edge and
+       the mobile block only takes it out of absolute, so the offset survives as
+       a relative shift and centring landed 40px short. */
+    right: auto;
+  }
+}
+
+/* The one terminal cue that survives contact with Korean: the index is two
+   digits, so a monospace face costs nothing in readability. */
+.ev-perp-dex-day .contest-N5.no-thumb .card-idx {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.16em;
+}
+
+.ev-perp-dex-day .contest-N5.no-thumb .card-idx,
+.ev-perp-dex-day .arena-tag {
+  color: var(--primary);
+  text-shadow: 0 0 1.2rem rgba(var(--primary-rgb), 0.55);
+}
+
+/* The prompt the reference leads every line with. The empty string after the
+   slash is the alt text, which keeps a screen reader from announcing "greater
+   than" before each number. */
+.ev-perp-dex-day .contest-N5.no-thumb .card-idx::before {
+  content: "> " / "";
+}
+
+/*
+  Bento grid. Six items over three columns with every row filled: 1+2, 2+1,
+  2+1. The wide slot goes to items 2, 3 and 5 because those are the longest
+  strings in both dictionaries — a short item in a wide box stretches its row
+  and leaves the neighbour half empty. It replaces the template's flex row
+  outright, which is also what retires the nth-child rotations that row
+  carries.
+
+  Below 993px the template stacks the list in a single column and this never
+  applies, so the small screen is untouched.
+*/
+@media (min-width: 993px) {
+  .ev-perp-dex-day .contest-N5 .list-area {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .ev-perp-dex-day .contest-N5 .list-area li:nth-child(2),
+  .ev-perp-dex-day .contest-N5 .list-area li:nth-child(3),
+  .ev-perp-dex-day .contest-N5 .list-area li:nth-child(5) {
+    grid-column: span 2;
+  }
+}
+
+/* The template stacks the small screen with gap: 0 because its cards were
+   meant to overlap. A lit edge makes touching boxes read as one, so the
+   stack gets its gap back. */
+@media (max-width: 992px) {
+  .ev-perp-dex-day .contest-N5 .list-area { gap: 2rem; }
+}
+
+/* ==========================================================================
+   Partners
+   --------------------------------------------------------------------------
+   Not a template block, so the layout is written out rather than overridden.
+   The logos sit straight on the page ground with no cell around them, so the
+   only thing setting the rhythm is the padding on each li.
+   ========================================================================== */
+
+/*
+  The template's own section rhythm: 20rem in, 10rem out, halved at 992px.
+  #partners sits between two N5 blocks, so matching it keeps the 30rem the page
+  already puts between every pair of sections.
+*/
+.partners {
+  padding-top: 20rem;
+  padding-bottom: 10rem;
+}
+
+/* Every other section centres its heading; the gap below it comes from the
+   shared .title-area rule above rather than a number of its own. */
+.partners .title-area { text-align: center; }
+
+.partners-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.partners-row li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.6rem 2.4rem;
+}
+
+/*
+  The five files disagree: two ship white fills, three ship brand colour, and
+  the aspect ratios run from 2:1 to 7.5:1. brightness(0) invert(1) flattens all
+  five to the same white so no one logo shouts, and the height is set per mark
+  rather than globally — a 2:1 wordmark and a 7.5:1 one at the same height read
+  as two different sizes.
+*/
+.partners-row img {
+  width: auto;
+  height: 2.2rem;
+  max-width: 100%;
+  filter: brightness(0) invert(1);
+}
+
+.partners-row img[alt="MetaMask"] { height: 3rem; }
+.partners-row img[alt="Variational"] { height: 1.7rem; }
+.partners-row img[alt="Lighter"] { height: 3rem; }
+
+@media (max-width: 992px) {
+  .partners {
+    padding-top: 10rem;
+    padding-bottom: 5rem;
+  }
+  .partners-row li { padding: 2.8rem 2rem; }
+}
+

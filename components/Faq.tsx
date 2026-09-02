@@ -22,7 +22,7 @@ export function Faq({ faq }: { faq: Dictionary["faq"] }) {
             </h2>
             <p className="p1">{faq.intro}</p>
           </div>
-          <div className="accordset accordset-arrow accent-header accordset-round">
+          <div className="accordset accordset-arrow">
             {faq.items.map((item) => (
               <div className="accordset-item" key={item.q}>
                 <div className="accordset-header">

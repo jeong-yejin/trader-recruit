@@ -1791,13 +1791,11 @@ body {
 .contest-N9 .thumb-area::before {
   top: 0;
   transform: translateY(-25%);
-  background: url(../images/contest_N9_01.png) no-repeat center/cover
 }
 
 .contest-N9 .thumb-area::after {
   bottom: 0;
   transform: translateY(35%);
-  background: url(../images/contest_N9_02.png) no-repeat center/cover
 }
 
 .contest-N9 .thumb-list {
@@ -1870,12 +1868,10 @@ body {
   }
 
   .contest-N9 .thumb-area::before {
-    background: url(../images/contest_N9_18.png) no-repeat center/cover;
     transform: translateY(-5%)
   }
 
   .contest-N9 .thumb-area::after {
-    background: url(../images/contest_N9_19.png) no-repeat center/cover;
     transform: translateY(5%)
   }
 

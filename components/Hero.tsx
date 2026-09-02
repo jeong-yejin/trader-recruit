@@ -1,14 +1,23 @@
-import type { Dictionary } from "@/lib/i18n";
+import type { Dictionary, EventSlug } from "@/lib/i18n";
 import { MatrixRain } from "./MatrixRain";
+import { StageBackdrop } from "./StageBackdrop";
 
 /**
- * TemplateHouse block contest-N3: full-bleed title area over the falling-glyph
- * canvas ported from the legacy static page.
+ * TemplateHouse block contest-N3: full-bleed title area over a moving backdrop.
+ * perp-dex-day keeps the falling-glyph canvas ported from the legacy static
+ * page; token-2049 runs the graded video stage instead. The two never load
+ * together, so the event has to reach this far down.
  * The template's four floating dithered PNGs are gone — they were the old
  * background, and two of them crossed the headline. No JS binds to the block,
  * so the class names are what style.css lays out and have to match exactly.
  */
-export function Hero({ hero }: { hero: Dictionary["hero"] }) {
+export function Hero({
+  hero,
+  event,
+}: {
+  hero: Dictionary["hero"];
+  event: EventSlug;
+}) {
   return (
     <section className="contest-N3" id="EpmtE69D23">
       <div className="contents-container container-full fullscreen">
@@ -29,7 +38,7 @@ export function Hero({ hero }: { hero: Dictionary["hero"] }) {
           </a>
         </div>
       </div>
-      <MatrixRain />
+      {event === "token-2049" ? <StageBackdrop /> : <MatrixRain />}
     </section>
   );
 }

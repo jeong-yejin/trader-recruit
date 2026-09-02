@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Apply } from "@/components/Apply";
 import { Arena } from "@/components/Arena";
 import { Faq } from "@/components/Faq";
+import { Partners } from "@/components/Partners";
 import { FinalCta } from "@/components/FinalCta";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -50,6 +51,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
  * The th-layout-* wrappers are the TemplateHouse page shell. style.js measures
  * .th-layout-footer to park the floating contest-N4 bar, so the structure
  * matches index.html rather than being flattened.
+ *
+ * The .ev-<slug> wrapper is what scopes a per-event skin: project.css is one
+ * file behind both events, so token-2049's stage styling hangs off this class
+ * and perp-dex-day keeps the template's own look. style.js reaches the footer
+ * with a descendant selector, so the extra div does not break it.
  */
 export default async function RecruitPage({ params }: Params) {
   const { lang, event } = await params;
@@ -57,24 +63,25 @@ export default async function RecruitPage({ params }: Params) {
   const d = getDictionary(event, lang);
 
   return (
-    <>
+    <div className={`ev ev-${event}`}>
       <Header lang={lang} event={event} nav={d.nav} a11y={d.a11y} />
       <main className="th-layout-main" id="main">
         <div className="th-layout-content">
-          <Hero hero={d.hero} />
+          <Hero hero={d.hero} event={event} />
           <Marquee items={d.marquee} />
           <StickyCta final={d.final} />
-          <SeatBand seat={d.seat} countdown={d.countdown} />
-          <Prize prize={d.prize} />
+          <SeatBand seat={d.seat} countdown={d.countdown} event={event} />
+          <Prize prize={d.prize} event={event} />
           <Arena arena={d.arena} />
+          <Partners partners={d.partners} />
           <Who who={d.who} />
-          <Process process={d.process} />
+          <Process process={d.process} event={event} />
           <Apply apply={d.apply} />
           <Faq faq={d.faq} />
-          <FinalCta final={d.final} />
+          <FinalCta final={d.final} event={event} />
         </div>
       </main>
-      <Footer footer={d.footer} />
-    </>
+      <Footer footer={d.footer} event={event} />
+    </div>
   );
 }

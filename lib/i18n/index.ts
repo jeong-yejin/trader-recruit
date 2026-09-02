@@ -24,7 +24,7 @@ export const EVENT_LABELS: Record<EventSlug, string> = {
 };
 
 /** A run of copy where `mark` marks the words the design lifts out of the sentence. */
-export type Segment = { t: string; mark?: boolean };
+type Segment = { t: string; mark?: boolean };
 
 type Field = { label: string; placeholder: string };
 type Choice = { label: string; options: string[] };
@@ -41,6 +41,9 @@ export type Dictionary = {
   nav: {
     prize: string;
     arena: string;
+    /** Optional, like `partners` below: only the event that runs the strip
+        carries the link, so token-2049 gets no dead label. */
+    partners?: string;
     who: string;
     process: string;
     faq: string;
@@ -139,6 +142,17 @@ export type Dictionary = {
     items: { q: string; a: string }[];
   };
   final: { kicker: string; title: string[]; body: string; cta: string };
+  /**
+   * Optional: only perp-dex-day runs the partner strip. `items` names the
+   * partners and sets their order; the component maps each name to its logo
+   * file, so a name with no file drops out of the strip.
+   */
+  partners?: {
+    kicker: string;
+    title: string[];
+    intro: string;
+    items: string[];
+  };
   footer: { backToTop: string };
 };
 

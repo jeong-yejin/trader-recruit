@@ -128,8 +128,16 @@
           wrapEl.removeChild(wrapEl.lastChild);
         }
         // 텍스트 복제
-        const cloneCount = 30;
-        for (let i = 0; i < cloneCount; i++) {
+        // 고정 30벌은 화면을 채우고도 한참 남아, 8개짜리 목록에서는 폭이
+        // 6만px을 넘고 브라우저가 이 레이어를 합성하지 못해 움직임이 끊긴다.
+        // 그리고 xPercent: -50은 전체 폭의 절반을 미는 값이라, 총 벌 수가
+        // 홀수면 한 바퀴마다 이음매가 눈에 띈다. 화면을 세 번 덮을 만큼만,
+        // 짝수로 맞춰 복제한다.
+        const unitWidth = textEl.getBoundingClientRect().width;
+        const viewWidth = wrapEl.parentElement.clientWidth;
+        const needed = unitWidth > 0 ? Math.ceil((viewWidth * 3) / unitWidth) : 30;
+        const copyCount = Math.max(2, needed + (needed % 2));
+        for (let i = 1; i < copyCount; i++) {
           wrapEl.appendChild(textEl.cloneNode(true));
         }
         // gsap 애니메이션 제거
@@ -218,20 +226,22 @@
       const mm = gsap.matchMedia();
       // 미디어 쿼리를 사용하여 특정 화면 너비 이상에서만 실행
       mm.add("(min-width: 993px)", () => {
-        $block.find(".list li").each(function() {
-          const $el = $(this);
+        const $items = $block.find(".list li");
+        // 스크롤 위치의 단계 하나만 활성화. -1이면 전부 해제.
+        const focus = (i) => {
+          $items.removeClass("active");
+          if (i >= 0) $items.eq(i).addClass("active");
+        };
+        $items.each(function(i) {
           // 텍스트 애니메이션
           gsap.timeline({
             scrollTrigger: {
-              trigger: $el[0],
+              trigger: this,
               start: "0% 50%",
               end: "0% 30%",
-              onEnter: () => {
-                $el.addClass("active");
-              },
-              onLeaveBack: () => {
-                $el.removeClass("active");
-              },
+              onEnter: () => { focus(i); },
+              onEnterBack: () => { focus(i); },
+              onLeaveBack: () => { focus(i - 1); },
             }
           });
         });
