@@ -16,7 +16,7 @@ type Config = {
   fallbackEmail: string;
   /** Support handle, without the @. Shown beside the form and in the FAQ copy. */
   contactTelegram: string;
-  /** Seats still open — shown in the hero meta and the seat grid. */
+  /** Seats still open. The seat grid marks the rest taken, filling from 01. */
   seatsOpen: number;
 };
 

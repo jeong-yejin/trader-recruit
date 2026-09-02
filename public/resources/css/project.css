@@ -238,7 +238,10 @@
   black fill and both grounds are near-black (#0d0d0d here, #000 on
   token-2049), so the drawn colour has to come from CSS. The mask carries the
   shape and the box carries the colour, which is also what lets a taken seat
-  swap black for white without a second file.
+  drop its figure below the ground without a second file.
+
+  An open seat lifts a shade off the card. It is the only figure on the band
+  that holds a shape, so the eye lands on a seat that can still be applied for.
 */
 .seat::after {
   content: "";
@@ -250,7 +253,7 @@
      height-driven figure filled that narrower card end to end. */
   width: 34%;
   aspect-ratio: 1180 / 1732;
-  background: var(--black);
+  background: rgba(255, 255, 255, 0.14);
   mask: url("../images/Silhouette.svg") no-repeat bottom / contain;
   pointer-events: none;
 }
@@ -274,10 +277,9 @@
 .seat.taken { background: var(--bg-color); }
 .seat.taken .no { color: var(--text-color3); }
 .seat.taken .status i { background: var(--text-color4); }
-/* The seat is filled, so the figure in it comes forward instead of sitting a
-   shade under the ground. It is the only thing on a taken card that gains
-   weight — the number and the dot both step back. */
-.seat.taken::after { background: var(--white); }
+/* A taken seat empties out. The figure drops below the card's own ground so the
+   three open seats are the only ones holding a shape. */
+.seat.taken::after { background: rgba(0, 0, 0, 0.07); }
 
 .count-band {
   display: flex;
@@ -1384,13 +1386,6 @@
 /* ---------- seat band ---------- */
 .ev-token-2049 .seat .no { color: var(--text-color3); }
 .ev-token-2049 .seat.taken .status { color: var(--text-color4); }
-
-/* The figure is black on a #0d0d0d card, which reads on perp-dex-day only
-   because it cuts a hole in the graph paper. The stage has no paper and a
-   #0a0a0a card, so black there is nothing at all and the space it holds sits
-   empty. It gets a faint white instead. A taken seat still goes to full
-   white — :not() is what keeps this rule out of that one's way. */
-.ev-token-2049 .seat:not(.taken)::after { background: rgba(255, 255, 255, 0.07); }
 
 /* ---------- accordion ---------- */
 .ev-token-2049 .contest-N8 .accordset .accordset-item { border-color: var(--line-color1); }
