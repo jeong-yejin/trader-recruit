@@ -88,7 +88,7 @@ export const en: Dictionary = {
       {
         k: "03",
         lead: "Hotel for the competition",
-        body: "We book the accommodation you need for the Singapore final.",
+        body: "We book the accommodation you need in Singapore.",
       },
     ],
     sideNote:

@@ -444,10 +444,6 @@
   --line-color1: #2a2a2a;
   --line-color2: #333333;
   --line-color3: #f2f2f2;
-  --body-color: var(--text-color1);
-  --border-color: var(--line-color1);
-  --link-color: var(--text-color1);
-  --link-hover-color: var(--text-color1);
   /* Ink for the blocks that keep a bright background (primary buttons). */
   --on-bright: #0a0a0a;
   /* --danger reads at 4.29:1 on the dark ground, just under AA. */

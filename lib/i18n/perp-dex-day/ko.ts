@@ -143,6 +143,8 @@ export const ko: Dictionary = {
   partners: {
     kicker: "PARTICIPATING PARTNERS",
     title: ["PERP-DEX DAY를 함께하는", "파트너를 소개해요."],
+    intro:
+      "Variational, Lighter, Extended, Aster, MetaMask가 함께하는 무대에서 거래 실력과 이름을 업계에 알릴 수 있어요.",
     items: ["Variational", "Lighter", "Extended", "Aster", "MetaMask"],
   },
 
@@ -218,7 +220,7 @@ export const ko: Dictionary = {
         v: "출금 권한이 있는 키나 시드 문구, 비밀번호는 받지 않아요. 읽기 전용 API나 화면 캡처를 보내 주세요.",
       },
     ],
-    contactLabel: "문의 · @reboundx_cs",
+    contactLabel: "문의",
     selectPlaceholder: "선택해 주세요",
     fields: {
       name: { label: "이름", placeholder: "실명" },
