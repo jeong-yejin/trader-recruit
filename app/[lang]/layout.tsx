@@ -1,6 +1,6 @@
 import type { Viewport } from "next";
 import { notFound } from "next/navigation";
-import { TemplateScripts } from "@/components/TemplateScripts";
+import { TemplateScripts } from "@/components/layout/TemplateScripts";
 import { isLocale, LOCALES } from "@/lib/i18n";
 
 type Params = { params: Promise<{ lang: string }> };

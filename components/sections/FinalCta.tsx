@@ -1,6 +1,6 @@
 import type { Dictionary, EventSlug } from "@/lib/i18n";
-import { CodeRain } from "./CodeRain";
-import { RetroGrid } from "./RetroGrid";
+import { CodeRain } from "../visuals/CodeRain";
+import { RetroGrid } from "../visuals/RetroGrid";
 
 /**
  * TemplateHouse block contest-N9. The template's three drifting thumbnail rows

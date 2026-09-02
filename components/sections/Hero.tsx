@@ -1,6 +1,6 @@
 import type { Dictionary, EventSlug } from "@/lib/i18n";
-import { MatrixRain } from "./MatrixRain";
-import { StageBackdrop } from "./StageBackdrop";
+import { MatrixRain } from "../visuals/MatrixRain";
+import { StageBackdrop } from "../visuals/StageBackdrop";
 
 /**
  * TemplateHouse block contest-N3: full-bleed title area over a moving backdrop.
