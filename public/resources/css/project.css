@@ -1107,6 +1107,12 @@
 .ev-token-2049 {
   --primary: #ff25bc;
   --primary-rgb: 255, 37, 188;
+  /*
+    The second neon. Cyan sits opposite the stage pink on the wheel, so where
+    the two meet each keeps its own colour instead of muddying into a third.
+  */
+  --neon: #00e5ff;
+  --neon-rgb: 0, 229, 255;
   --body-bg: #000000;
   --bg-color: #000000;
   --surface: #0a0a0a;
@@ -1240,6 +1246,13 @@
   font-size: clamp(4rem, 7.4vw, 11rem);
   line-height: 0.94;
   letter-spacing: -0.035em;
+  /* Misregistration. A sign this size is more than one tube behind one pane of
+     glass and they never line up, so the headline carries pink on one edge and
+     cyan on the other. 3px is under a stroke width here, which keeps it a
+     fringe rather than a second copy of the word. */
+  text-shadow:
+    -0.3rem 0 0 rgba(var(--primary-rgb), 0.5),
+    0.3rem 0 0 rgba(var(--neon-rgb), 0.42);
 }
 
 .ev-token-2049 .contest-N3 .title-area p {
@@ -1361,9 +1374,12 @@
   color: var(--primary);
 }
 
+/* The indices are the sign's system voice, so they take the second neon and
+   the copy keeps the first. */
 .ev-token-2049 .contest-N5 .card-idx {
   font-size: 1.2rem;
-  color: var(--primary);
+  color: var(--neon);
+  text-shadow: 0 0 1.4rem rgba(var(--neon-rgb), 0.45);
 }
 
 .ev-token-2049 .contest-N5 .list-label { font-size: 1.3rem; }
@@ -1389,6 +1405,7 @@
 /* The fill is gone, so the open question carries the stage pink on its own. */
 .ev-token-2049 .contest-N8 .accordset .accordset-item.active .accordset-button {
   color: var(--primary);
+  text-shadow: 0 0 1.6rem rgba(var(--primary-rgb), 0.45);
 }
 
 /* ---------- form ---------- */
@@ -1404,6 +1421,8 @@
 .ev-token-2049 .selectset .selectset-select:focus {
   border-color: var(--primary);
   background-color: #000;
+  /* A focused field is the one lit thing on the form. */
+  box-shadow: 0 0 1.8rem rgba(var(--primary-rgb), 0.3);
 }
 
 /* --surface is #0a0a0a on the stage, a shade the fields never use. The list
@@ -1492,6 +1511,19 @@
 ) { letter-spacing: 0; }
 
 .ev-token-2049:lang(ko) .contest-N3 .title-area p { letter-spacing: 0; }
+
+/* ---------- neon ---------- */
+/* What a lit tube does to the wall behind it. */
+.ev-token-2049 .btnset-primary { box-shadow: 0 0 3rem rgba(var(--primary-rgb), 0.4); }
+
+/*
+  The hairline is the only thing separating one black box from the next, so the
+  top edge takes the neon and the other three stay neutral. Four lit edges would
+  outline the box and turn six panels into six signs.
+*/
+.ev-token-2049 .contest-N5 .list-area li,
+.ev-token-2049 .arena-card { border-top-color: rgba(var(--neon-rgb), 0.3); }
+
 
 /* ==========================================================================
    perp-dex-day — terminal boxes
@@ -1658,12 +1690,6 @@
   text-shadow: 0 0 1.2rem rgba(var(--primary-rgb), 0.55);
 }
 
-/* The prompt the reference leads every line with. The empty string after the
-   slash is the alt text, which keeps a screen reader from announcing "greater
-   than" before each number. */
-.ev-perp-dex-day .contest-N5.no-thumb .card-idx::before {
-  content: "> " / "";
-}
 
 /*
   Bento grid. Six items over three columns with every row filled: 1+2, 2+1,
@@ -1695,6 +1721,52 @@
 @media (max-width: 992px) {
   .ev-perp-dex-day .contest-N5 .list-area { gap: 2rem; }
 }
+
+/* ---------- CRT screen ---------- */
+/*
+  Three layers of glass over the whole viewport: the shadow mask the picture is
+  drawn through, the phosphor wash where the beam is brightest, and the falloff
+  at the corners of the tube.
+
+  Fixed, not absolute. The mask belongs to the screen rather than to the
+  document, so it has to hold still while the page scrolls under it. .ev sets
+  no transform or filter, so fixed still resolves against the viewport from
+  inside it.
+
+  z-index 101 clears the header and the sticky bar at 99 and the skip link at
+  100, so everything the viewer sees sits behind the same glass, and stays
+  under the template's toasts and modals at 99999. Nothing here is a target.
+*/
+.ev-perp-dex-day::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 101;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.26) 0 1px,
+      transparent 1px 3px
+    ),
+    radial-gradient(
+      72% 52% at 50% 30%,
+      rgba(var(--primary-rgb), 0.05),
+      transparent 70%
+    ),
+    radial-gradient(122% 92% at 50% 50%, transparent 44%, rgba(0, 0, 0, 0.5));
+}
+
+/*
+  A tube cannot hold an edge on a letter this bright: the beam blooms into the
+  phosphor around it. White is the bloom, green is what it blooms into.
+*/
+.ev-perp-dex-day .contest-N3 .title-area h2 {
+  text-shadow:
+    0 0 0.8rem rgba(255, 255, 255, 0.2),
+    0 0 3.6rem rgba(var(--primary-rgb), 0.24);
+}
+
 
 /* ==========================================================================
    Partners
