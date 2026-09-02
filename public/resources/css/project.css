@@ -1290,7 +1290,6 @@
     StageBackdrop, and the near-neutral highlights stay where they are.
   */
   filter: url(#stage-grade) hue-rotate(-42deg);
-  -webkit-mask-image: linear-gradient(90deg, transparent 26%, #000 62%);
   mask-image: linear-gradient(90deg, transparent 26%, #000 62%);
 }
 
@@ -1319,7 +1318,6 @@
 @media (max-width: 992px) {
   .stage-plate,
   .stage-plate-lift {
-    -webkit-mask-image: linear-gradient(180deg, #000 34%, transparent 88%);
     mask-image: linear-gradient(180deg, #000 34%, transparent 88%);
   }
 
