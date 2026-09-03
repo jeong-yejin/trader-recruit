@@ -1626,6 +1626,17 @@
 }
 
 /*
+  The panel body inherited the page's p1, which left it 0.2rem under the h6
+  lead above it — close enough that the pair read as one block. One step down
+  the existing scale to p2 puts the weight back on the lead.
+*/
+.ev-perp-dex-day .contest-N6 dd {
+  font-size: var(--fs-p2);
+  line-height: var(--lh-p2);
+  letter-spacing: var(--letter-spacing-p2);
+}
+
+/*
   The hand runs at 64% and the figure at 114%.
 
   Above 993px the green thumb is width-driven with no height of its own, so the

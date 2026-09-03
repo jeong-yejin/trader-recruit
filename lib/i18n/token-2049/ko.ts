@@ -170,7 +170,7 @@ export const ko: Dictionary = {
   },
 
   process: {
-    title: ["싱가포르 무대까지, 이렇게 진행돼요."],
+    title: ["싱가포르 무대까지, 이렇게 진행돼요"],
     intro:
       "지원서 검토와 인터뷰를 거쳐 Asia Trading Championship에 출전할 트레이더를 선발해요.",
     steps: [
