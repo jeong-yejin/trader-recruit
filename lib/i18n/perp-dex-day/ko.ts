@@ -32,15 +32,22 @@ export const ko: Dictionary = {
     sub: [
       [
         {
-          t: "네 명의 트레이더가 실제 계좌와 실제 자금으로 경쟁해요.",
+          t: "네 명의 트레이더가 관객 앞에서 실제 계좌와 실제 자금으로 거래해요.",
           mark: true,
         },
+        { t: " 거래 자금은 저희가 준비하고, 대회 중 손실도 저희가 부담해요." },
       ],
       [
         {
-          t: "1위 한 명은 Kalshi와 함께하는 싱가포르 Asia Trading Championship에 진출해요.",
+          t: "1위 한 명은 Kalshi와 함께하는 싱가포르 Asia Trading Championship에 진출해요. 왕복 항공권과 숙소를 지원해요.",
         },
       ],
+    ],
+    facts: [
+      { k: "일시", v: "2026년 9월 28일" },
+      { k: "장소", v: "SJ KUNSTHALLE, 서울" },
+      { k: "참가자", v: "트레이더 4명" },
+      { k: "거래 자금", v: "전액 지원" },
     ],
     ctaPrimary: "지원서 작성하기",
   },
@@ -287,6 +294,14 @@ export const ko: Dictionary = {
       sending: "보내는 중이에요…",
       ok: "지원서가 접수됐어요. 검토 후 개별 연락드릴게요",
       error: "메일이 전송되지 않았으니 {email}로 직접 보내 주세요",
+    },
+    success: {
+      title: "지원서가 접수됐어요.",
+      body: "검토 후 아래 연락처로 개별 연락드릴게요. 추가로 보낼 자료가 있으면 Telegram으로 알려 주세요.",
+      draftTitle: "메일 앱에서 보내기를 눌러 주세요.",
+      draftBody:
+        "지원서를 담은 메일 초안을 열었어요. 보내기를 눌러야 접수되고, 그 뒤 아래 연락처로 개별 연락드릴게요.",
+      back: "돌아가서 수정하기",
     },
     mailSubject: "PERP-DEX DAY 트레이더 지원서: {name}",
   },

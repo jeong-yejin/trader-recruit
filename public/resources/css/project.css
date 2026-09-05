@@ -334,6 +334,60 @@
   .count-band { flex-direction: column; align-items: center; }
 }
 
+/* ---------- hero fact bar ---------- */
+/*
+  Date, venue and the two numbers, sat between the sub copy and the CTA. It is
+  the last thing read before the button, which is where the question it answers
+  gets asked.
+
+  Rules rather than a card: the hero already carries a moving canvas behind it,
+  and a filled box on top of that is one surface too many. One line on a desktop,
+  2x2 on a phone — the media query below sets the column count from the width so
+  it never has to be kept in sync with how many facts the copy carries.
+*/
+.hero-facts:empty { display: none; }
+
+.hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.6rem 4rem;
+  /* fit-content, so the two rules stop at the facts. Run full-bleed they read
+     as section dividers and left the four short rows stranded mid-page. */
+  width: fit-content;
+  max-width: 100%;
+  margin: 4rem auto 0;
+  padding: 2.4rem 0;
+  border-top: 1px solid var(--line-color1);
+  border-bottom: 1px solid var(--line-color1);
+  text-align: left;
+}
+
+.hero-facts dt { color: var(--text-color3); }
+.hero-facts dd { margin: 0.4rem 0 0; color: var(--text-color1); }
+
+/* The template gives .title-area .btnset a 4rem top margin against the copy.
+   The bar is now what it sits under, and a rule needs less air than a
+   paragraph does. */
+.contest-N3 .title-area .hero-facts + .btnset { margin-top: 3.2rem; }
+
+/*
+  Wrapping put three facts on the first line and left the fourth centred on its
+  own under them. auto-fit takes the column count from the width instead: four
+  across on a tablet, 2x2 on a phone, and nothing stranded at either end. Not a
+  fixed two columns, which would leave a 900px screen half empty.
+*/
+@media (max-width: 992px) {
+  .hero-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 2rem 2.4rem;
+    width: 100%;
+    margin-top: 3.2rem;
+    padding: 2rem 0;
+  }
+}
+
 /* ---------- application form ---------- */
 .apply-block { padding: 8rem 0; background: var(--bg-color); }
 .apply-shell { display: grid; grid-template-columns: 28rem 1fr; gap: 6rem; align-items: start; }
@@ -350,6 +404,61 @@
 .inputset-langth { display: block; margin-top: 0.6rem; text-align: right; color: var(--text-color3); }
 
 .form-submit { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
+
+/*
+  .apply-form sets display: grid, which is a class and so outranks the UA's
+  [hidden] rule. Without this the hidden form stays on the page under the
+  panel.
+*/
+.apply-form[hidden] { display: none; }
+
+/* ---------- submitted ---------- */
+/*
+  Sits where the form was. A left rule in the accent rather than a filled box:
+  the section already has a background of its own, and the mark plus the
+  heading are enough to read as a state change.
+*/
+.apply-done {
+  padding: 0 0 0 2.4rem;
+  border-left: 2px solid var(--primary);
+}
+
+.apply-done:focus { outline: none; }
+.apply-done:focus-visible { outline: 2px solid var(--primary); outline-offset: 1.2rem; }
+
+.apply-done-mark { display: block; color: var(--primary); }
+.apply-done h3 { margin: 1.6rem 0 0; }
+.apply-done > p { margin: 1.2rem 0 0; max-width: 52ch; color: var(--text-color2); }
+
+.apply-done-recap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem 4rem;
+  margin: 3.2rem 0 0;
+  padding-top: 2.4rem;
+  border-top: 1px solid var(--line-color1);
+}
+
+.apply-done-recap dt { color: var(--text-color3); }
+.apply-done-recap dd { margin: 0.4rem 0 0; word-break: break-all; }
+
+.apply-done .btnset { margin-top: 3.2rem; }
+
+@media (max-width: 992px) {
+  .apply-done { padding-left: 1.6rem; }
+
+  /*
+    word-break lets a flex item shrink under its own content, so wrapping
+    squeezed name, email and Telegram onto one phone line and dropped X below.
+    Same auto-fit as the hero bar, with a wider track: the email address is the
+    longest value here and is what decides whether a second column fits.
+  */
+  .apply-done-recap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 2rem 2.4rem;
+  }
+}
 
 /* Empty until a submit says something, so it never leaves a blank gap. */
 .form-status:empty { display: none; }
@@ -1237,6 +1346,12 @@
 }
 
 .ev-token-2049 .contest-N3 .title-area p { max-width: 66rem; }
+
+/* The stage hero runs left, not centred like the template default the fact bar
+   was built against. A fit-content block with auto side margins ignores
+   text-align, so it has to be told; without this the bar floats out to the
+   middle and reads as belonging to nothing. */
+.ev-token-2049 .hero-facts { margin-left: 0; justify-content: flex-start; }
 
 /* Face comes from the template (style.css sets the hero to Creato Display for
    both events). Only the scale is the stage's own: the Singapore headline is

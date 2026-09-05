@@ -37,9 +37,15 @@ export const ko: Dictionary = {
       ],
       [
         {
-          t: "TOKEN2049 Singapore Side Event · 2026년 10월 5일 · Zouk Singapore",
+          t: "실제 온체인 거래 결과로 순위를 가리고, 1,000명 이상의 관객이 그 과정을 지켜봐요.",
         },
       ],
+    ],
+    facts: [
+      { k: "일시", v: "2026년 10월 5일" },
+      { k: "장소", v: "Zouk Singapore" },
+      { k: "행사", v: "TOKEN2049 Singapore Side Event" },
+      { k: "관객", v: "1,000명 이상" },
     ],
     ctaPrimary: "챔피언십 지원하기",
   },
@@ -314,6 +320,14 @@ export const ko: Dictionary = {
       sending: "보내는 중이에요…",
       ok: "지원서가 접수됐어요. 검토 후 개별 연락드릴게요",
       error: "메일이 전송되지 않았으니 {email}로 직접 보내 주세요",
+    },
+    success: {
+      title: "지원서가 접수됐어요.",
+      body: "검토 후 아래 연락처로 개별 연락드릴게요. 추가로 보낼 자료가 있으면 Telegram으로 알려 주세요.",
+      draftTitle: "메일 앱에서 보내기를 눌러 주세요.",
+      draftBody:
+        "지원서를 담은 메일 초안을 열었어요. 보내기를 눌러야 접수되고, 그 뒤 아래 연락처로 개별 연락드릴게요.",
+      back: "돌아가서 수정하기",
     },
     mailSubject: "ASIA TRADING CHAMPIONSHIP 트레이더 지원서: {name}",
   },

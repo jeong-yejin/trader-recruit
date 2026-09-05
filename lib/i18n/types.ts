@@ -30,6 +30,12 @@ export type Dictionary = {
     titleLit: string;
     /** One entry per paragraph. */
     sub: Segment[][];
+    /**
+     * When, where, and the two numbers that decide whether someone applies.
+     * The date and the venue were reachable only from the arena carousel and
+     * the FAQ, which is past the point most visitors leave.
+     */
+    facts: { k: string; v: string }[];
     ctaPrimary: string;
   };
   marquee: string[];
@@ -107,6 +113,20 @@ export type Dictionary = {
       ok: string;
       /** `{email}` is replaced with CONFIG.fallbackEmail. */
       error: string;
+    };
+    /**
+     * Takes the form's place once it is away. Two headings, because the two
+     * submit paths are not the same promise: `title` is for a filed entry,
+     * `draft` for the mailto fallback, where nothing reaches us until the
+     * applicant presses send in their own mail app.
+     */
+    success: {
+      title: string;
+      body: string;
+      draftTitle: string;
+      draftBody: string;
+      /** Returns to the form with every answer still in it. */
+      back: string;
     };
     /** `{name}` is replaced with the applicant's name. */
     mailSubject: string;

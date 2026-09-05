@@ -29,10 +29,25 @@ export function Hero({
           {hero.sub.map((para, p) => (
             <p className="p1" key={p}>
               {para.map((seg, i) =>
-                seg.mark ? <strong key={i}>{seg.t}</strong> : <span key={i}>{seg.t}</span>,
+                seg.mark ? (
+                  <strong key={i}>{seg.t}</strong>
+                ) : (
+                  <span key={i}>{seg.t}</span>
+                ),
               )}
             </p>
           ))}
+          {/* A dl, not a list of divs: each row is a label and its value, and
+              that is what a screen reader should hear when it reaches the
+              date. Empty is styled away rather than guarded for in JS. */}
+          <dl className="hero-facts">
+            {hero.facts.map((fact) => (
+              <div key={fact.k}>
+                <dt className="p3">{fact.k}</dt>
+                <dd className="p2">{fact.v}</dd>
+              </div>
+            ))}
+          </dl>
           <a href="#apply" className="btnset btnset-primary btnset-lg p2">
             <span>{hero.ctaPrimary}</span>
           </a>

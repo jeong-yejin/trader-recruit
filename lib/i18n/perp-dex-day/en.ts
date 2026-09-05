@@ -27,15 +27,22 @@ export const en: Dictionary = {
     sub: [
       [
         {
-          t: "Four traders compete on real accounts with real capital.",
+          t: "Four traders trade live on stage, on real accounts with real capital.",
           mark: true,
         },
+        { t: " We put up the capital and we cover the losses." },
       ],
       [
         {
-          t: "First place goes on to the Asia Trading Championship in Singapore, with Kalshi.",
+          t: "First place goes on to the Asia Trading Championship in Singapore, with Kalshi. Flight and hotel covered.",
         },
       ],
+    ],
+    facts: [
+      { k: "Date", v: "September 28, 2026" },
+      { k: "Venue", v: "SJ KUNSTHALLE, Seoul" },
+      { k: "On stage", v: "4 traders" },
+      { k: "Trading capital", v: "Fully funded" },
     ],
     ctaPrimary: "Apply for a seat ↗",
   },
@@ -283,6 +290,14 @@ export const en: Dictionary = {
       sending: "Sending…",
       ok: "Application received. We'll review it and reply individually",
       error: "The mail didn't send. Write to {email} directly",
+    },
+    success: {
+      title: "Application received.",
+      body: "We'll review it and reply to you individually at the contact below. If you have anything else to send, reach us on Telegram.",
+      draftTitle: "Hit send in your mail app.",
+      draftBody:
+        "We opened a mail draft with your application in it. It reaches us once you send it, and we'll reply individually at the contact below.",
+      back: "Back to the form",
     },
     mailSubject: "PERP-DEX DAY trader application: {name}",
   },

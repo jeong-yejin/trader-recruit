@@ -32,9 +32,15 @@ export const en: Dictionary = {
       ],
       [
         {
-          t: "TOKEN2049 Singapore Side Event · October 5, 2026 · Zouk Singapore",
+          t: "Real on-chain trades decide the ranking, with over 1,000 people watching it happen.",
         },
       ],
+    ],
+    facts: [
+      { k: "Date", v: "October 5, 2026" },
+      { k: "Venue", v: "Zouk Singapore" },
+      { k: "Event", v: "TOKEN2049 Singapore Side Event" },
+      { k: "Audience", v: "1,000+" },
     ],
     ctaPrimary: "Apply to the championship ↗",
   },
@@ -271,6 +277,14 @@ export const en: Dictionary = {
       sending: "Sending…",
       ok: "Application received. We'll review it and reply individually",
       error: "The mail didn't send. Write to {email} directly",
+    },
+    success: {
+      title: "Application received.",
+      body: "We'll review it and reply to you individually at the contact below. If you have anything else to send, reach us on Telegram.",
+      draftTitle: "Hit send in your mail app.",
+      draftBody:
+        "We opened a mail draft with your application in it. It reaches us once you send it, and we'll reply individually at the contact below.",
+      back: "Back to the form",
     },
     mailSubject: "ASIA TRADING CHAMPIONSHIP trader application: {name}",
   },
