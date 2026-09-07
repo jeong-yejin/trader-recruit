@@ -54,7 +54,7 @@ export function Header({
           </div>
           <div className="header-center">
             {/* The tabs replaced the wordmark, so the page heading is carried
-                separately. .blind is templatehouse's visually-hidden class. */}
+                separately. .blind is base.css's visually-hidden class. */}
             <h1 className="blind">{EVENT_LABELS[event]}</h1>
             <nav className="header-title h5 event-tabs" aria-label={a11y.events}>
               {EVENTS.map((slug) => (

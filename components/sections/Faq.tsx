@@ -2,7 +2,7 @@ import type { Dictionary } from "@/lib/i18n";
 
 /**
  * TemplateHouse block contest-N8: an accordset over a notes list.
- * templatehouse.js binds every `.accordset-button` on the page and opens the
+ * base.js binds every `.accordset-button` on the page and opens the
  * matching `.accordset-body` with jQuery slideToggle, so the nesting here has
  * to stay header → button, body → content.
  */

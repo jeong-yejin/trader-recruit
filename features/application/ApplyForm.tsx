@@ -202,7 +202,7 @@ export function ApplyForm({
       : {};
 
   return (
-    // The form is hidden rather than unmounted, which keeps templatehouse.js's
+    // The form is hidden rather than unmounted, which keeps base.js's
     // keyup counters bound to inputs it already found.
     <>
       <form
@@ -328,7 +328,7 @@ export function ApplyForm({
           />
         </FormField>
 
-        {/* inputset-count is required: templatehouse.js writes the keyup counter into it. */}
+        {/* inputset-count is required: base.js writes the keyup counter into it. */}
         <FormField name="risk" label={fields.risk.label}>
           <textarea
             id="risk"
@@ -368,7 +368,7 @@ export function ApplyForm({
           />
         </FormField>
 
-        {/* checkset-fill is not decoration: templatehouse.css gates every
+        {/* checkset-fill is not decoration: base.css gates every
             :checked rule behind a state modifier, so a bare .checkset box
             never paints the tick. */}
         <div

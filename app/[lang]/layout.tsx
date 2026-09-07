@@ -18,25 +18,25 @@ export const viewport: Viewport = { themeColor: "#000000" };
  * The TemplateHouse stylesheets, in the order index.html loads them.
  * They stay plain files under public/ rather than imports so the cascade
  * is exactly what the template authors wrote: style.css is last and expects
- * to win over templatehouse.css.
+ * to win over base.css.
  */
 const STYLESHEETS = [
   /*
     Wanted Sans, ahead of the template sheets so the faces are requested before
-    templatehouse.css's own @import chain starts. The split build is subset by
+    base.css's own @import chain starts. The split build is subset by
     unicode-range, so a page only pulls the Hangul ranges it actually prints.
   */
   "https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css",
   "/resources/css/setting.css",
   "/resources/css/plugin.css",
-  "/resources/css/templatehouse.css",
+  "/resources/css/base.css",
   "/resources/css/style.css",
   /* Ours, last: it only fills gaps the contest template has no block for. */
   "/resources/css/project.css",
 ];
 
 /**
- * The same four scripts index.html ends with, in the same order.
+ * The same four scripts legacy/index.html ends with, in the same order.
  * TemplateScripts runs them in sequence, so only the first tag is on the
  * server-rendered page; the preloads below start the other three downloading
  * anyway. Next preloads the first one itself, and a repeated preload of one URL
@@ -45,7 +45,7 @@ const STYLESHEETS = [
 const SCRIPTS = [
   "/resources/js/setting.js",
   "/resources/js/plugin.js",
-  "/resources/js/templatehouse.js",
+  "/resources/js/base.js",
   "/resources/js/style.js",
 ];
 

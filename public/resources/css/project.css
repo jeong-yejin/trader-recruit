@@ -5,7 +5,7 @@
   Everything here covers something the contest template has no block for:
   the seat counter, the application form, and the lists that are longer than
   the template's fixed three-card rows. Tokens and the 1rem = 10px scale come
-  from templatehouse.css.
+  from base.css.
 */
 
 /* ---------- skip link ---------- */
@@ -588,12 +588,12 @@
 /*
   The template ships one light palette. This overrides the neutral tokens and
   the surfaces that hard-code #fff / #f5f5f5. --white itself stays white:
-  56 rules in templatehouse.css use it as label text on a coloured button,
+  56 rules in base.css use it as label text on a coloured button,
   where it still has to read as white.
 */
 :root {
   /*
-    Every heading and paragraph class in templatehouse.css reads --ff-ko1, so
+    Every heading and paragraph class in base.css reads --ff-ko1, so
     this one token is the whole switch. Pretendard stays behind it: the template
     already imports it, so a jsDelivr failure lands on a Korean face rather than
     the system default.
@@ -643,7 +643,7 @@
    This 2rem square is the only mark the consent field has. */
 .checkset .checkset-label::before { border-color: var(--text-color3); }
 
-/* templatehouse.css hides the native box with display:none, which also drops a
+/* base.css hides the native box with display:none, which also drops a
    required field out of the tab order. Hidden the way a checkbox has to be:
    still focusable, still checkable, sitting over the ::before that stands in
    for it, just not painted. */
@@ -666,7 +666,7 @@
 }
 
 /* inputset-danger and inputset-msg are both scoped under .inputset in
-   templatehouse.css, so on the consent row the failed-submit state painted
+   base.css, so on the consent row the failed-submit state painted
    nothing and the message read as trailing prose. Same colours the text fields
    already get, reached for .checkset. */
 .checkset.inputset-danger .checkset-label::before { border-color: var(--danger); }
@@ -1139,7 +1139,7 @@
 @property --gradient-shine { syntax: "<color>"; initial-value: #ffffff; inherits: false; }
 
 /*
-  :hover is in the selector because templatehouse.css restates background-color
+  :hover is in the selector because base.css restates background-color
   and border-width there, at the same specificity this block would otherwise
   concede on that one state.
 */
@@ -1299,7 +1299,7 @@
 
 /* ---------- tokens ---------- */
 /*
-  --primary carries the whole accent: templatehouse.css spends it on 40-odd
+  --primary carries the whole accent: base.css spends it on 40-odd
   rules and every one of them wants the stage pink instead of the lime.
   The CTA ink is --on-bright, not white: white on #ff25bc measures 3.36:1 and
   on the #ff4dc8 hover 2.94:1, both under AA. #0a0a0a reads 5.89:1 / 6.74:1.
@@ -1379,7 +1379,7 @@
   The shiny pill above is the perp-dex-day skin. Here the button is a flat pink
   rectangle, so the conic border, the dot field and both shimmer layers come
   off. :hover is in the selector for the same reason it is up there —
-  templatehouse.css restates background-color on that state.
+  base.css restates background-color on that state.
 */
 .ev-token-2049 .btnset-primary,
 .ev-token-2049 .btnset-primary:hover {
