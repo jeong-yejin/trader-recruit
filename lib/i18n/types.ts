@@ -16,8 +16,9 @@ export type Dictionary = {
   nav: {
     prize: string;
     arena: string;
-    /** Optional, like `partners` below: only the event that runs the strip
-        carries the link, so token-2049 gets no dead label. */
+    /** Optional, like `about` and `partners` below: only the event that runs
+        the block carries the link, so token-2049 gets no dead label. */
+    about?: string;
     partners?: string;
     who: string;
     process: string;
@@ -25,6 +26,12 @@ export type Dictionary = {
     apply: string;
   };
   hero: {
+    /**
+     * Optional eyebrow over the headline. The visible h1 is the header's, and
+     * it is `.blind`, so without this the event's name is nowhere above the
+     * fold — the headline is about the seats, not about the event.
+     */
+    kicker?: string;
     /** Both locales keep the English headline — it is the event's wordmark. */
     titleTop: string;
     titleLit: string;
@@ -39,6 +46,16 @@ export type Dictionary = {
     ctaPrimary: string;
   };
   marquee: string[];
+  /**
+   * Optional, like `partners`: says what the event is, for readers who arrive
+   * knowing neither the event nor the instrument. Only the event whose
+   * dictionary carries the copy renders the block.
+   */
+  about?: {
+    title: string[];
+    lead: string;
+    items: { k: string; title: string; body: string }[];
+  };
   seat: {
     status: string;
     note: string;
@@ -80,7 +97,6 @@ export type Dictionary = {
     steps: { n: string; title: string; body: string; when: string }[];
   };
   apply: {
-    kicker: string;
     title: string[];
     kv: { k: string; v: string }[];
     contactLabel: string;
@@ -108,28 +124,19 @@ export type Dictionary = {
       required: string;
       /** Telegram and X satisfy one requirement between them. */
       eitherSocial: string;
-      mailto: string;
       sending: string;
-      ok: string;
       /** `{email}` is replaced with CONFIG.fallbackEmail. */
       error: string;
     };
-    /**
-     * Takes the form's place once it is away. Two headings, because the two
-     * submit paths are not the same promise: `title` is for a filed entry,
-     * `draft` for the mailto fallback, where nothing reaches us until the
-     * applicant presses send in their own mail app.
-     */
+    /** Takes the form's place once it is away. */
     success: {
       title: string;
       body: string;
-      draftTitle: string;
-      draftBody: string;
-      /** Returns to the form with every answer still in it. */
+      /** Sends the applicant back to the top of the page. */
       back: string;
+      /** Small print: a sent application is final. */
+      note: string;
     };
-    /** `{name}` is replaced with the applicant's name. */
-    mailSubject: string;
   };
   faq: {
     title: string[];
@@ -143,7 +150,6 @@ export type Dictionary = {
    * file, so a name with no file drops out of the strip.
    */
   partners?: {
-    kicker: string;
     title: string[];
     intro: string;
     items: string[];

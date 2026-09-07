@@ -2,11 +2,11 @@
 
 import { useState, type FormEvent } from "react";
 import { CONFIG } from "@/lib/config";
-import type { Dictionary } from "@/lib/i18n";
+import type { Dictionary, EventSlug } from "@/lib/i18n";
 import { ApplySuccess, type Receipt } from "./components/ApplySuccess";
 import { FormField } from "./components/FormField";
 import { SelectField } from "./components/SelectField";
-import { buildMailtoUrl, fill, serializeFormData } from "./form-submit";
+import { fill } from "./form-submit";
 
 type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
@@ -18,12 +18,18 @@ const isControl = (el: Element): el is Control =>
   el instanceof HTMLSelectElement ||
   el instanceof HTMLTextAreaElement;
 
-export function ApplyForm({ t }: { t: Dictionary["apply"] }) {
+export function ApplyForm({
+  t,
+  event,
+}: {
+  t: Dictionary["apply"];
+  event: EventSlug;
+}) {
   const [status, setStatus] = useState({ text: "", error: false });
   const [missing, setMissing] = useState<Record<string, true>>({});
   const [busy, setBusy] = useState(false);
-  /** Set once the form is away. `draft` is the mailto path — see ApplySuccess. */
-  const [done, setDone] = useState<{ draft: boolean; receipt: Receipt } | null>(null);
+  /** The receipt, set once the form is away. Null while the form is up. */
+  const [done, setDone] = useState<Receipt | null>(null);
 
   /**
    * What the applicant needs read back: the name we will address them by and
@@ -78,25 +84,26 @@ export function ApplyForm({ t }: { t: Dictionary["apply"] }) {
     }
 
     const data = Object.fromEntries(entries.entries());
-    setBusy(true);
 
+    // Held for both paths, so the button is disabled and reading `sending`
+    // from the click onwards. Without an endpoint there is nothing to wait for
+    // and the panel replaces the form in the same paint, so that state is never
+    // seen — it is the POST below that needs the double-click guard.
+    setBusy(true);
+    setStatus({ text: t.status.sending, error: false });
+
+    // WARNING: with no endpoint set, the entry goes nowhere. The panel is the
+    // whole submit, and it tells the applicant we received something we did
+    // not. Fill in CONFIG.formEndpoint before this page takes real traffic.
     if (!CONFIG.formEndpoint) {
-      // No backend yet — hand the applicant a pre-filled email instead of losing the entry.
-      const body = serializeFormData(data);
-      // The panel carries this message now, and says plainly that the entry is
-      // not filed until they press send.
-      setDone({ draft: true, receipt: receiptOf(data) });
-      window.location.href = buildMailtoUrl({
-        email: CONFIG.fallbackEmail,
-        subject: fill(t.mailSubject, { name: String(data.name ?? "") }),
-        body,
-      });
-      // The page never unloads here, so release the button in case no mail app opened.
-      window.setTimeout(() => setBusy(false), 4000);
+      form.reset();
+      setMissing({});
+      setStatus({ text: "", error: false });
+      setDone(receiptOf(data));
+      setBusy(false);
       return;
     }
 
-    setStatus({ text: t.status.sending, error: false });
     try {
       const res = await fetch(CONFIG.formEndpoint, {
         method: "POST",
@@ -107,7 +114,7 @@ export function ApplyForm({ t }: { t: Dictionary["apply"] }) {
       form.reset();
       setMissing({});
       setStatus({ text: "", error: false });
-      setDone({ draft: false, receipt: receiptOf(data) });
+      setDone(receiptOf(data));
     } catch {
       setStatus({
         text: fill(t.status.error, { email: CONFIG.fallbackEmail }),
@@ -132,9 +139,8 @@ export function ApplyForm({ t }: { t: Dictionary["apply"] }) {
       : {};
 
   return (
-    // The form is hidden rather than unmounted. Its inputs are uncontrolled, so
-    // unmounting would drop thirteen fields of answers and leave the mailto
-    // path's way back with nothing to go back to.
+    // The form is hidden rather than unmounted, which keeps templatehouse.js's
+    // keyup counters bound to inputs it already found.
     <>
       <form
         id="apply-form"
@@ -292,7 +298,16 @@ export function ApplyForm({ t }: { t: Dictionary["apply"] }) {
           />
         </FormField>
 
-        <div className={missing.agree ? "checkset inputset-danger" : "checkset"}>
+        {/* checkset-fill is not decoration: templatehouse.css gates every
+            :checked rule behind a state modifier, so a bare .checkset box
+            never paints the tick. */}
+        <div
+          className={
+            missing.agree
+              ? "checkset checkset-fill inputset-danger"
+              : "checkset checkset-fill"
+          }
+        >
           <input
             type="checkbox"
             id="agree"
@@ -326,14 +341,7 @@ export function ApplyForm({ t }: { t: Dictionary["apply"] }) {
           {status.text}
         </div>
       </form>
-      {done && (
-        <ApplySuccess
-          t={t.success}
-          draft={done.draft}
-          receipt={done.receipt}
-          onBack={() => setDone(null)}
-        />
-      )}
+      {done && <ApplySuccess t={t.success} receipt={done} event={event} />}
     </>
   );
 }

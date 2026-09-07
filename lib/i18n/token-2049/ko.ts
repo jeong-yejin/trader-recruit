@@ -194,7 +194,7 @@ export const ko: Dictionary = {
       },
       {
         n: "03",
-        title: "30분 화상 인터뷰",
+        title: "30분 인터뷰",
         body: "매매 원칙과 리스크 관리 방식, 라이브 무대에서 보여줄 전략을 편한 언어로 물어봐요.",
         when: "개별 안내",
       },
@@ -214,7 +214,6 @@ export const ko: Dictionary = {
   },
 
   apply: {
-    kicker: "ASIA TRADING CHAMPIONSHIP",
     title: ["아시아 챔피언을 가리는", "싱가포르 무대에 도전하세요."],
     kv: [
       {
@@ -316,20 +315,15 @@ export const ko: Dictionary = {
       missing: "별표(*) 표시된 칸을 채워 주세요",
       required: "꼭 입력해 주세요",
       eitherSocial: "Telegram과 X 중 하나는 입력해 주세요",
-      mailto: "메일 앱에서 보내기를 누르면 지원서가 접수돼요",
       sending: "보내는 중이에요…",
-      ok: "지원서가 접수됐어요. 검토 후 개별 연락드릴게요",
       error: "메일이 전송되지 않았으니 {email}로 직접 보내 주세요",
     },
     success: {
-      title: "지원서가 접수됐어요.",
-      body: "검토 후 아래 연락처로 개별 연락드릴게요. 추가로 보낼 자료가 있으면 Telegram으로 알려 주세요.",
-      draftTitle: "메일 앱에서 보내기를 눌러 주세요.",
-      draftBody:
-        "지원서를 담은 메일 초안을 열었어요. 보내기를 눌러야 접수되고, 그 뒤 아래 연락처로 개별 연락드릴게요.",
-      back: "돌아가서 수정하기",
+      title: "지원이 완료됐어요",
+      body: "지원서를 확인한 뒤 입력해 주신 연락처로 개별 안내드릴게요.",
+      back: "ASIA TRADING CHAMPIONSHIP 돌아가기",
+      note: "지원 내용은 제출 후 수정할 수 없어요. 변경이 필요하면 운영팀에 문의해 주세요.",
     },
-    mailSubject: "ASIA TRADING CHAMPIONSHIP 트레이더 지원서: {name}",
   },
 
   faq: {

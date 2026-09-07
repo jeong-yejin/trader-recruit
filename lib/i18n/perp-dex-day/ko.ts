@@ -10,13 +10,14 @@ export const ko: Dictionary = {
   meta: {
     title: "PERP-DEX DAY / 트레이더 모집",
     description:
-      "Variational, Lighter, Extended, Aster, MetaMask와 함께 2026년 9월 28일 서울에서 열리는 실시간 무기한 선물 트레이딩 대회에 참가할 트레이더 네 명을 찾고 있어요. 1위는 Kalshi와 함께하는 Asia Trading Championship에 진출해요.",
+      "Variational, Lighter, Aster, Extended, MetaMask와 함께 2026년 9월 28일 서울에서 열리는 실시간 무기한 선물 트레이딩 대회에 참가할 트레이더 네 명을 찾고 있어요. 1위는 Kalshi와 함께하는 Asia Trading Championship에 진출해요.",
     ogTitle: "PERP-DEX DAY / 트레이더 모집",
     ogDescription:
       "자리는 네 개, 싱가포르행은 단 한 자리. 1위는 항공과 숙소를 지원받고 Asia Trading Championship에 진출해요.",
   },
 
   nav: {
+    about: "행사 소개",
     prize: "1위 혜택",
     arena: "대회 방식",
     partners: "참여 파트너",
@@ -27,19 +28,18 @@ export const ko: Dictionary = {
   },
 
   hero: {
+    kicker: "PERP-DEX DAY · 코리아 블록체인 위크 2026",
     titleTop: "Four seats,",
     titleLit: "One ticket",
     sub: [
       [
         {
-          t: "네 명의 트레이더가 관객 앞에서 실제 계좌와 실제 자금으로 거래해요.",
-          mark: true,
+          t: "Variational, Lighter, Aster, Extended, MetaMask가 함께하는 PERP-DEX Day에서 무대에 오를 트레이더 네 명을 모집해요.",
         },
-        { t: " 거래 자금은 저희가 준비하고, 대회 중 손실도 저희가 부담해요." },
       ],
       [
         {
-          t: "1위 한 명은 Kalshi와 함께하는 싱가포르 Asia Trading Championship에 진출해요. 왕복 항공권과 숙소를 지원해요.",
+          t: "1위는 싱가포르 Asia Trading Championship에 진출해요.",
         },
       ],
     ],
@@ -64,6 +64,32 @@ export const ko: Dictionary = {
     "WITH ASTER",
     "WITH METAMASK",
   ],
+
+  about: {
+    title: ["무대 위에서 실력을 증명할", "트레이더 네 명을 찾아요."],
+    lead:
+      "Variational, Lighter, Aster, Extended, MetaMask가 함께하는 PERP-DEX Day의 무대에 오를 트레이더 네 명을 모집해요.",
+    items: [
+      {
+        k: "01",
+        title: "PERP-DEX DAY는",
+        body:
+          "PERP DEX 프로젝트와 트레이더가 한자리에 모여 피칭과 네트워킹, 라이브 트레이딩 대회를 함께하는 행사예요.",
+      },
+      {
+        k: "02",
+        title: "무대에서는",
+        body:
+          "네 명의 트레이더가 실제 계좌와 자금으로 거래하고, 관객은 실시간 거래 화면과 순위 변화를 보며 우승자를 예측해요.",
+      },
+      {
+        k: "03",
+        title: "네 자리에 도전하세요",
+        body:
+          "거래 자금과 손실은 주최 측이 부담하며, 1위는 싱가포르 Asia Trading Championship에 진출해요.",
+      },
+    ],
+  },
 
   seat: {
     status: "모집 중",
@@ -148,11 +174,10 @@ export const ko: Dictionary = {
   },
 
   partners: {
-    kicker: "PARTICIPATING PARTNERS",
     title: ["PERP-DEX DAY를 함께하는", "파트너를 소개해요."],
     intro:
-      "Variational, Lighter, Extended, Aster, MetaMask가 함께하는 무대에서 거래 실력과 이름을 업계에 알릴 수 있어요.",
-    items: ["Variational", "Lighter", "Extended", "Aster", "MetaMask"],
+      "Variational, Lighter, Aster, Extended, MetaMask가 함께하는 무대에서 거래 실력과 이름을 업계에 알릴 수 있어요.",
+    items: ["Variational", "Lighter", "Aster", "Extended", "MetaMask"],
   },
 
   who: {
@@ -194,7 +219,7 @@ export const ko: Dictionary = {
       },
       {
         n: "03",
-        title: "30분 화상 인터뷰",
+        title: "30분 인터뷰",
         body: "매매 원칙과 손실 관리 방식, 라이브 무대에서 보여줄 전략을 물어봐요.",
         when: "개별 안내",
       },
@@ -214,10 +239,8 @@ export const ko: Dictionary = {
   },
 
   apply: {
-    kicker: "트레이더 지원서",
     title: ["네 자리 중 하나에", "도전해 보세요."],
     kv: [
-      { k: "걸리는 시간", v: "약 5분이에요." },
       {
         k: "평가 기준",
         v: "실제 매매 기록과 리스크 관리 방식, 라이브 무대 적합성을 함께 봐요.",
@@ -290,20 +313,15 @@ export const ko: Dictionary = {
       missing: "별표(*) 표시된 칸을 채워 주세요",
       required: "꼭 입력해 주세요",
       eitherSocial: "Telegram과 X 중 하나는 입력해 주세요",
-      mailto: "메일 앱에서 보내기를 누르면 지원서가 접수돼요",
       sending: "보내는 중이에요…",
-      ok: "지원서가 접수됐어요. 검토 후 개별 연락드릴게요",
       error: "메일이 전송되지 않았으니 {email}로 직접 보내 주세요",
     },
     success: {
-      title: "지원서가 접수됐어요.",
-      body: "검토 후 아래 연락처로 개별 연락드릴게요. 추가로 보낼 자료가 있으면 Telegram으로 알려 주세요.",
-      draftTitle: "메일 앱에서 보내기를 눌러 주세요.",
-      draftBody:
-        "지원서를 담은 메일 초안을 열었어요. 보내기를 눌러야 접수되고, 그 뒤 아래 연락처로 개별 연락드릴게요.",
-      back: "돌아가서 수정하기",
+      title: "지원이 완료됐어요",
+      body: "지원서를 확인한 뒤 입력해 주신 연락처로 개별 안내드릴게요.",
+      back: "PERP-DEX DAY 돌아가기",
+      note: "지원 내용은 제출 후 수정할 수 없어요. 변경이 필요하면 운영팀에 문의해 주세요.",
     },
-    mailSubject: "PERP-DEX DAY 트레이더 지원서: {name}",
   },
 
   faq: {
@@ -312,7 +330,7 @@ export const ko: Dictionary = {
     items: [
       {
         q: "어떤 파트너가 대회에 참여하나요?",
-        a: "Variational, Lighter, Extended, Aster, MetaMask가 PERP-DEX DAY에 함께해요.",
+        a: "Variational, Lighter, Aster, Extended, MetaMask가 PERP-DEX DAY에 함께해요.",
       },
       {
         q: "한국에 살지 않아도 지원할 수 있나요?",

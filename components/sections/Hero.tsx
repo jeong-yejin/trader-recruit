@@ -22,6 +22,9 @@ export function Hero({
     <section className="contest-N3" id="EpmtE69D23">
       <div className="contents-container container-full fullscreen">
         <div className="title-area" data-aos="fade-up">
+          {/* The visible h1 lives in the header and is `.blind`, so this is the
+              only place the event names itself above the fold. */}
+          {hero.kicker && <p className="hero-kicker p3">{hero.kicker}</p>}
           <h2>
             {hero.titleTop}
             <br /> {hero.titleLit}

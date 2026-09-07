@@ -199,7 +199,6 @@ export const en: Dictionary = {
   },
 
   apply: {
-    kicker: "ASIA TRADING CHAMPIONSHIP",
     title: ["Take your shot at", "Asia's championship stage."],
     kv: [
       { k: "Date", v: "October 5, 2026" },
@@ -273,20 +272,15 @@ export const en: Dictionary = {
       missing: "Fill in the fields marked with *",
       required: "Required",
       eitherSocial: "Enter at least one of Telegram or X",
-      mailto: "Hit send in your mail app and the application reaches us",
       sending: "Sending…",
-      ok: "Application received. We'll review it and reply individually",
       error: "The mail didn't send. Write to {email} directly",
     },
     success: {
-      title: "Application received.",
-      body: "We'll review it and reply to you individually at the contact below. If you have anything else to send, reach us on Telegram.",
-      draftTitle: "Hit send in your mail app.",
-      draftBody:
-        "We opened a mail draft with your application in it. It reaches us once you send it, and we'll reply individually at the contact below.",
-      back: "Back to the form",
+      title: "Application complete",
+      body: "We'll review your application and reply individually at the contact you gave.",
+      back: "Back to Asia Trading Championship",
+      note: "An application can't be edited once it is sent. Contact the team if something needs to change.",
     },
-    mailSubject: "ASIA TRADING CHAMPIONSHIP trader application: {name}",
   },
 
   faq: {

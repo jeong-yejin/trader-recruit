@@ -5,13 +5,14 @@ export const en: Dictionary = {
   meta: {
     title: "PERP-DEX DAY / Traders Wanted",
     description:
-      "With Variational, Lighter, Extended, Aster and MetaMask, we're looking for 4 traders to compete in a live perpetuals trading competition in Seoul on September 28, 2026. First place goes on to the Asia Trading Championship with Kalshi.",
+      "With Variational, Lighter, Aster, Extended and MetaMask, we're looking for 4 traders to compete in a live perpetuals trading competition in Seoul on September 28, 2026. First place goes on to the Asia Trading Championship with Kalshi.",
     ogTitle: "PERP-DEX DAY / Traders Wanted",
     ogDescription:
       "Four seats, one ticket to Singapore. First place takes the flight and hotel and goes on to the Asia Trading Championship.",
   },
 
   nav: {
+    about: "About",
     prize: "Prize",
     arena: "Format",
     partners: "Partners",
@@ -22,19 +23,18 @@ export const en: Dictionary = {
   },
 
   hero: {
+    kicker: "PERP-DEX DAY · KOREA BLOCKCHAIN WEEK 2026",
     titleTop: "Four seats.",
     titleLit: "One ticket.",
     sub: [
       [
         {
-          t: "Four traders trade live on stage, on real accounts with real capital.",
-          mark: true,
+          t: "PERP-DEX Day brings together Variational, Lighter, Aster, Extended, and MetaMask. We're recruiting the four traders who take the stage.",
         },
-        { t: " We put up the capital and we cover the losses." },
       ],
       [
         {
-          t: "First place goes on to the Asia Trading Championship in Singapore, with Kalshi. Flight and hotel covered.",
+          t: "First place goes on to the Asia Trading Championship in Singapore.",
         },
       ],
     ],
@@ -59,6 +59,32 @@ export const en: Dictionary = {
     "with aster",
     "with metamask",
   ],
+
+  about: {
+    title: ["We're looking for four traders", "who can hold the stage."],
+    lead:
+      "We're recruiting the four traders who will stand on the PERP-DEX Day stage, alongside Variational, Lighter, Aster, Extended, and MetaMask.",
+    items: [
+      {
+        k: "01",
+        title: "What PERP-DEX DAY is",
+        body:
+          "An event where perp DEX projects and traders meet in one room for pitches, networking, and a live trading competition.",
+      },
+      {
+        k: "02",
+        title: "On the stage",
+        body:
+          "Four traders trade on real accounts with real capital. The audience watches the live trading screens and the leaderboard move, and calls the winner.",
+      },
+      {
+        k: "03",
+        title: "Take one of the four seats",
+        body:
+          "We put up the trading capital and we cover the losses. First place goes on to the Asia Trading Championship in Singapore.",
+      },
+    ],
+  },
 
   seat: {
     status: "Open",
@@ -143,11 +169,10 @@ export const en: Dictionary = {
   },
 
   partners: {
-    kicker: "PARTICIPATING PARTNERS",
     title: ["The partners standing", "behind PERP-DEX DAY."],
     intro:
-      "Variational, Lighter, Extended, Aster and MetaMask are on this stage with you, so your trading and your name reach the industry.",
-    items: ["Variational", "Lighter", "Extended", "Aster", "MetaMask"],
+      "Variational, Lighter, Aster, Extended and MetaMask are on this stage with you, so your trading and your name reach the industry.",
+    items: ["Variational", "Lighter", "Aster", "Extended", "MetaMask"],
   },
 
   who: {
@@ -190,7 +215,7 @@ export const en: Dictionary = {
       },
       {
         n: "03",
-        title: "30-minute video call",
+        title: "30-minute call",
         body: "Your trading rules, how you manage losses, and the strategy you'd run on a live stage.",
         when: "Notified individually",
       },
@@ -210,10 +235,8 @@ export const en: Dictionary = {
   },
 
   apply: {
-    kicker: "Trader application",
     title: ["Take your shot at", "one of the four seats."],
     kv: [
-      { k: "Time to complete", v: "About 5 minutes." },
       {
         k: "What we check",
         v: "Your trading record, your risk process, and how you'd hold up on a live stage.",
@@ -286,20 +309,15 @@ export const en: Dictionary = {
       missing: "Fill in the fields marked with *",
       required: "Required",
       eitherSocial: "Enter at least one of Telegram or X",
-      mailto: "Hit send in your mail app and the application reaches us",
       sending: "Sending…",
-      ok: "Application received. We'll review it and reply individually",
       error: "The mail didn't send. Write to {email} directly",
     },
     success: {
-      title: "Application received.",
-      body: "We'll review it and reply to you individually at the contact below. If you have anything else to send, reach us on Telegram.",
-      draftTitle: "Hit send in your mail app.",
-      draftBody:
-        "We opened a mail draft with your application in it. It reaches us once you send it, and we'll reply individually at the contact below.",
-      back: "Back to the form",
+      title: "Application complete",
+      body: "We'll review your application and reply individually at the contact you gave.",
+      back: "Back to PERP-DEX DAY",
+      note: "An application can't be edited once it is sent. Contact the team if something needs to change.",
     },
-    mailSubject: "PERP-DEX DAY trader application: {name}",
   },
 
   faq: {
@@ -309,7 +327,7 @@ export const en: Dictionary = {
     items: [
       {
         q: "Which partners are in on the competition?",
-        a: "Variational, Lighter, Extended, Aster and MetaMask are all in on PERP-DEX DAY.",
+        a: "Variational, Lighter, Aster, Extended and MetaMask are all in on PERP-DEX DAY.",
       },
       {
         q: "Can I apply if I don't live in Korea?",

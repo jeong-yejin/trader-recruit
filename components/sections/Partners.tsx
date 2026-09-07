@@ -18,7 +18,6 @@ export function Partners({ partners }: { partners: Dictionary["partners"] }) {
       <div className="contents-container container-md">
         <div className="contents-inner">
           <div className="title-area" data-aos="fade-up">
-            <p className="p2">{partners.kicker}</p>
             <h2 className="h2">
               {partners.title.map((line, i) => (
                 <span key={line}>

@@ -14,7 +14,7 @@
   left: 1.6rem;
   top: -6rem;
   z-index: 100;
-  padding: 1rem 1.6rem;
+  padding: 1.2rem 1.6rem;
   border-radius: 0.4rem;
   background: var(--secondary);
   color: var(--white);
@@ -29,6 +29,16 @@
 /* The hero lead is two paragraphs. The template zeroes p margins, so without
    this they butt together and read as one wrapped block. */
 .contest-N3 .title-area p.p1 + p.p1 { margin-top: 1.2rem; }
+
+/* Sits over the headline and is the only place the event names itself above
+   the fold. Tracked out and dimmed so it reads as a label, not as a first
+   line of the copy. */
+.hero-kicker {
+  margin-bottom: 1.6rem;
+  color: var(--text-color3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
 /* Both ported from the legacy static page. The rain runs at half strength,
    and the two-part vignette darkens the middle so the copy has a ground and
@@ -74,15 +84,18 @@
 #who,
 #process,
 #faq,
-#apply { scroll-margin-top: 10rem; }
+#apply,
+#about { scroll-margin-top: 10rem; }
 
 @media (max-width: 992px) {
+  #about,
   #prize,
   #arena,
   #who,
   #process,
   #faq,
-  #apply { scroll-margin-top: 7rem; }
+  #apply,
+  #about { scroll-margin-top: 7rem; }
 }
 
 /* ---------- header / footer wordmarks ---------- */
@@ -158,7 +171,7 @@
 /* .blue .thumb is absolutely positioned at right: 4rem with a 25.8rem basis,
    so it takes no space and longer copy than the template's ran under it. */
 @media (min-width: 993px) {
-  .contest-N6 .blue .desc { padding-right: 29.8rem; }
+  .contest-N6 .blue .desc { padding-right: 30rem; }
   /* The blob is align-self: center, which put its top edge level with the last
      line of the note. Nudged down so the copy clears it. Under 993px the thumb
      is in flow with its own margin, so the shift stops here. */
@@ -177,7 +190,7 @@
 .contest-N5 .list-label { margin: 0 0 2.4rem; }
 .contest-N5 .not-area { margin-top: 6.4rem; }
 .contest-N5 .not-area ul { margin: 0; padding: 0; list-style: none; }
-.contest-N5 .not-area li { position: relative; padding-left: 1.8rem; }
+.contest-N5 .not-area li { position: relative; padding-left: 1.6rem; }
 .contest-N5 .not-area li + li { margin-top: 0.8rem; }
 .contest-N5 .not-area li::before {
   content: "";
@@ -399,9 +412,9 @@
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
 .apply-form .inputset-label { display: block; margin-bottom: 0.8rem; }
 .apply-form .inputset-input { width: 100%; }
-.apply-form textarea.inputset-input { height: auto; min-height: 12rem; padding: 1.4rem 1.6rem; resize: vertical; }
+.apply-form textarea.inputset-input { height: auto; min-height: 12rem; padding: 1.6rem; resize: vertical; }
 .req { color: var(--danger-ink, var(--danger)); }
-.inputset-langth { display: block; margin-top: 0.6rem; text-align: right; color: var(--text-color3); }
+.inputset-langth { display: block; margin-top: 0.8rem; text-align: right; color: var(--text-color3); }
 
 .form-submit { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
 
@@ -414,11 +427,33 @@
 
 /* ---------- submitted ---------- */
 /*
-  Sits where the form was. A left rule in the accent rather than a filled box:
-  the section already has a background of its own, and the mark plus the
-  heading are enough to read as a state change.
+  Its own screen, portalled to <body> and laid over the page. z-index clears
+  everything the page puts above the flow: the drawer at 101, the header at 100
+  and the sticky bar at 99.
+  margin: auto on the child rather than centring here — a centred flex line that
+  outgrows its container clips at the top instead of scrolling to it, and the
+  recap plus the small print can outgrow a short viewport.
+*/
+.apply-done-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 8rem 2.4rem;
+  background-color: var(--body-bg);
+}
+
+/*
+  A left rule in the accent rather than a filled box: the screen is already the
+  state change, and the mark plus the heading carry the rest. The measure keeps
+  the column off the edges of a wide monitor.
 */
 .apply-done {
+  margin: auto;
+  width: 100%;
+  max-width: 64rem;
   padding: 0 0 0 2.4rem;
   border-left: 2px solid var(--primary);
 }
@@ -444,7 +479,13 @@
 
 .apply-done .btnset { margin-top: 3.2rem; }
 
+/* `.apply-done > p` above sets the body ink and holds the 52ch measure. The
+   child selector is only here to outrank it on colour: this is small print
+   under a button, not a second paragraph of the confirmation. */
+.apply-done > .apply-done-note { margin-top: 2.4rem; color: var(--text-color3); }
+
 @media (max-width: 992px) {
+  .apply-done-screen { padding: 6.4rem 1.6rem; }
   .apply-done { padding-left: 1.6rem; }
 
   /*
@@ -502,7 +543,7 @@
 }
 
 .selectset-option {
-  padding: 1rem 1.2rem;
+  padding: 1.2rem;
   border-radius: 0.2rem;
   color: var(--text-color2);
   cursor: pointer;
@@ -580,6 +621,40 @@
 .selectset .selectset-select,
 .selectset .selectset-select:focus,
 .checkset .checkset-label::before { background-color: var(--surface); }
+
+/* The template outlines the box in --line-color1, which on this palette is
+   #2a2a2a on near-black: about 1.3:1, under the 3:1 a non-text control needs.
+   This 2rem square is the only mark the consent field has. */
+.checkset .checkset-label::before { border-color: var(--text-color3); }
+
+/* templatehouse.css hides the native box with display:none, which also drops a
+   required field out of the tab order. Hidden the way a checkbox has to be:
+   still focusable, still checkable, sitting over the ::before that stands in
+   for it, just not painted. */
+.checkset .checkset-input {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  opacity: 0;
+}
+
+/* The ring goes on the stand-in box, since the input itself is invisible. */
+.checkset .checkset-input:focus-visible + .checkset-label::before {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* inputset-danger and inputset-msg are both scoped under .inputset in
+   templatehouse.css, so on the consent row the failed-submit state painted
+   nothing and the message read as trailing prose. Same colours the text fields
+   already get, reached for .checkset. */
+.checkset.inputset-danger .checkset-label::before { border-color: var(--danger); }
+.checkset.inputset-danger .inputset-msg { color: var(--danger); }
 
 /* Bright blocks keep dark ink so the copy stays readable on them.
    Their headings and terms set their own colour, so they are pulled back to the
@@ -1270,7 +1345,6 @@
 .ev-token-2049 .contest-N5 .list-label,
 .ev-token-2049 .contest-N6 .desc dt,
 .ev-token-2049 .contest-N7 .list li span,
-.ev-token-2049 .apply-block .title-area p,
 .ev-token-2049 .apply-kv dt,
 .ev-token-2049 .inputset-label,
 .ev-token-2049 .checkset-label,
@@ -1614,7 +1688,6 @@
   .list-label,
   .desc dt,
   .list li span,
-  .apply-block .title-area p,
   .apply-kv dt,
   .inputset-label,
   .seat .no,
@@ -1900,6 +1973,47 @@
    only thing setting the rhythm is the padding on each li.
    ========================================================================== */
 
+/* ==========================================================================
+   about
+   --------------------------------------------------------------------------
+   Not a template block either, and the same borrowed container and title-area
+   as #partners. It answers the two questions the page never answered — what
+   PERP-DEX DAY is, and what a perp DEX is — so it runs before the seat count
+   rather than after it.
+   ========================================================================== */
+.about {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.about .title-area { margin-bottom: 6.4rem; }
+
+.about-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-row li {
+  padding: 3.2rem;
+  background: var(--surface);
+  border: 1px solid var(--line-color1);
+  border-radius: 1.2rem;
+}
+
+.about-idx { color: var(--primary); }
+.about-row li h3 { margin: 0.8rem 0 0; }
+.about-row li > p:last-child { margin: 1.2rem 0 0; color: var(--text-color2); }
+
+@media (max-width: 992px) {
+  .about { padding-top: 4.8rem; padding-bottom: 4.8rem; }
+  .about .title-area { margin-bottom: 4rem; }
+  .about-row { grid-template-columns: 1fr; }
+}
+
 /*
   The template's own section rhythm: 20rem in, 10rem out, halved at 992px.
   #partners sits between two N5 blocks, so matching it keeps the 30rem the page
@@ -1947,8 +2061,98 @@
 @media (max-width: 992px) {
   .partners {
     padding-top: 10rem;
-    padding-bottom: 5rem;
+    padding-bottom: 4.8rem;
   }
   .partners-row li { padding: 2.8rem 2rem; }
 }
 
+/* ==========================================================================
+   perp-dex-day: the 1440 frame's spacing
+   --------------------------------------------------------------------------
+   Figma "PERP-DEX DAY / Traders Wanted — 1440". Every section there is
+   80px top and bottom on 64px a side, and the container inside it adds 40
+   more, so the column is 1232 wide inside a 104px gutter. The template ships
+   a different pad per block — 20rem/10rem on N5 and N8, 10rem on N6 and N7 —
+   and a 1280 column, so the numbers below replace both.
+
+   Desktop only. The frame is 1440 and says nothing about a phone, so the
+   template's own 992px block keeps the widths it already has; writing these
+   outside a query would outrank it and take the phone with them.
+
+   Scoped to the event: token-2049 renders the same blocks and has its own
+   design to answer to.
+   ========================================================================== */
+@media (min-width: 993px) {
+  /* 64 from the viewport, 40 more from container-md's own padding. The footer
+     is in for the alignment alone — the frame stops above it, and a footer
+     still on the 1280 column would sit 48px wider than everything over it. */
+  .ev-perp-dex-day .contents-container.container-md,
+  .ev-perp-dex-day .footer-container.container-md {
+    max-width: calc(1232px + 8rem);
+  }
+
+  .ev-perp-dex-day .contest-N5,
+  .ev-perp-dex-day .contest-N6,
+  .ev-perp-dex-day .contest-N7,
+  .ev-perp-dex-day .contest-N8,
+  .ev-perp-dex-day .partners {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  /* A 40 strip on 16 a side. */
+  .ev-perp-dex-day .contest-N10 .loop-area { min-height: 7.2rem; }
+
+  /* #who: the label takes the same 64 the headings take, and the cards are an
+     even 32 rather than the template's taller 4.8rem/4rem. */
+  .ev-perp-dex-day .contest-N5 .list-label { margin-bottom: 6.4rem; }
+  .ev-perp-dex-day .contest-N5 .list-area li { padding: 3.2rem; }
+  .ev-perp-dex-day .contest-N5.no-thumb .card-idx { margin-bottom: 0.8rem; }
+
+  /* The rule stays 40 under the seat cards; the clock moves to 32 under it. */
+  .ev-perp-dex-day .count-band { padding-top: 3.2rem; }
+
+  /* #prize: 24 between the three numbered items, not 12. */
+  .ev-perp-dex-day .contest-N6 .desc dl > div + div { margin-top: 2.4rem; }
+
+  /* #process: 8 under a step title, 28 under its date. */
+  .ev-perp-dex-day .contest-N7 .list li h3 { margin-bottom: 0.8rem; }
+  .ev-perp-dex-day .contest-N7 .list li p { margin-top: 2.8rem; }
+
+  /*
+    #faq: 24 on all four sides of a row, chevron included. The template runs
+    the question flush left against the column and pins the chevron to the
+    edge; the frame insets both.
+  */
+  .ev-perp-dex-day .contest-N8 .accordset .accordset-button,
+  .ev-perp-dex-day .contest-N8 .accordset .accordset-content {
+    padding: 2.4rem 5.6rem 2.4rem 2.4rem;
+  }
+  .ev-perp-dex-day .contest-N8 .accordset .accordset-header::after {
+    right: 2.4rem;
+  }
+}
+
+/* ==========================================================================
+   The template's own values, rounded onto the 4px grid
+   --------------------------------------------------------------------------
+   Not scoped to an event and not behind a width: these are 1px and 2px
+   corrections to numbers the template picked, and both events want them. The
+   two desktop ones happen to be what the frame asks for anyway.
+   ========================================================================== */
+
+/* 11 under the green panel's list, and 66 over the process thumbs. */
+.contest-N6 .green .desc { padding-bottom: 1.2rem; }
+.contest-N7 .thumb { padding-top: 6.8rem; }
+
+@media (max-width: 992px) {
+  /* The template halves its section padding for the phone and lands on 50. */
+  .contest-N5 { padding-bottom: 4.8rem; }
+  .contest-N6,
+  .contest-N7 { padding-top: 4.8rem; padding-bottom: 4.8rem; }
+
+  /* 2 between a prize term and its line, where the desktop rule says 4.
+     `.list-area dd` is the template's own selector and outranks the plain
+     `.contest-N6 dd` that carries the 4, so the override has to match it. */
+  .contest-N6 .list-area dd { margin-top: 0.4rem; }
+}

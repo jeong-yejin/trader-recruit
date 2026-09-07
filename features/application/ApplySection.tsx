@@ -1,19 +1,26 @@
 import { Fragment } from "react";
 import { ApplyForm } from "./ApplyForm";
 import { CONFIG } from "@/lib/config";
-import type { Dictionary } from "@/lib/i18n";
+import type { Dictionary, EventSlug } from "@/lib/i18n";
 
 /**
  * The template has no form block, so this borrows its container and typography
  * classes and leans on the inputset/selectset/checkset components inside.
  */
-export function ApplySection({ apply }: { apply: Dictionary["apply"] }) {
+export function ApplySection({
+  apply,
+  event,
+}: {
+  apply: Dictionary["apply"];
+  /** Only travels as far as the confirmation screen, which leaves the
+      page's tree and so cannot inherit the event's palette. */
+  event: EventSlug;
+}) {
   return (
     <section className="apply-block" id="apply">
       <div className="contents-container container-md">
         <div className="contents-inner">
           <div className="title-area" data-aos="fade-up">
-            <p className="p2">{apply.kicker}</p>
             <h2 className="h2">
               {apply.title.map((line, i) => (
                 <Fragment key={line}>
@@ -46,7 +53,7 @@ export function ApplySection({ apply }: { apply: Dictionary["apply"] }) {
               </dd>
             </dl>
 
-            <ApplyForm t={apply} />
+            <ApplyForm t={apply} event={event} />
           </div>
         </div>
       </div>

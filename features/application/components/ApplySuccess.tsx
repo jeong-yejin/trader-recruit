@@ -1,75 +1,93 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import type { Dictionary } from "@/lib/i18n";
+import { createPortal } from "react-dom";
+import { usePathname } from "next/navigation";
+import type { Dictionary, EventSlug } from "@/lib/i18n";
 
 /** Name, email and whichever handle the applicant gave. */
 export type Receipt = { label: string; value: string }[];
 
 /**
- * Takes the form's place once it is away. Two reasons it is a panel rather
- * than a toast or a route:
- *
- * A toast is gone in four seconds. This form is thirteen fields long and the
- * reply comes by email days later, so the confirmation has to still be there
- * when the applicant looks up.
- *
- * A route would be a claim we cannot make on the mailto path, where the
- * application has not left the applicant's machine yet. `draft` is what picks
- * the honest wording, and it is also what offers the way back — the form is
- * only hidden, so every answer is still in it.
+ * The confirmation gets its own screen rather than a panel where the form was:
+ * a toast is gone in four seconds, and a panel sits one scroll away from
+ * thirteen fields the applicant can no longer change. Portalled to <body> and
+ * covering the viewport, so the page behind is neither visible nor reachable.
  */
 export function ApplySuccess({
   t,
-  draft,
   receipt,
-  onBack,
+  event,
 }: {
   t: Dictionary["apply"]["success"];
-  draft: boolean;
   receipt: Receipt;
-  onBack: () => void;
+  event: EventSlug;
 }) {
   const panel = useRef<HTMLDivElement>(null);
+  /** A real navigation, not a hash: the form behind is spent, so the way back
+      to the event page is a fresh load of it. */
+  const pathname = usePathname();
 
-  // The form it replaced held focus, and focus has to land somewhere it can be
-  // read from. tabIndex -1 keeps the panel out of the tab order afterwards.
-  useEffect(() => panel.current?.focus(), []);
+  useEffect(() => {
+    // The form held focus, and focus has to land somewhere it can be read from.
+    // tabIndex -1 keeps the panel out of the tab order afterwards.
+    panel.current?.focus();
 
-  return (
-    <div className="apply-done" ref={panel} tabIndex={-1} role="status">
-      {/* Decorative: the heading beside it already says the state. */}
-      <svg
-        className="apply-done-mark"
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="square"
-        aria-hidden="true"
-      >
-        <path d="M4 12.5 9.5 18 20 6.5" />
-      </svg>
+    // The page is still mounted behind this screen, and covering it is not
+    // enough — without this it keeps its scroll position and all of its tab
+    // stops, so the confirmation would be one Tab away from the sent form.
+    const page = document.getElementById("page");
+    const scrolled = document.body.style.overflow;
+    if (page) page.inert = true;
+    document.body.style.overflow = "hidden";
+    return () => {
+      if (page) page.inert = false;
+      document.body.style.overflow = scrolled;
+    };
+  }, []);
 
-      <h3 className="h5">{draft ? t.draftTitle : t.title}</h3>
-      <p className="p2">{draft ? t.draftBody : t.body}</p>
+  return createPortal(
+    // token-2049's palette tokens are declared on .ev-token-2049, so the scope
+    // class has to travel with the screen once it leaves the page's own tree.
+    <div className={`apply-done-screen ev ev-${event}`}>
+      <div className="apply-done" ref={panel} tabIndex={-1} role="status">
+        {/* Decorative: the heading beside it already says the state. */}
+        <svg
+          className="apply-done-mark"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="square"
+          aria-hidden="true"
+        >
+          <path d="M4 12.5 9.5 18 20 6.5" />
+        </svg>
 
-      <dl className="apply-done-recap">
-        {receipt.map((row) => (
-          <div key={row.label}>
-            <dt className="p3">{row.label}</dt>
-            <dd className="p2">{row.value}</dd>
-          </div>
-        ))}
-      </dl>
+        <h3 className="h5">{t.title}</h3>
+        <p className="p2">{t.body}</p>
 
-      {draft && (
-        <button type="button" className="btnset btnset-line-dark p2" onClick={onBack}>
+        <dl className="apply-done-recap">
+          {receipt.map((row) => (
+            <div key={row.label}>
+              <dt className="p3">{row.label}</dt>
+              <dd className="p2">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        {/* The only way out of the screen. */}
+        <a className="btnset btnset-lg btnset-line-dark p2" href={pathname}>
           <span>{t.back}</span>
-        </button>
-      )}
-    </div>
+        </a>
+
+        {/* Last on the screen: it only matters to someone who has already read
+            the confirmation and is looking for what to do about a typo. */}
+        <p className="apply-done-note p3">{t.note}</p>
+      </div>
+    </div>,
+    document.body,
   );
 }
