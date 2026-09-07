@@ -315,7 +315,7 @@ export const ko: Dictionary = {
       eitherSocial: "Telegram과 X 중 하나는 입력해 주세요",
       duplicate: "이미 지원한 이메일이에요. 다른 이메일을 입력해 주세요",
       sending: "보내는 중이에요…",
-      error: "메일이 전송되지 않았으니 {email}로 직접 보내 주세요",
+      error: "전송에 실패했어요. 텔레그램 @{telegram} 으로 보내 주세요",
     },
     success: {
       title: "지원이 완료됐어요",

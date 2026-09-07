@@ -13,10 +13,10 @@ type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 /** Either one satisfies the requirement. Order decides which gets focus. */
 const SOCIAL = ["telegram", "x"];
 
-const isControl = (el: Element): el is Control =>
-  el instanceof HTMLInputElement ||
-  el instanceof HTMLSelectElement ||
-  el instanceof HTMLTextAreaElement;
+const isControl = (node: EventTarget): node is Control =>
+  node instanceof HTMLInputElement ||
+  node instanceof HTMLSelectElement ||
+  node instanceof HTMLTextAreaElement;
 
 /** Focus alone can leave the field above the fold on a form this long. */
 const revealField = (element: HTMLElement) => {
@@ -164,7 +164,7 @@ export function ApplyForm({
       completeSubmission();
     } catch {
       setStatus({
-        text: fill(t.status.error, { email: CONFIG.fallbackEmail }),
+        text: fill(t.status.error, { telegram: CONFIG.contactTelegram }),
         error: true,
       });
     } finally {
@@ -173,6 +173,28 @@ export function ApplyForm({
   }
 
   const { fields } = t;
+
+  /**
+   * A message under a field describes what was there when submit ran, so it
+   * stops being true the moment the applicant edits that field. Delegated from
+   * the form: native controls bubble `input`, and SelectField dispatches one of
+   * its own because it assigns the select's value in script.
+   */
+  const clearFieldError = (edited: EventTarget) => {
+    if (!isControl(edited)) return;
+    const { name } = edited;
+    setFieldErrors((shown) => {
+      if (!shown[name]) return shown;
+      const next = { ...shown };
+      // Telegram and X are one requirement, so filling either answers both.
+      const answered = SOCIAL.includes(name) ? SOCIAL : [name];
+      answered.forEach((field) => delete next[field]);
+      return next;
+    });
+    // The banner summarises the same failed submit, so it goes with them.
+    // `sending` is not an error and has to survive a keystroke mid-POST.
+    setStatus((shown) => (shown.error ? { text: "", error: false } : shown));
+  };
 
   const flagged = (name: string) =>
     fieldErrors[name]
@@ -189,6 +211,7 @@ export function ApplyForm({
         noValidate
         hidden={done !== null}
         onSubmit={onSubmit}
+        onInput={(edit) => clearFieldError(edit.target)}
       >
         <div className="form-row">
           <FormField name="name" label={fields.name.label} required error={fieldErrors.name}>

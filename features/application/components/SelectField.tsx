@@ -36,6 +36,9 @@ export function SelectField({
   const commit = (row: string) => {
     if (!native.current) return;
     native.current.value = row;
+    // Assigning value in script fires nothing, and the form clears a field's
+    // error message on input. Say the edit happened.
+    native.current.dispatchEvent(new Event("input", { bubbles: true }));
     setValue(row);
     setOpen(false);
   };

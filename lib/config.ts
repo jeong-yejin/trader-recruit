@@ -10,11 +10,10 @@ type Config = {
    * the countdown. 12:00 is a placeholder start time on both.
    */
   eventDate: Record<EventSlug, string>;
-  /** Where the form posts. Leave "" to fall back to a pre-filled email draft. */
+  /** Where the form posts. Leave "" and the form only shows the panel. */
   formEndpoint: string;
-  /** Inbox used when formEndpoint is empty. */
-  fallbackEmail: string;
-  /** Support handle, without the @. Shown beside the form and in the FAQ copy. */
+  /** Support handle, without the @. Shown beside the form, in the FAQ copy,
+      and as the way through when a submit fails. */
   contactTelegram: string;
   /** Seats still open. The seat grid marks the rest taken, filling from 01. */
   seatsOpen: number;
@@ -28,7 +27,6 @@ export const CONFIG: Config = {
     "token-2049": "2026-10-05T12:00:00+08:00",
   },
   formEndpoint: "",
-  fallbackEmail: "hello@perpdexday.xyz",
   contactTelegram: "reboundx_cs",
   seatsOpen: 3,
 };

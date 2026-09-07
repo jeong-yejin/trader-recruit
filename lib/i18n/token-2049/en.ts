@@ -273,7 +273,7 @@ export const en: Dictionary = {
       eitherSocial: "Enter at least one of Telegram or X",
       duplicate: "This email has already applied. Use a different one",
       sending: "Sending…",
-      error: "The mail didn't send. Write to {email} directly",
+      error: "Sending failed. Message us on Telegram at @{telegram}",
     },
     success: {
       title: "Application complete",

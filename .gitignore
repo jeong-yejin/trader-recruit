@@ -6,3 +6,8 @@ next-env.d.ts
 .DS_Store
 .env*.local
 .claude/
+
+# 로컬 작업용 문서. 저장소에는 올리지 않음.
+docs/
+AGENTS.md
+CLAUDE.md

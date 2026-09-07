@@ -130,7 +130,7 @@ export type Dictionary = {
        */
       duplicate: string;
       sending: string;
-      /** `{email}` is replaced with CONFIG.fallbackEmail. */
+      /** `{telegram}` is replaced with CONFIG.contactTelegram. */
       error: string;
     };
     /** Takes the form's place once it is away. */

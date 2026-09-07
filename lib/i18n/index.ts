@@ -1,4 +1,4 @@
-export type { Choice, Dictionary, Field, Segment } from "./types.ts";
+export type { Dictionary } from "./types.ts";
 export {
   EVENTS,
   EVENT_LABELS,
