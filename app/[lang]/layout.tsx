@@ -21,6 +21,12 @@ export const viewport: Viewport = { themeColor: "#000000" };
  * to win over templatehouse.css.
  */
 const STYLESHEETS = [
+  /*
+    Wanted Sans, ahead of the template sheets so the faces are requested before
+    templatehouse.css's own @import chain starts. The split build is subset by
+    unicode-range, so a page only pulls the Hangul ranges it actually prints.
+  */
+  "https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css",
   "/resources/css/setting.css",
   "/resources/css/plugin.css",
   "/resources/css/templatehouse.css",

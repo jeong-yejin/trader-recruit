@@ -446,16 +446,14 @@
 }
 
 /*
-  A left rule in the accent rather than a filled box: the screen is already the
-  state change, and the mark plus the heading carry the rest. The measure keeps
-  the column off the edges of a wide monitor.
+  No frame and no rule: the screen is already the state change, and the mark
+  plus the heading carry the rest. The measure keeps the column off the edges
+  of a wide monitor.
 */
 .apply-done {
   margin: auto;
   width: 100%;
-  max-width: 64rem;
-  padding: 0 0 0 2.4rem;
-  border-left: 2px solid var(--primary);
+  max-width: 72rem;
 }
 
 .apply-done:focus { outline: none; }
@@ -477,16 +475,26 @@
 .apply-done-recap dt { color: var(--text-color3); }
 .apply-done-recap dd { margin: 0.4rem 0 0; word-break: break-all; }
 
-.apply-done .btnset { margin-top: 3.2rem; }
+.apply-done .btnset {
+  margin-top: 3.2rem;
+  height: auto;
+  padding: 2.4rem;
+}
 
 /* `.apply-done > p` above sets the body ink and holds the 52ch measure. The
    child selector is only here to outrank it on colour: this is small print
    under a button, not a second paragraph of the confirmation. */
-.apply-done > .apply-done-note { margin-top: 2.4rem; color: var(--text-color3); }
+.apply-done > .apply-done-note {
+  margin-top: 2.4rem;
+  max-width: none;
+  color: var(--text-color3);
+}
+
+.apply-done-note a { color: inherit; text-decoration: underline; }
+.apply-done-note a:hover { color: var(--primary); }
 
 @media (max-width: 992px) {
   .apply-done-screen { padding: 6.4rem 1.6rem; }
-  .apply-done { padding-left: 1.6rem; }
 
   /*
     word-break lets a flex item shrink under its own content, so wrapping
@@ -584,6 +592,14 @@
   where it still has to read as white.
 */
 :root {
+  /*
+    Every heading and paragraph class in templatehouse.css reads --ff-ko1, so
+    this one token is the whole switch. Pretendard stays behind it: the template
+    already imports it, so a jsDelivr failure lands on a Korean face rather than
+    the system default.
+  */
+  --ff-ko1: "Wanted Sans Variable", "Wanted Sans", "Pretendard", sans-serif;
+
   --body-bg: #000000;
   --bg-color: #0d0d0d;
   --surface: #151515;

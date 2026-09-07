@@ -124,6 +124,11 @@ export type Dictionary = {
       required: string;
       /** Telegram and X satisfy one requirement between them. */
       eitherSocial: string;
+      /**
+       * Shown when this browser has already applied with the address. There is
+       * no endpoint, so the check is browser-local — see ApplyForm.
+       */
+      duplicate: string;
       sending: string;
       /** `{email}` is replaced with CONFIG.fallbackEmail. */
       error: string;
@@ -134,6 +139,7 @@ export type Dictionary = {
       body: string;
       /** Sends the applicant back to the top of the page. */
       back: string;
+      /** `{telegram}` becomes a link to CONFIG.contactTelegram. */
       /** Small print: a sent application is final. */
       note: string;
     };

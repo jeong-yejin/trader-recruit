@@ -3,10 +3,14 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
+import { CONFIG } from "@/lib/config";
 import type { Dictionary, EventSlug } from "@/lib/i18n";
 
 /** Name, email and whichever handle the applicant gave. */
 export type Receipt = { label: string; value: string }[];
+
+/** The slot every locale's success note leaves for the support handle. */
+const TELEGRAM_SLOT = "{telegram}";
 
 /**
  * The confirmation gets its own screen rather than a panel where the form was:
@@ -27,6 +31,7 @@ export function ApplySuccess({
   /** A real navigation, not a hash: the form behind is spent, so the way back
       to the event page is a fresh load of it. */
   const pathname = usePathname();
+  const [noteBeforeHandle, noteAfterHandle = ""] = t.note.split(TELEGRAM_SLOT);
 
   useEffect(() => {
     // The form held focus, and focus has to land somewhere it can be read from.
@@ -84,8 +89,19 @@ export function ApplySuccess({
         </a>
 
         {/* Last on the screen: it only matters to someone who has already read
-            the confirmation and is looking for what to do about a typo. */}
-        <p className="apply-done-note p3">{t.note}</p>
+            the confirmation and is looking for what to do about a typo. Split
+            rather than filled, because the handle in the middle is a link. */}
+        <p className="apply-done-note p3">
+          {noteBeforeHandle}
+          <a
+            href={`https://t.me/${CONFIG.contactTelegram}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            @{CONFIG.contactTelegram}
+          </a>
+          {noteAfterHandle}
+        </p>
       </div>
     </div>,
     document.body,

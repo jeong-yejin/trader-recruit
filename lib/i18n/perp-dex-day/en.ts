@@ -24,8 +24,8 @@ export const en: Dictionary = {
 
   hero: {
     kicker: "PERP-DEX DAY · KOREA BLOCKCHAIN WEEK 2026",
-    titleTop: "Four seats.",
-    titleLit: "One ticket.",
+    titleTop: "Four seats,",
+    titleLit: "One ticket",
     sub: [
       [
         {
@@ -61,7 +61,7 @@ export const en: Dictionary = {
   ],
 
   about: {
-    title: ["We're looking for four traders", "who can hold the stage."],
+    title: ["We're looking for four traders", "who can hold the stage"],
     lead:
       "We're recruiting the four traders who will stand on the PERP-DEX Day stage, alongside Variational, Lighter, Aster, Extended, and MetaMask.",
     items: [
@@ -100,7 +100,7 @@ export const en: Dictionary = {
   },
 
   prize: {
-    title: ["Only first place", "flies to Singapore."],
+    title: ["Only first place", "flies to Singapore"],
     intro: "Prove it in Seoul, then go for the Asia title.",
     kicker: "What first place gets",
     heading: [
@@ -131,7 +131,7 @@ export const en: Dictionary = {
   arena: {
     prev: "Previous card",
     next: "Next card",
-    title: ["The whole trading session", "is the match."],
+    title: ["Your trading results", "are the proof"],
     intro:
       "An e-sports style trading competition. The room watches the trading screens and the leaderboard move in real time.",
     cards: [
@@ -169,24 +169,24 @@ export const en: Dictionary = {
   },
 
   partners: {
-    title: ["The partners standing", "behind PERP-DEX DAY."],
+    title: ["The partners standing", "behind PERP-DEX DAY"],
     intro:
       "Variational, Lighter, Aster, Extended and MetaMask are on this stage with you, so your trading and your name reach the industry.",
     items: ["Variational", "Lighter", "Aster", "Extended", "MetaMask"],
   },
 
   who: {
-    title: ["We're looking for traders", "who can prove it on stage."],
+    title: ["We're looking for traders", "who can prove it on stage"],
     intro:
       "Account size carries less weight than your actual trading record, your risk process, and whether you can hold your strategy together in front of an audience.",
     haveLabel: "You're a good fit if",
     have: [
       "You currently trade perpetuals.",
-      "You can show your track record: an exchange PnL page, a read-only API, or a public profile.",
-      "You can explain your own trading rules and risk process.",
-      "You can trade as usual with cameras and a live leaderboard on you.",
-      "You can be at the Seoul venue all day on September 28, 2026.",
-      "You hold a valid passport for travel to Singapore.",
+      "You can show your track record: an exchange PnL page, a read-only API, or a public profile",
+      "You can explain your own trading rules and risk process",
+      "You can trade as usual with cameras and a live leaderboard on you",
+      "You can be at the Seoul venue all day on September 28, 2026",
+      "You can travel to Singapore for the final",
     ],
     not: [
       "Follower count and name recognition alone won't get you selected.",
@@ -197,7 +197,7 @@ export const en: Dictionary = {
   },
 
   process: {
-    title: ["How we select traders."],
+    title: ["How we select traders"],
     intro:
       "We interview in the order applications arrive and close once the four seats are filled.",
     steps: [
@@ -235,7 +235,7 @@ export const en: Dictionary = {
   },
 
   apply: {
-    title: ["Take your shot at", "one of the four seats."],
+    title: ["Take your shot at", "one of the four seats"],
     kv: [
       {
         k: "What we check",
@@ -309,6 +309,7 @@ export const en: Dictionary = {
       missing: "Fill in the fields marked with *",
       required: "Required",
       eitherSocial: "Enter at least one of Telegram or X",
+      duplicate: "This email has already applied. Use a different one",
       sending: "Sending…",
       error: "The mail didn't send. Write to {email} directly",
     },
@@ -316,12 +317,12 @@ export const en: Dictionary = {
       title: "Application complete",
       body: "We'll review your application and reply individually at the contact you gave.",
       back: "Back to PERP-DEX DAY",
-      note: "An application can't be edited once it is sent. Contact the team if something needs to change.",
+      note: "An application can't be edited once it is sent. Message us on Telegram at {telegram} if something needs to change.",
     },
   },
 
   faq: {
-    title: ["Questions."],
+    title: ["Questions"],
     intro:
       "Anything not covered here — message us on Telegram at @reboundx_cs.",
     items: [
@@ -362,7 +363,7 @@ export const en: Dictionary = {
 
   final: {
     kicker: "We close when the four seats are filled.",
-    title: ["Four seats,", "one ticket to Singapore."],
+    title: ["Four seats,", "one ticket to Singapore"],
     body:
       "Applications are reviewed in the order they arrive. We close the moment the last seat is confirmed.",
     cta: "Apply for a seat ↗",

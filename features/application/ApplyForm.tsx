@@ -18,6 +18,12 @@ const isControl = (el: Element): el is Control =>
   el instanceof HTMLSelectElement ||
   el instanceof HTMLTextAreaElement;
 
+/** Focus alone can leave the field above the fold on a form this long. */
+const revealField = (element: HTMLElement) => {
+  element.focus();
+  element.scrollIntoView({ behavior: "smooth", block: "center" });
+};
+
 export function ApplyForm({
   t,
   event,
@@ -26,10 +32,38 @@ export function ApplyForm({
   event: EventSlug;
 }) {
   const [status, setStatus] = useState({ text: "", error: false });
-  const [missing, setMissing] = useState<Record<string, true>>({});
+  /** Field name to the message shown under it, empty while nothing has failed. */
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
   /** The receipt, set once the form is away. Null while the form is up. */
   const [done, setDone] = useState<Receipt | null>(null);
+
+  /**
+   * WARNING: this is the entire duplicate check, and it is browser-local.
+   * With CONFIG.formEndpoint empty there is no server holding the list of who
+   * has applied, so the addresses live in this browser's storage. A different
+   * browser, a private window, or cleared site data all apply again freely.
+   * Point formEndpoint at a server that owns this list before launch.
+   */
+  const appliedStorageKey = `applied:${event}`;
+
+  const appliedAddresses = (): string[] => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(appliedStorageKey) ?? "");
+      return Array.isArray(saved) ? saved : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const rememberApplied = (email: string) => {
+    try {
+      const next = JSON.stringify([...appliedAddresses(), email]);
+      localStorage.setItem(appliedStorageKey, next);
+    } catch {
+      // Storage refused. Nothing to recover: the guard just does not hold here.
+    }
+  };
 
   /**
    * What the applicant needs read back: the name we will address them by and
@@ -44,9 +78,9 @@ export function ApplyForm({
       { label: t.fields.x.label, value: String(data.x ?? "") },
     ].filter((row) => row.value.trim());
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = event.currentTarget;
+  async function onSubmit(submitEvent: FormEvent<HTMLFormElement>) {
+    submitEvent.preventDefault();
+    const form = submitEvent.currentTarget;
     setStatus({ text: "", error: false });
 
     const controls = Array.from(form.elements).filter(isControl);
@@ -59,9 +93,11 @@ export function ApplyForm({
 
     // Flag every empty field, not just the first — one generic message left the
     // applicant hunting through the form for whatever was wrong.
-    setMissing({
-      ...Object.fromEntries(invalid.map((el) => [el.name, true as const])),
-      ...(hasSocial ? {} : { telegram: true as const, x: true as const }),
+    setFieldErrors({
+      ...Object.fromEntries(invalid.map((el) => [el.name, t.status.required])),
+      ...(hasSocial
+        ? {}
+        : { telegram: t.status.eitherSocial, x: t.status.eitherSocial }),
     });
 
     const firstBad =
@@ -76,14 +112,31 @@ export function ApplyForm({
       });
       // A Select keeps its native control out of the layout, so the applicant
       // has to be sent to the button standing in for it.
-      const target =
-        form.querySelector<HTMLElement>(`[data-focus-for="${firstBad.name}"]`) ?? firstBad;
-      target.focus();
-      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      revealField(
+        form.querySelector<HTMLElement>(`[data-focus-for="${firstBad.name}"]`) ?? firstBad,
+      );
       return;
     }
 
     const data = Object.fromEntries(entries.entries());
+    const email = String(data.email ?? "").trim().toLowerCase();
+
+    if (appliedAddresses().includes(email)) {
+      setFieldErrors({ email: t.status.duplicate });
+      setStatus({ text: t.status.duplicate, error: true });
+      const emailField = form.querySelector<HTMLElement>('[name="email"]');
+      if (emailField) revealField(emailField);
+      return;
+    }
+
+    /** Both send paths land here, and they clear exactly the same state. */
+    const completeSubmission = () => {
+      form.reset();
+      setFieldErrors({});
+      setStatus({ text: "", error: false });
+      rememberApplied(email);
+      setDone(receiptOf(data));
+    };
 
     // Held for both paths, so the button is disabled and reading `sending`
     // from the click onwards. Without an endpoint there is nothing to wait for
@@ -96,10 +149,7 @@ export function ApplyForm({
     // whole submit, and it tells the applicant we received something we did
     // not. Fill in CONFIG.formEndpoint before this page takes real traffic.
     if (!CONFIG.formEndpoint) {
-      form.reset();
-      setMissing({});
-      setStatus({ text: "", error: false });
-      setDone(receiptOf(data));
+      completeSubmission();
       setBusy(false);
       return;
     }
@@ -111,10 +161,7 @@ export function ApplyForm({
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error(String(res.status));
-      form.reset();
-      setMissing({});
-      setStatus({ text: "", error: false });
-      setDone(receiptOf(data));
+      completeSubmission();
     } catch {
       setStatus({
         text: fill(t.status.error, { email: CONFIG.fallbackEmail }),
@@ -127,14 +174,8 @@ export function ApplyForm({
 
   const { fields } = t;
 
-  const err = (name: string) =>
-    missing[name]
-      ? SOCIAL.includes(name)
-        ? t.status.eitherSocial
-        : t.status.required
-      : undefined;
   const flagged = (name: string) =>
-    missing[name]
+    fieldErrors[name]
       ? ({ "aria-invalid": true, "aria-describedby": `${name}-err` } as const)
       : {};
 
@@ -150,7 +191,7 @@ export function ApplyForm({
         onSubmit={onSubmit}
       >
         <div className="form-row">
-          <FormField name="name" label={fields.name.label} required error={err("name")}>
+          <FormField name="name" label={fields.name.label} required error={fieldErrors.name}>
             <input
               id="name"
               name="name"
@@ -174,7 +215,7 @@ export function ApplyForm({
           </FormField>
         </div>
 
-        <FormField name="email" label={fields.email.label} required error={err("email")}>
+        <FormField name="email" label={fields.email.label} required error={fieldErrors.email}>
           <input
             id="email"
             name="email"
@@ -190,7 +231,7 @@ export function ApplyForm({
         {/* Starred like the rest: an applicant who fills both is never worse
             off, and one who has only X still submits. */}
         <div className="form-row">
-          <FormField name="telegram" label={fields.telegram.label} required error={err("telegram")}>
+          <FormField name="telegram" label={fields.telegram.label} required error={fieldErrors.telegram}>
             <input
               id="telegram"
               name="telegram"
@@ -200,7 +241,7 @@ export function ApplyForm({
               {...flagged("telegram")}
             />
           </FormField>
-          <FormField name="x" label={fields.x.label} required error={err("x")}>
+          <FormField name="x" label={fields.x.label} required error={fieldErrors.x}>
             <input
               id="x"
               name="x"
@@ -234,7 +275,7 @@ export function ApplyForm({
         </div>
 
         <div className="form-row">
-          <FormField name="venue" label={fields.venue.label} required error={err("venue")}>
+          <FormField name="venue" label={fields.venue.label} required error={fieldErrors.venue}>
             <SelectField
               name="venue"
               options={fields.venue.options}
@@ -243,7 +284,7 @@ export function ApplyForm({
               flags={flagged("venue")}
             />
           </FormField>
-          <FormField name="volume" label={fields.volume.label} required error={err("volume")}>
+          <FormField name="volume" label={fields.volume.label} required error={fieldErrors.volume}>
             <SelectField
               name="volume"
               options={fields.volume.options}
@@ -289,11 +330,17 @@ export function ApplyForm({
           </span>
         </FormField>
 
-        <FormField name="available" label={fields.available.label}>
+        <FormField
+          name="available"
+          label={fields.available.label}
+          required
+          error={fieldErrors.available}
+        >
           <SelectField
             name="available"
             options={fields.available.options}
             placeholder={t.selectPlaceholder}
+            required
             flags={flagged("available")}
           />
         </FormField>
@@ -303,7 +350,7 @@ export function ApplyForm({
             never paints the tick. */}
         <div
           className={
-            missing.agree
+            fieldErrors.agree
               ? "checkset checkset-fill inputset-danger"
               : "checkset checkset-fill"
           }
@@ -318,8 +365,9 @@ export function ApplyForm({
           />
           <label className="checkset-label p2" htmlFor="agree">
             {t.agree}
+            <span className="req"> *</span>
           </label>
-          {missing.agree && (
+          {fieldErrors.agree && (
             <span className="inputset-msg" id="agree-err">
               {t.status.required}
             </span>

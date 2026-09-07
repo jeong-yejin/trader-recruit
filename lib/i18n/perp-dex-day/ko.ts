@@ -66,7 +66,7 @@ export const ko: Dictionary = {
   ],
 
   about: {
-    title: ["무대 위에서 실력을 증명할", "트레이더 네 명을 찾아요."],
+    title: ["무대 위에서 실력을 증명할", "트레이더 네 명을 찾아요"],
     lead:
       "Variational, Lighter, Aster, Extended, MetaMask가 함께하는 PERP-DEX Day의 무대에 오를 트레이더 네 명을 모집해요.",
     items: [
@@ -105,7 +105,7 @@ export const ko: Dictionary = {
   },
 
   prize: {
-    title: ["오직 1위만", "싱가포르로 가요."],
+    title: ["오직 1위만", "싱가포르로 가요"],
     intro: "서울에서 증명한 실력으로 아시아 챔피언에 도전해요.",
     kicker: "1위가 받는 것",
     heading: [
@@ -136,7 +136,7 @@ export const ko: Dictionary = {
   arena: {
     prev: "이전 카드",
     next: "다음 카드",
-    title: ["거래 과정 전체가", "하나의 경기가 돼요."],
+    title: ["거래 결과로", "실력을 증명해요"],
     intro:
       "관객이 거래 화면과 순위 변화를 실시간으로 지켜보는 e-스포츠형 트레이딩 대회예요.",
     cards: [
@@ -174,24 +174,24 @@ export const ko: Dictionary = {
   },
 
   partners: {
-    title: ["PERP-DEX DAY를 함께하는", "파트너를 소개해요."],
+    title: ["PERP-DEX DAY를 함께하는", "파트너를 소개해요"],
     intro:
       "Variational, Lighter, Aster, Extended, MetaMask가 함께하는 무대에서 거래 실력과 이름을 업계에 알릴 수 있어요.",
     items: ["Variational", "Lighter", "Aster", "Extended", "MetaMask"],
   },
 
   who: {
-    title: ["무대 위에서도 실력으로 증명할", "트레이더를 찾고 있어요."],
+    title: ["무대 위에서도 실력으로 증명할", "트레이더를 찾고 있어요"],
     intro:
       "거래 규모보다 실제 매매 기록과 리스크 관리 방식, 관객 앞에서도 전략을 유지할 수 있는지를 봐요.",
     haveLabel: "이런 분이면 좋아요",
     have: [
-      "현재 무기한 선물을 거래하고 있어요.",
-      "거래소 손익 화면, 읽기 전용 API, 공개 프로필 중 하나로 매매 기록을 보여줄 수 있어요.",
-      "본인의 매매 원칙과 리스크 관리 방식을 설명할 수 있어요.",
-      "카메라와 실시간 순위표 앞에서도 평소처럼 거래할 수 있어요.",
-      "2026년 9월 28일 서울 현장에 종일 참여할 수 있어요.",
-      "싱가포르에 출국할 수 있는 유효한 여권이 있어요.",
+      "현재 무기한 선물을 거래하고 있어요",
+      "거래소 손익 화면, 읽기 전용 API, 공개 프로필 중 하나로 매매 기록을 보여줄 수 있어요",
+      "본인의 매매 원칙과 리스크 관리 방식을 설명할 수 있어요",
+      "카메라와 실시간 순위표 앞에서도 평소처럼 거래할 수 있어요",
+      "2026년 9월 28일 서울 현장에 종일 참여할 수 있어요",
+      "싱가포르 본선 참가를 위해 출국할 수 있어요",
     ],
     not: [
       "팔로워 수나 인지도만으로 선발하지 않아요.",
@@ -202,7 +202,7 @@ export const ko: Dictionary = {
   },
 
   process: {
-    title: ["트레이더는 이렇게 선발해요."],
+    title: ["트레이더는 이렇게 선발해요"],
     intro: "지원서를 검토한 순서대로 인터뷰를 진행하고, 네 자리가 차면 마감해요.",
     steps: [
       {
@@ -239,7 +239,7 @@ export const ko: Dictionary = {
   },
 
   apply: {
-    title: ["네 자리 중 하나에", "도전해 보세요."],
+    title: ["네 자리 중 하나에", "도전해 보세요"],
     kv: [
       {
         k: "평가 기준",
@@ -313,6 +313,7 @@ export const ko: Dictionary = {
       missing: "별표(*) 표시된 칸을 채워 주세요",
       required: "꼭 입력해 주세요",
       eitherSocial: "Telegram과 X 중 하나는 입력해 주세요",
+      duplicate: "이미 지원한 이메일이에요. 다른 이메일을 입력해 주세요",
       sending: "보내는 중이에요…",
       error: "메일이 전송되지 않았으니 {email}로 직접 보내 주세요",
     },
@@ -320,13 +321,13 @@ export const ko: Dictionary = {
       title: "지원이 완료됐어요",
       body: "지원서를 확인한 뒤 입력해 주신 연락처로 개별 안내드릴게요.",
       back: "PERP-DEX DAY 돌아가기",
-      note: "지원 내용은 제출 후 수정할 수 없어요. 변경이 필요하면 운영팀에 문의해 주세요.",
+      note: "지원 내용은 제출 후 수정할 수 없어요. 변경이 필요하면 Telegram {telegram}로 문의해 주세요.",
     },
   },
 
   faq: {
-    title: ["자주 묻는 질문."],
-    intro: "여기 없는 내용은 Telegram @reboundx_cs로 문의해 주세요.",
+    title: ["자주 묻는 질문"],
+    intro: "궁금한 내용은 Telegram @reboundx_cs로 문의해 주세요.",
     items: [
       {
         q: "어떤 파트너가 대회에 참여하나요?",
@@ -365,7 +366,7 @@ export const ko: Dictionary = {
 
   final: {
     kicker: "네 자리가 차면 모집을 마감해요.",
-    title: ["자리는 네 개,", "싱가포르행은 단 한 자리."],
+    title: ["자리는 네 개,", "싱가포르행은 단 한 자리"],
     body: "지원서는 접수 순서대로 검토하며, 마지막 출전자가 확정되면 모집을 마감해요.",
     cta: "지원서 작성하기",
   },

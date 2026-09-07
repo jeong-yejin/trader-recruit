@@ -21,8 +21,8 @@ export const en: Dictionary = {
   },
 
   hero: {
-    titleTop: "Asia’s traders.",
-    titleLit: "One arena.",
+    titleTop: "Asia’s traders,",
+    titleLit: "One arena",
     sub: [
       [
         {
@@ -40,7 +40,6 @@ export const en: Dictionary = {
       { k: "Date", v: "October 5, 2026" },
       { k: "Venue", v: "Zouk Singapore" },
       { k: "Event", v: "TOKEN2049 Singapore Side Event" },
-      { k: "Audience", v: "1,000+" },
     ],
     ctaPrimary: "Apply to the championship ↗",
   },
@@ -70,7 +69,7 @@ export const en: Dictionary = {
   },
 
   prize: {
-    title: ["Take the Singapore stage", "that decides Asia's best trader."],
+    title: ["Take the Singapore stage", "that decides Asia's best trader"],
     intro:
       "The Asia Trading Championship, with Kalshi, runs at Zouk Singapore during TOKEN2049 Singapore week.",
     kicker: "ASIA TRADING CHAMPIONSHIP · WITH KALSHI",
@@ -102,7 +101,7 @@ export const en: Dictionary = {
   arena: {
     prev: "Previous card",
     next: "Next card",
-    title: ["Every trade you make", "is part of deciding Asia's champion."],
+    title: ["Every trade you make", "is part of deciding Asia's champion"],
     intro:
       "An e-sports style live trading championship with Kalshi. Real trading performance decides it, not presentations.",
     cards: [
@@ -140,7 +139,7 @@ export const en: Dictionary = {
   },
 
   who: {
-    title: ["We're looking for traders", "who'll compete for Asia's title."],
+    title: ["We're looking for traders", "who'll compete for Asia's title"],
     intro:
       "Follower count carries no weight. We look at your trading record, your risk process, and how you perform on a live stage.",
     haveLabel: "You're a good fit if",
@@ -161,7 +160,7 @@ export const en: Dictionary = {
   },
 
   process: {
-    title: ["How you get to the Singapore stage."],
+    title: ["How you get to the Singapore stage"],
     intro:
       "Applications and interviews decide who competes in the Asia Trading Championship.",
     steps: [
@@ -169,7 +168,7 @@ export const en: Dictionary = {
         n: "01",
         title: "Apply",
         body: "Five minutes. Contact, the venue you trade, and a link that proves the track record.",
-        when: "Now — rolling",
+        when: "Rolling",
       },
       {
         n: "02",
@@ -199,7 +198,7 @@ export const en: Dictionary = {
   },
 
   apply: {
-    title: ["Take your shot at", "Asia's championship stage."],
+    title: ["Take your shot at", "Asia's championship stage"],
     kv: [
       { k: "Date", v: "October 5, 2026" },
       { k: "Venue", v: "Zouk Singapore" },
@@ -272,6 +271,7 @@ export const en: Dictionary = {
       missing: "Fill in the fields marked with *",
       required: "Required",
       eitherSocial: "Enter at least one of Telegram or X",
+      duplicate: "This email has already applied. Use a different one",
       sending: "Sending…",
       error: "The mail didn't send. Write to {email} directly",
     },
@@ -279,12 +279,12 @@ export const en: Dictionary = {
       title: "Application complete",
       body: "We'll review your application and reply individually at the contact you gave.",
       back: "Back to Asia Trading Championship",
-      note: "An application can't be edited once it is sent. Contact the team if something needs to change.",
+      note: "An application can't be edited once it is sent. Message us on Telegram at {telegram} if something needs to change.",
     },
   },
 
   faq: {
-    title: ["Questions."],
+    title: ["Questions"],
     intro:
       "Anything not covered here — message us on Telegram at @reboundx_cs.",
     items: [
@@ -313,7 +313,7 @@ export const en: Dictionary = {
 
   final: {
     kicker: "ASIA TRADING CHAMPIONSHIP · WITH KALSHI",
-    title: ["The first stage on the way", "to Asia's title."],
+    title: ["The first stage on the way", "to Asia's title"],
     body:
       "Show us your record and your risk process. Applications are reviewed in the order they arrive.",
     cta: "Apply to the championship ↗",

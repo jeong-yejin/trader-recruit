@@ -26,8 +26,8 @@ export const ko: Dictionary = {
   },
 
   hero: {
-    titleTop: "Asia’s traders.",
-    titleLit: "One arena.",
+    titleTop: "Asia’s traders,",
+    titleLit: "One arena",
     sub: [
       [
         {
@@ -45,7 +45,6 @@ export const ko: Dictionary = {
       { k: "일시", v: "2026년 10월 5일" },
       { k: "장소", v: "Zouk Singapore" },
       { k: "행사", v: "TOKEN2049 Singapore Side Event" },
-      { k: "관객", v: "1,000명 이상" },
     ],
     ctaPrimary: "챔피언십 지원하기",
   },
@@ -80,7 +79,7 @@ export const ko: Dictionary = {
   },
 
   prize: {
-    title: ["아시아 최고의 트레이더를 가리는", "싱가포르 무대에 서세요."],
+    title: ["아시아 최고의 트레이더를 가리는", "싱가포르 무대에 서세요"],
     intro:
       "Kalshi와 함께하는 Asia Trading Championship이 TOKEN2049 Singapore 주간, Zouk Singapore에서 열려요.",
     kicker: "ASIA TRADING CHAMPIONSHIP · WITH KALSHI",
@@ -117,7 +116,7 @@ export const ko: Dictionary = {
   arena: {
     prev: "이전 카드",
     next: "다음 카드",
-    title: ["아시아 챔피언을 가리는", "모든 거래가 경기가 돼요."],
+    title: ["아시아 챔피언을 가리는", "모든 거래가 경기가 돼요"],
     intro:
       "Kalshi와 함께하는 e-스포츠형 라이브 트레이딩 챔피언십으로, 발표가 아닌 실제 거래 퍼포먼스로 승부해요.",
     cards: [
@@ -155,7 +154,7 @@ export const ko: Dictionary = {
   },
 
   who: {
-    title: ["아시아 챔피언의 자리를 두고 경쟁할", "트레이더를 찾고 있어요."],
+    title: ["아시아 챔피언의 자리를 두고 경쟁할", "트레이더를 찾고 있어요"],
     intro:
       "팔로워 수보다 실제 거래 기록과 리스크 관리 방식, 라이브 무대에서 보여줄 퍼포먼스를 봐요.",
     haveLabel: "이런 분이면 좋아요",
@@ -214,7 +213,7 @@ export const ko: Dictionary = {
   },
 
   apply: {
-    title: ["아시아 챔피언을 가리는", "싱가포르 무대에 도전하세요."],
+    title: ["아시아 챔피언을 가리는", "싱가포르 무대에 도전하세요"],
     kv: [
       {
         k: "일정",
@@ -315,6 +314,7 @@ export const ko: Dictionary = {
       missing: "별표(*) 표시된 칸을 채워 주세요",
       required: "꼭 입력해 주세요",
       eitherSocial: "Telegram과 X 중 하나는 입력해 주세요",
+      duplicate: "이미 지원한 이메일이에요. 다른 이메일을 입력해 주세요",
       sending: "보내는 중이에요…",
       error: "메일이 전송되지 않았으니 {email}로 직접 보내 주세요",
     },
@@ -322,12 +322,12 @@ export const ko: Dictionary = {
       title: "지원이 완료됐어요",
       body: "지원서를 확인한 뒤 입력해 주신 연락처로 개별 안내드릴게요.",
       back: "ASIA TRADING CHAMPIONSHIP 돌아가기",
-      note: "지원 내용은 제출 후 수정할 수 없어요. 변경이 필요하면 운영팀에 문의해 주세요.",
+      note: "지원 내용은 제출 후 수정할 수 없어요. 변경이 필요하면 Telegram {telegram}로 문의해 주세요.",
     },
   },
 
   faq: {
-    title: ["자주 묻는 질문."],
+    title: ["자주 묻는 질문"],
     intro: "여기 없는 내용은 Telegram @reboundx_cs로 문의해 주세요.",
     items: [
       {
@@ -355,7 +355,7 @@ export const ko: Dictionary = {
 
   final: {
     kicker: "ASIA TRADING CHAMPIONSHIP · WITH KALSHI",
-    title: ["아시아 챔피언을 향한", "첫 번째 무대가 열려요."],
+    title: ["아시아 챔피언을 향한", "첫 번째 무대가 열려요"],
     body:
       "실제 거래 기록과 리스크 관리 방식으로 실력을 보여주세요. 지원서는 접수 순서대로 검토해요.",
     cta: "챔피언십 지원하기",
