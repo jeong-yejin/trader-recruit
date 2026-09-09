@@ -32,21 +32,38 @@ export const PROCESS_ART: Record<EventSlug, [string, string, string]> = {
   ],
 };
 
+/**
+ * Kalshi ships the mark in white and in brand green. White is the one both
+ * placements want: the hero and the marquee band are both on black, so it
+ * needs no filter to sit there.
+ */
+const KALSHI = { src: "/resources/logo/Kalshi-Logo_White.svg", w: 300, h: 88 };
+
+const EXCHANGE = "/resources/exchange-logo";
+
 export const PARTNER_LOGOS = new Map([
-  ["Variational", { file: "variational.svg", w: 1284, h: 171 }],
-  ["Lighter", { file: "lighter.svg", w: 93, h: 30 }],
-  ["Extended", { file: "extended.svg", w: 136, h: 24 }],
-  ["Aster", { file: "aster.svg", w: 91, h: 24 }],
-  ["MetaMask", { file: "MetaMask-logo-white.svg", w: 127, h: 63 }],
+  ["Variational", { src: `${EXCHANGE}/variational.svg`, w: 1284, h: 171 }],
+  ["Lighter", { src: `${EXCHANGE}/lighter.svg`, w: 93, h: 30 }],
+  ["Extended", { src: `${EXCHANGE}/extended.svg`, w: 136, h: 24 }],
+  ["Aster", { src: `${EXCHANGE}/aster.svg`, w: 91, h: 24 }],
+  ["MetaMask", { src: `${EXCHANGE}/MetaMask-logo-white.svg`, w: 127, h: 63 }],
 ]);
 
 export const MARQUEE_LOGOS = new Map([
-  ["variational", { file: "variational.svg", w: 1284, h: 171 }],
-  ["lighter", { file: "lighter.svg", w: 93, h: 30 }],
-  ["extended", { file: "extended.svg", w: 136, h: 24 }],
-  ["aster", { file: "aster.svg", w: 91, h: 24 }],
-  ["metamask", { file: "MetaMask-logo-white.svg", w: 127, h: 63 }],
+  ["variational", { src: `${EXCHANGE}/variational.svg`, w: 1284, h: 171 }],
+  ["lighter", { src: `${EXCHANGE}/lighter.svg`, w: 93, h: 30 }],
+  ["extended", { src: `${EXCHANGE}/extended.svg`, w: 136, h: 24 }],
+  ["aster", { src: `${EXCHANGE}/aster.svg`, w: 91, h: 24 }],
+  ["metamask", { src: `${EXCHANGE}/MetaMask-logo-white.svg`, w: 127, h: 63 }],
+  ["kalshi", KALSHI],
 ]);
+
+/**
+ * The mark the hero locks up beside its co-host label. Keyed by the name the
+ * dictionary writes; a name with no entry here stays as text, so the credit
+ * still reads if a file ever goes missing.
+ */
+export const COHOST_LOGOS = new Map([["Kalshi", KALSHI]]);
 
 export const FOOTER_LOGOS = {
   "perp-dex-day": {

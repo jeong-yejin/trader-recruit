@@ -37,7 +37,7 @@ export function Partners({ partners }: { partners: Dictionary["partners"] }) {
                   {/* The alt text is also the CSS hook: project.css sizes the
                       two odd aspect ratios with img[alt="..."]. */}
                   <img
-                    src={`/resources/exchange-logo/${logo.file}`}
+                    src={logo.src}
                     alt={name}
                     width={logo.w}
                     height={logo.h}

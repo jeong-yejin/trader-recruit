@@ -32,6 +32,12 @@ export type Dictionary = {
      * fold — the headline is about the seats, not about the event.
      */
     kicker?: string;
+    /**
+     * Optional, like `partners`: the co-host credit over the headline, for the
+     * event that is run with someone. `label` is the localised words, `name`
+     * keys into COHOST_LOGOS for the mark beside them.
+     */
+    cohost?: { label: string; name: string };
     /** Both locales keep the English headline — it is the event's wordmark. */
     titleTop: string;
     titleLit: string;
@@ -61,7 +67,7 @@ export type Dictionary = {
     note: string;
     takenStatus: string;
     takenNote: string;
-    /** `{n}` is replaced with CONFIG.seatsOpen. */
+    /** `{n}` is replaced with the event's CONFIG.seatsOpen. */
     remaining: string;
   };
   countdown: {
@@ -75,6 +81,16 @@ export type Dictionary = {
     heading: Segment[];
     items: { k: string; lead: string; body: string }[];
     sideNote: string;
+    /**
+     * The payout table. `prize` is free text, not a number: first place on
+     * perp-dex-day is the Singapore seat rather than an amount, and the row has
+     * to read the same either way. `total` is the sum the rows add up to.
+     */
+    payout: {
+      label: string;
+      total: string;
+      rows: { place: string; prize: string }[];
+    };
   };
   arena: {
     title: string[];

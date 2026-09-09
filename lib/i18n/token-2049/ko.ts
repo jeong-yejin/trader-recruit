@@ -26,18 +26,19 @@ export const ko: Dictionary = {
   },
 
   hero: {
+    cohost: { label: "함께하는 파트너", name: "Kalshi" },
     titleTop: "Asia’s traders,",
     titleLit: "One arena",
     sub: [
       [
         {
-          t: "Kalshi와 함께 아시아 최고의 온체인 트레이더를 가려요.",
+          t: "Kalshi와 함께하는 싱가포르 Asia Trading Championship에서 실제 온체인 거래로 글로벌 트레이더들과 실력을 겨뤄요.",
           mark: true,
         },
       ],
       [
         {
-          t: "실제 온체인 거래 결과로 순위를 가리고, 1,000명 이상의 관객이 그 과정을 지켜봐요.",
+          t: "1,000명 이상의 관객 앞에서 실제 거래 기록과 리스크 관리 전략으로 당신의 실력을 증명해 보세요.",
         },
       ],
     ],
@@ -56,7 +57,7 @@ export const ko: Dictionary = {
     "실시간 온체인 트레이딩",
     "관객 앞에서 펼치는 승부",
     "TOKEN2049 SINGAPORE SIDE EVENT",
-    "PERPDEX DAY SINGAPORE",
+    "PERPS DAY SINGAPORE",
     "ZOUK SINGAPORE",
   ],
 
@@ -110,7 +111,18 @@ export const ko: Dictionary = {
       },
     ],
     sideNote:
-      "상금과 참가 지원 등 세부 조건은 최종 선발된 트레이더에게 별도로 안내해요.",
+      "참가 지원 등 세부 조건은 최종 선발된 트레이더에게 별도로 안내해요.",
+    payout: {
+      label: "상금",
+      total: "10,000 USDT",
+      rows: [
+        { place: "1위", prize: "5,000 USDT" },
+        { place: "2위", prize: "2,000 USDT" },
+        { place: "3위", prize: "1,000 USDT" },
+        { place: "4위", prize: "800 USDT" },
+        { place: "5~8위", prize: "각 300 USDT" },
+      ],
+    },
   },
 
   arena: {
@@ -344,7 +356,7 @@ export const ko: Dictionary = {
       },
       {
         q: "상금과 참가 지원은 어떻게 되나요?",
-        a: "상금과 참가 지원, 챔피언십 규정 등 세부 조건은 최종 선발 과정에서 개별 안내해요.",
+        a: "상금은 총 10,000 USDT로 1위부터 8위까지 지급해요. 참가 지원과 챔피언십 규정 등 세부 조건은 최종 선발 과정에서 개별 안내해요.",
       },
       {
         q: "Asia Trading Championship은 어떤 대회인가요?",
@@ -357,7 +369,7 @@ export const ko: Dictionary = {
     kicker: "ASIA TRADING CHAMPIONSHIP · WITH KALSHI",
     title: ["아시아 챔피언을 향한", "첫 번째 무대가 열려요"],
     body:
-      "실제 거래 기록과 리스크 관리 방식으로 실력을 보여주세요. 지원서는 접수 순서대로 검토해요.",
+      "실제 거래 기록과 리스크 관리 전략이 곧 경쟁력이 되는 글로벌 무대에서 실력을 증명해 보세요.",
     cta: "챔피언십 지원하기",
   },
 

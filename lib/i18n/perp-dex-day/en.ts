@@ -110,22 +110,32 @@ export const en: Dictionary = {
     items: [
       {
         k: "01",
-        lead: "Championship entry",
-        body: "You go on to the Asia Trading Championship in Singapore, with Kalshi.",
+        lead: "Final entry and prize money",
+        body: "You go on to the Asia Trading Championship Final in Singapore, with Kalshi, and compete for the prize.",
       },
       {
         k: "02",
-        lead: "Round-trip flight",
-        body: "We book the round-trip flight between Seoul and Singapore.",
+        lead: "Flight and hotel",
+        body: "We cover the round-trip flight and the hotel you need for the Singapore competition.",
       },
       {
         k: "03",
-        lead: "Hotel for the competition",
-        body: "We book the accommodation you need in Singapore.",
+        lead: "Exposure on the global stage",
+        body: "You show what you can do in front of the PERP-DEX DAY partners and global Tier 1 exchanges, and get your name known.",
       },
     ],
     sideNote:
-      "The prize goes to first place only. We cover every trading loss all four make during the competition.",
+      "First place is the only one that flies. We cover every trading loss all four make during the competition.",
+    payout: {
+      label: "Prize pool",
+      total: "1,500 USDT",
+      rows: [
+        { place: "1st", prize: "Straight to the Singapore final" },
+        { place: "2nd", prize: "700 USDT" },
+        { place: "3rd", prize: "500 USDT" },
+        { place: "4th", prize: "300 USDT" },
+      ],
+    },
   },
 
   arena: {

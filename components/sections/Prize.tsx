@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Dictionary, EventSlug } from "@/lib/i18n";
 import { PRIZE_ART, type EventArt } from "@/lib/events/assets";
 
@@ -84,6 +85,32 @@ export function Prize({
                 <Thumb art={art.blue} />
               </div>
             </div>
+          </div>
+          {/* Under the two panels, not inside one: .blue is a fixed column with
+              a blob absolutely placed in it, and eight rows do not fit beside
+              the blob. The dt/dd shape is the one .hero-facts already uses for
+              label-to-value, so a rank reads as the label for its prize. */}
+          <div className="payout" data-aos="fade-up">
+            <div className="payout-head">
+              <h3 className="p3">{prize.payout.label}</h3>
+              <p className="h5">{prize.payout.total}</p>
+            </div>
+            {/* One row, whatever the event pays: Korea lists four places and
+                Singapore five. The column count comes from the dictionary, so a
+                table that gains or loses a line needs no new rule. */}
+            <dl
+              className="payout-rows"
+              style={
+                { "--payout-cols": prize.payout.rows.length } as CSSProperties
+              }
+            >
+              {prize.payout.rows.map((row) => (
+                <div key={row.place}>
+                  <dt className="p3">{row.place}</dt>
+                  <dd className="p1">{row.prize}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
       </div>

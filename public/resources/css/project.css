@@ -26,6 +26,18 @@
 /* The rain canvas and the vignette over it are both z-index 1, so the copy
    needs 2 to stay on top of both. */
 .contest-N3 .title-area { z-index: 2; }
+
+/* base.css pins the hero to exactly 100vh and centres inside it, so a hero
+   taller than the viewport overflows both ways and its first line slides under
+   the fixed 8.7rem header. 100vh becomes a floor instead. The pad is symmetric
+   so tall viewports keep the centring they already had, and short ones grow
+   the block downward with the header's height held clear. */
+.contest-N3 .contents-container.fullscreen {
+  height: auto;
+  min-height: 100vh;
+  padding-top: 9rem;
+  padding-bottom: 9rem;
+}
 /* The hero lead is two paragraphs. The template zeroes p margins, so without
    this they butt together and read as one wrapped block. */
 .contest-N3 .title-area p.p1 + p.p1 { margin-top: 1.2rem; }
@@ -38,6 +50,42 @@
   color: var(--text-color3);
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+/* The co-host credit, in the slot the kicker leaves empty on the event that
+   runs with someone. Label then mark on one line: that is the order both
+   locales read in, where a sentence would put the name before "와 함께" in
+   Korean and after "with" in English and only one of them could win. */
+.hero-cohost {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 2.4rem;
+}
+
+/* Same voice as .hero-kicker: it labels the mark rather than saying anything. */
+.hero-cohost span {
+  color: var(--text-color3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Kalshi's wordmark is drawn to the edge of its box, so cap height is box
+   height. 3rem puts its caps well over the 1.4rem label's, which is what a
+   credit wants — the label introduces, the mark is the thing being read. */
+.hero-cohost img {
+  width: auto;
+  height: 3rem;
+}
+
+@media (max-width: 992px) {
+  .hero-cohost {
+    gap: 1rem;
+    margin-bottom: 1.6rem;
+  }
+  .hero-cohost img { height: 2rem; }
 }
 
 /* Both ported from the legacy static page. The rain runs at half strength,
@@ -183,6 +231,78 @@
    alone. The wrapper is what the gap has to hang off. */
 .contest-N6 .desc dl > div + div { margin-top: 1.2rem; }
 
+/* ---------- #prize: the payout table ---------- */
+/*
+  A rule over it rather than a panel around it: the two panels above are the
+  bright surfaces in this section, and a third would make the payout compete
+  with the thing it is a footnote to.
+*/
+.payout {
+  margin-top: 4rem;
+  padding-top: 3.2rem;
+  border-top: 1px solid var(--line-color1);
+}
+
+.payout-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem 2.4rem;
+  margin-bottom: 2.4rem;
+}
+
+/* Same voice as .hero-kicker: it labels the number rather than saying
+   anything itself. */
+.payout-head h3 {
+  margin: 0;
+  color: var(--text-color3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* The pool is the one number worth reading before the breakdown, so it takes
+   the accent both events already spend on their CTA. */
+.payout-head p {
+  margin: 0;
+  color: var(--primary);
+}
+
+/*
+  A counted track list, not auto-fit: auto-fit decides the count from the
+  available width, and the table has to hold its line whatever that width is.
+  The 1px gap over a lined ground is what draws the grid: no cell owns a
+  border, so no edge doubles where two cells meet.
+*/
+.payout-rows {
+  display: grid;
+  /* Set per event on the element: the table is one row wide whether it lists
+     four places or five. The fallback is only there for a payout rendered
+     without the property. */
+  grid-template-columns: repeat(var(--payout-cols, 4), 1fr);
+  gap: 1px;
+  margin: 0;
+  background: var(--line-color1);
+  border: 1px solid var(--line-color1);
+}
+
+.payout-rows > div {
+  padding: 1.6rem 2rem;
+  background: var(--body-bg);
+}
+
+.payout-rows dt { color: var(--text-color3); }
+.payout-rows dd { margin: 0.4rem 0 0; color: var(--text-color1); }
+
+@media (max-width: 992px) {
+  .payout { margin-top: 3.2rem; padding-top: 2.4rem; }
+  .payout-rows { grid-template-columns: repeat(2, 1fr); }
+  .payout-rows > div { padding: 1.4rem 1.6rem; }
+  /* Two columns here whatever the event pays, so an odd count leaves the
+     last cell alone and it takes the rest of its line. */
+  .payout-rows > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+
 /* ---------- contest-N5 with more than three cards ---------- */
 /* The template pins N5 to three tilted cards. These lists are longer, so the
    row wraps and the tilt drops to an angle that survives two rows. */
@@ -291,7 +411,7 @@
 .seat.taken .no { color: var(--text-color3); }
 .seat.taken .status i { background: var(--text-color4); }
 /* A taken seat empties out. The figure drops below the card's own ground so the
-   three open seats are the only ones holding a shape. */
+   open seats are the only ones holding a shape. */
 .seat.taken::after { background: rgba(0, 0, 0, 0.07); }
 
 .count-band {
@@ -1443,6 +1563,8 @@
    middle and reads as belonging to nothing. */
 .ev-token-2049 .hero-facts { margin-left: 0; justify-content: flex-start; }
 
+.ev-token-2049 .hero-cohost { justify-content: flex-start; }
+
 /* Face comes from the template (style.css sets the hero to Creato Display for
    both events). Only the scale is the stage's own: the Singapore headline is
    two full sentences where perp-dex-day's is four words, so it cannot run at
@@ -1545,6 +1667,10 @@
 /* The band inherits --primary, so the ink has to come back to white with it. */
 .ev-token-2049 .contest-N10 .loop-area,
 .ev-token-2049 .contest-N10 .loop-area * { color: #fff; }
+
+/* The base rule flattens each mark to the black of the words beside it. Here
+   those words are white, so the same trick has to land the other way up. */
+.ev-token-2049 .contest-N10 .text-wrap img { filter: brightness(0) invert(1); }
 
 .ev-token-2049 .contest-N10 .text-wrap .h4 {
   font-size: 1.4rem;
@@ -1725,6 +1851,43 @@
 */
 .ev-token-2049 .contest-N5 .list-area li,
 .ev-token-2049 .arena-card { border-top-color: rgba(var(--neon-rgb), 0.3); }
+
+/* ---------- #arena: the partner's mark as the ground ---------- */
+/*
+  The green file, not the white one. Dimmed this far the hue is most of what
+  survives, and green is the one colour on the stage that belongs to neither
+  the pink nor the cyan — so it reads as someone else's mark rather than as
+  more of the skin. .contest-N5 already clips, so the layer needs no box of its
+  own; the container is lifted a level so the copy stays over it.
+
+  Anchored to the top of the section, not its middle. The block opens on 20rem
+  of empty pad and closes on a card row, so a centred mark lands behind the
+  cards and comes back out of the gaps between them in pieces. From the top it
+  is whole, the headline crosses it, and the cards start below its baseline.
+*/
+.ev-token-2049 #arena::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url("../logo/Kalshi-Logo_Lightmode-Green.svg") no-repeat center top
+    8rem;
+  background-size: min(90rem, 68%) auto;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+/* The pad halves to 10rem here and the cards climb with it, so the mark drops
+   its offset to match. The cap is what keeps it off them: past ~70rem wide it
+   is tall enough to reach the first card's top edge. */
+@media (max-width: 992px) {
+  .ev-token-2049 #arena::before {
+    background-position: center top 2rem;
+    background-size: min(70rem, 86%) auto;
+  }
+}
+
+.ev-token-2049 #arena .contents-container { position: relative; z-index: 1; }
 
 
 /* ==========================================================================

@@ -1,4 +1,5 @@
 import type { Dictionary, EventSlug } from "@/lib/i18n";
+import { COHOST_LOGOS } from "@/lib/events/assets";
 import { MatrixRain } from "../visuals/MatrixRain";
 import { StageBackdrop } from "../visuals/StageBackdrop";
 
@@ -18,6 +19,8 @@ export function Hero({
   hero: Dictionary["hero"];
   event: EventSlug;
 }) {
+  const cohostMark = hero.cohost && COHOST_LOGOS.get(hero.cohost.name);
+
   return (
     <section className="contest-N3" id="EpmtE69D23">
       <div className="contents-container container-full fullscreen">
@@ -25,6 +28,23 @@ export function Hero({
           {/* The visible h1 lives in the header and is `.blind`, so this is the
               only place the event names itself above the fold. */}
           {hero.kicker && <p className="hero-kicker p3">{hero.kicker}</p>}
+          {/* Read aloud it is the label followed by the mark's alt text, which
+              is the same credit the sighted reader gets. */}
+          {hero.cohost && (
+            <p className="hero-cohost">
+              <span className="p3">{hero.cohost.label}</span>
+              {cohostMark ? (
+                <img
+                  src={cohostMark.src}
+                  alt={hero.cohost.name}
+                  width={cohostMark.w}
+                  height={cohostMark.h}
+                />
+              ) : (
+                <strong>{hero.cohost.name}</strong>
+              )}
+            </p>
+          )}
           <h2>
             {hero.titleTop}
             <br /> {hero.titleLit}

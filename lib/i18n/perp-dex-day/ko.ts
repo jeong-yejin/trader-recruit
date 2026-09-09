@@ -109,28 +109,38 @@ export const ko: Dictionary = {
     intro: "서울에서 증명한 실력으로 아시아 챔피언에 도전해요.",
     kicker: "1위가 받는 것",
     heading: [
-      { t: "Asia Trading Championship 출전권", mark: true },
+      { t: "Asia Trading Championship 결승 출전권", mark: true },
       { t: ", 항공과 숙소까지 지원해요." },
     ],
     items: [
       {
         k: "01",
-        lead: "본선 출전권",
-        body: "Kalshi와 함께하는 싱가포르 Asia Trading Championship에 진출해요.",
+        lead: "결승 출전권과 상금",
+        body: "Kalshi와 함께하는 싱가포르 Asia Trading Championship 결승에 진출해 상금에 도전해요.",
       },
       {
         k: "02",
-        lead: "왕복 항공권",
-        body: "서울과 싱가포르를 오가는 왕복 항공권을 저희가 준비해요.",
+        lead: "항공권과 숙소",
+        body: "싱가포르 대회 참가에 필요한 왕복 항공권과 숙소를 모두 지원해요.",
       },
       {
         k: "03",
-        lead: "대회 기간 숙소",
-        body: "싱가포르 참가에 필요한 숙소를 저희가 준비해요.",
+        lead: "글로벌 무대 노출",
+        body: "PERP-DEX DAY 파트너와 글로벌 Tier 1 거래소 앞에서 실력을 보여주고 이름을 알릴 기회를 얻어요.",
       },
     ],
     sideNote:
-      "우승 혜택은 1위에게만 제공하며, 네 참가자의 대회 중 거래 손실은 모두 저희가 부담해요.",
+      "싱가포르행은 1위에게만 주어지며, 네 참가자의 대회 중 거래 손실은 모두 저희가 부담해요.",
+    payout: {
+      label: "상금",
+      total: "1,500 USDT",
+      rows: [
+        { place: "1위", prize: "싱가포르 결승 직행" },
+        { place: "2위", prize: "700 USDT" },
+        { place: "3위", prize: "500 USDT" },
+        { place: "4위", prize: "300 USDT" },
+      ],
+    },
   },
 
   arena: {

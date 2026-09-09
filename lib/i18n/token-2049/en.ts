@@ -21,18 +21,19 @@ export const en: Dictionary = {
   },
 
   hero: {
+    cohost: { label: "In partnership with", name: "Kalshi" },
     titleTop: "Asia’s traders,",
     titleLit: "One arena",
     sub: [
       [
         {
-          t: "With Kalshi, we're deciding Asia's best on-chain trader.",
+          t: "At the Asia Trading Championship in Singapore, with Kalshi, you take on traders from around the world in real on-chain trading.",
           mark: true,
         },
       ],
       [
         {
-          t: "Real on-chain trades decide the ranking, with over 1,000 people watching it happen.",
+          t: "Prove yourself in front of more than 1,000 people, on your real trading record and the way you manage risk.",
         },
       ],
     ],
@@ -51,7 +52,7 @@ export const en: Dictionary = {
     "live on-chain trading",
     "a match in front of a crowd",
     "token2049 singapore side event",
-    "perpdex day singapore",
+    "perps day singapore",
     "zouk singapore",
   ],
 
@@ -95,7 +96,18 @@ export const en: Dictionary = {
       },
     ],
     sideNote:
-      "Prize money, travel support and other conditions go to the traders who make the final selection.",
+      "Travel support and the other conditions go to the traders who make the final selection.",
+    payout: {
+      label: "Prize pool",
+      total: "10,000 USDT",
+      rows: [
+        { place: "1st", prize: "5,000 USDT" },
+        { place: "2nd", prize: "2,000 USDT" },
+        { place: "3rd", prize: "1,000 USDT" },
+        { place: "4th", prize: "800 USDT" },
+        { place: "5th–8th", prize: "300 USDT each" },
+      ],
+    },
   },
 
   arena: {
@@ -302,7 +314,7 @@ export const en: Dictionary = {
       },
       {
         q: "What about prize money and travel support?",
-        a: "Prize money, travel support and the championship rules are shared individually during final selection.",
+        a: "The pool is 10,000 USDT, paid from first place through eighth. Travel support and the championship rules are shared individually during final selection.",
       },
       {
         q: "What is the Asia Trading Championship?",
@@ -315,7 +327,7 @@ export const en: Dictionary = {
     kicker: "ASIA TRADING CHAMPIONSHIP · WITH KALSHI",
     title: ["The first stage on the way", "to Asia's title"],
     body:
-      "Show us your record and your risk process. Applications are reviewed in the order they arrive.",
+      "Prove your skills on a global stage where real trading records and risk management strategies become your competitive edge.",
     cta: "Apply to the championship ↗",
   },
 

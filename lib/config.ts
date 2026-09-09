@@ -2,7 +2,6 @@ import type { EventSlug } from "@/lib/i18n";
 
 /**
  * Everything that has to change before the page goes live.
- * Four values, same as the original single-file build.
  */
 type Config = {
   /**
@@ -15,8 +14,14 @@ type Config = {
   /** Support handle, without the @. Shown beside the form, in the FAQ copy,
       and as the way through when a submit fails. */
   contactTelegram: string;
+  /**
+   * Seats on the board per event. The two are different recruitments: Korea
+   * runs four traders, Singapore eight, which is also why the Singapore payout
+   * pays through eighth.
+   */
+  seatTotal: Record<EventSlug, number>;
   /** Seats still open. The seat grid marks the rest taken, filling from 01. */
-  seatsOpen: number;
+  seatsOpen: Record<EventSlug, number>;
 };
 
 export const CONFIG: Config = {
@@ -28,5 +33,6 @@ export const CONFIG: Config = {
   },
   formEndpoint: "",
   contactTelegram: "reboundx_cs",
-  seatsOpen: 3,
+  seatTotal: { "perp-dex-day": 4, "token-2049": 8 },
+  seatsOpen: { "perp-dex-day": 3, "token-2049": 8 },
 };

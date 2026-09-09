@@ -2,8 +2,6 @@ import { Countdown } from "./Countdown";
 import { CONFIG } from "@/lib/config";
 import type { Dictionary, EventSlug } from "@/lib/i18n";
 
-const SEAT_NUMBERS = ["01", "02", "03", "04"];
-
 /**
  * Not a TemplateHouse block — the template has no seat counter. It borrows the
  * template's container and typography classes so it sits in the same grid, and
@@ -18,19 +16,25 @@ export function SeatBand({
   countdown: Dictionary["countdown"];
   event: EventSlug;
 }) {
+  /** The board is as long as the recruitment: four in Korea, eight in
+      Singapore. Numbers are written 01, 02 … so the cards keep an even width. */
+  const seatNumbers = Array.from({ length: CONFIG.seatTotal[event] }, (_, i) =>
+    String(i + 1).padStart(2, "0"),
+  );
+  const seatsOpen = CONFIG.seatsOpen[event];
   /** Seats fill from the front, so seat 01 is the first one to go. */
-  const takenCount = SEAT_NUMBERS.length - CONFIG.seatsOpen;
+  const takenCount = seatNumbers.length - seatsOpen;
 
   return (
     <section className="seat-block">
       <div className="contents-container container-md">
         <div className="contents-inner">
           <strong className="h5 seat-lead">
-            {seat.remaining.replace("{n}", String(CONFIG.seatsOpen))}
+            {seat.remaining.replace("{n}", String(seatsOpen))}
           </strong>
 
           <ul className="seat-area">
-            {SEAT_NUMBERS.map((no, i) => {
+            {seatNumbers.map((no, i) => {
               const taken = i < takenCount;
               return (
                 <li className={taken ? "seat taken" : "seat"} key={no}>

@@ -4,8 +4,8 @@ import { MARQUEE_LOGOS } from "@/lib/events/assets";
 /**
  * The dictionaries write the partner lines as "with <name>", so the name is
  * what decides whether a line runs as a mark instead of as words. A name with
- * no file here stays text, which is what keeps "with kalshi" and every
- * non-partner line rendering the way they always did.
+ * no file here stays text, which is what keeps every non-partner line
+ * rendering as words.
  *
  * The intrinsic size matters more than usual: style.js measures the span to
  * decide how many copies to clone, and without the attributes the marks would
@@ -37,10 +37,10 @@ export function Marquee({ items }: { items: string[] }) {
                     {logo ? (
                       /* alt carries the line it replaced, so the band reads the
                          same aloud as it did in text. data-logo is the CSS hook:
-                         the five aspect ratios need their own heights and the
+                         the aspect ratios need their own heights and the
                          alt text changes with the locale. */
                       <img
-                        src={`/resources/exchange-logo/${logo.file}`}
+                        src={logo.src}
                         alt={item}
                         data-logo={key}
                         width={logo.w}
